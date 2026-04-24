@@ -37,7 +37,7 @@ const ROWS: MathKey[][] = [
     { label: "/", insert: "/", title: "Divide / fraction" },
     { label: "x²", insert: "x^2", title: "x squared" },
     { label: "x³", insert: "x^3", title: "x cubed" },
-    { label: "x^", insert: "^", title: "Power" },
+    { label: "x^", insert: "x^", title: "x to a power" },
   ],
   [
     { label: "√(\u2009)", insert: "sqrt()", caret: 5, title: "Square root" },
