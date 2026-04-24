@@ -19,9 +19,11 @@ import {
 import { grade } from "@/lib/grade";
 import { formatDuration, mistakeIds, useProgress } from "@/lib/storage";
 import { MathText } from "@/components/Math";
+import { MathKeyboard } from "@/components/MathKeyboard";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { previewKatex } from "@/lib/textToTex";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -314,8 +316,16 @@ export default function Practice({ sectionId }: PracticeProps) {
             </span>
           </div>
 
-          <div className="mb-6 font-serif text-lg leading-relaxed text-foreground sm:text-xl">
-            <MathText data-testid="text-question-prompt">{current.question}</MathText>
+          <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start">
+            {current.formula && (
+              <FormulaCard
+                label={current.formulaLabel ?? "Formula"}
+                tex={current.formula}
+              />
+            )}
+            <div className="flex-1 font-serif text-xl leading-relaxed text-foreground sm:text-2xl">
+              <MathText data-testid="text-question-prompt">{current.question}</MathText>
+            </div>
           </div>
 
           <form onSubmit={handleFormSubmit} className="space-y-3">
@@ -325,7 +335,7 @@ export default function Practice({ sectionId }: PracticeProps) {
             >
               Your answer
             </label>
-            <div className="flex flex-col gap-3 sm:flex-row">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
               <Input
                 ref={inputRef}
                 id="answer-input"
@@ -333,24 +343,38 @@ export default function Practice({ sectionId }: PracticeProps) {
                 onChange={(e) => setAnswer(e.target.value)}
                 placeholder="Type your answer here..."
                 readOnly={feedback === "correct"}
-                className="font-mono text-base"
+                className="h-16 flex-1 font-mono text-xl sm:text-2xl"
                 autoComplete="off"
                 spellCheck={false}
                 data-testid="input-answer"
               />
               {feedback === "idle" && (
-                <Button type="submit" disabled={!answer.trim()} data-testid="button-check-answer">
+                <Button
+                  type="submit"
+                  disabled={!answer.trim()}
+                  size="lg"
+                  className="h-16 px-6 text-base"
+                  data-testid="button-check-answer"
+                >
                   Check answer
                 </Button>
               )}
               {feedback === "wrong" && (
                 <>
-                  <Button type="submit" variant="secondary" data-testid="button-try-again">
+                  <Button
+                    type="submit"
+                    variant="secondary"
+                    size="lg"
+                    className="h-16 px-6 text-base"
+                    data-testid="button-try-again"
+                  >
                     Try again
                   </Button>
                   <Button
                     type="button"
                     variant="ghost"
+                    size="lg"
+                    className="h-16 px-6 text-base"
                     onClick={goNext}
                     data-testid="button-skip-question"
                   >
@@ -359,11 +383,20 @@ export default function Practice({ sectionId }: PracticeProps) {
                 </>
               )}
               {feedback === "correct" && (
-                <Button type="submit" data-testid="button-next-question">
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="h-16 px-6 text-base"
+                  data-testid="button-next-question"
+                >
                   {index + 1 >= total ? "Finish" : "Next question"}
                 </Button>
               )}
             </div>
+            <AnswerPreview value={answer} />
+            {feedback !== "correct" && (
+              <MathKeyboard inputRef={inputRef} value={answer} onChange={setAnswer} />
+            )}
             {feedback === "correct" && (
               <p
                 className="text-xs text-muted-foreground"
@@ -575,6 +608,65 @@ function SessionSummary({
         </Card>
       </main>
       <Footer />
+    </div>
+  );
+}
+
+/**
+ * Small KaTeX-rendered hint card pinned to the top-left of the question
+ * card. Stacks above the question text on narrow screens and sits to the
+ * left of it on `sm+` screens.
+ */
+function FormulaCard({ label, tex }: { label: string; tex: string }) {
+  return (
+    <aside
+      className="w-full shrink-0 self-start rounded-lg border border-primary/30 bg-primary/5 p-3 sm:max-w-[16rem]"
+      data-testid="card-formula"
+      aria-label={`${label} reference`}
+    >
+      <div className="mb-1 text-[0.65rem] font-semibold uppercase tracking-wider text-primary/80">
+        {label}
+      </div>
+      <div className="overflow-x-auto text-foreground" data-testid="text-formula-tex">
+        <MathText block>{tex}</MathText>
+      </div>
+    </aside>
+  );
+}
+
+/**
+ * Live KaTeX preview of what the student has typed in the answer input.
+ * Hidden when the input is empty. Renders plain monospaced text as a
+ * graceful fallback if the value can't be parsed into valid KaTeX.
+ */
+function AnswerPreview({ value }: { value: string }) {
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+  const result = previewKatex(value);
+  return (
+    <div
+      className="flex min-h-[2.5rem] flex-wrap items-center gap-2 rounded-lg border border-dashed border-border bg-background px-3 py-2"
+      data-testid="answer-preview"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <span className="text-[0.65rem] font-semibold uppercase tracking-wider text-muted-foreground">
+        You typed
+      </span>
+      {result.kind === "tex" ? (
+        <span
+          className="text-base sm:text-lg"
+          data-testid="answer-preview-tex"
+          dangerouslySetInnerHTML={{ __html: result.html }}
+        />
+      ) : (
+        <span
+          className="font-mono text-sm text-muted-foreground"
+          data-testid="answer-preview-text"
+        >
+          {result.value}
+        </span>
+      )}
     </div>
   );
 }

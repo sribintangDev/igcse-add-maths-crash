@@ -46,6 +46,17 @@ export interface Question {
    * (e.g. quadratic roots). The grader will also try permutations of comma-separated parts.
    */
   unorderedSet?: boolean;
+  /**
+   * Optional formula-sheet hint (KaTeX source, no $...$ delimiters) shown
+   * in a small card pinned to the top-left of the question card. Use this
+   * for questions where having the relevant IGCSE Add Maths formula
+   * visible would actually help the student (quadratic formula, sine /
+   * cosine rule, power rule, Pythagorean identity, etc.). Leave blank
+   * for items where a formula wouldn't help.
+   */
+  formula?: string;
+  /** Short label printed above the formula, e.g. "Quadratic formula". */
+  formulaLabel?: string;
 }
 
 export const TOPIC_TO_SECTION: Record<Topic, SectionId> = {
@@ -443,6 +454,8 @@ export const QUESTIONS: Question[] = [
       "Use the quadratic formula to find the roots of $x^2 + 2x - 5 = 0$. Give the exact answer, separated by a comma.",
     acceptedAnswers: ["-1+sqrt(6),-1-sqrt(6)", "-1+√6,-1-√6"],
     unorderedSet: true,
+    formulaLabel: "Quadratic formula",
+    formula: "x = \\dfrac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}",
     solution: [
       "$a = 1,\\ b = 2,\\ c = -5$.",
       "Discriminant: $b^2 - 4ac = 4 + 20 = 24$.",
@@ -458,6 +471,8 @@ export const QUESTIONS: Question[] = [
     difficulty: "Moderate",
     question: "Find the discriminant of $3x^2 - 4x + 1 = 0$.",
     acceptedAnswers: ["4"],
+    formulaLabel: "Discriminant",
+    formula: "\\Delta = b^2 - 4ac",
     solution: [
       "$\\Delta = b^2 - 4ac$.",
       "$\\Delta = (-4)^2 - 4(3)(1) = 16 - 12 = 4$.",
@@ -472,6 +487,8 @@ export const QUESTIONS: Question[] = [
     difficulty: "Moderate",
     question: "Complete the square for $x^2 + 6x + 5$.",
     acceptedAnswers: ["(x+3)^2-4"],
+    formulaLabel: "Completing the square",
+    formula: "x^2 + bx = \\left(x + \\tfrac{b}{2}\\right)^2 - \\left(\\tfrac{b}{2}\\right)^2",
     solution: [
       "Take half the coefficient of $x$: half of $6$ is $3$.",
       "Write $(x + 3)^2 = x^2 + 6x + 9$.",
@@ -487,6 +504,8 @@ export const QUESTIONS: Question[] = [
     question:
       "Find the coordinates of the minimum point of $y = x^2 - 4x + 1$. Give your answer as $x,y$.",
     acceptedAnswers: ["2,-3", "(2,-3)"],
+    formulaLabel: "Completing the square",
+    formula: "x^2 + bx = \\left(x + \\tfrac{b}{2}\\right)^2 - \\left(\\tfrac{b}{2}\\right)^2",
     solution: [
       "Complete the square: $y = (x - 2)^2 - 4 + 1 = (x - 2)^2 - 3$.",
       "Minimum occurs when $(x - 2)^2 = 0$, i.e. $x = 2$.",
@@ -519,6 +538,8 @@ export const QUESTIONS: Question[] = [
     question:
       "The roots of $x^2 + px + 12 = 0$ are $-2$ and $-6$. Find the value of $p$.",
     acceptedAnswers: ["8", "p=8"],
+    formulaLabel: "Sum & product of roots",
+    formula: "\\alpha + \\beta = -\\tfrac{b}{a},\\quad \\alpha\\beta = \\tfrac{c}{a}",
     solution: [
       "Sum of roots = $-p$, so $-2 + (-6) = -p \\Rightarrow -8 = -p$.",
       "Therefore $p = 8$.",
@@ -536,6 +557,8 @@ export const QUESTIONS: Question[] = [
       "For what values of $k$ does $x^2 + kx + 9 = 0$ have equal roots? Give both, separated by a comma.",
     acceptedAnswers: ["6,-6", "k=6,k=-6"],
     unorderedSet: true,
+    formulaLabel: "Equal roots: discriminant = 0",
+    formula: "b^2 - 4ac = 0",
     solution: [
       "Equal roots require discriminant $= 0$.",
       "$k^2 - 4(1)(9) = 0 \\Rightarrow k^2 = 36$.",
@@ -552,6 +575,8 @@ export const QUESTIONS: Question[] = [
     question:
       "Express $2x^2 - 8x + 3$ in the form $a(x + b)^2 + c$. Give your answer as the expression.",
     acceptedAnswers: ["2(x-2)^2-5"],
+    formulaLabel: "Completing the square",
+    formula: "x^2 + bx = \\left(x + \\tfrac{b}{2}\\right)^2 - \\left(\\tfrac{b}{2}\\right)^2",
     solution: [
       "Factor 2 from the $x$ terms: $2(x^2 - 4x) + 3$.",
       "Complete the square inside: $x^2 - 4x = (x - 2)^2 - 4$.",
@@ -601,6 +626,8 @@ export const QUESTIONS: Question[] = [
     difficulty: "Easy",
     question: "Differentiate $y = x^4$ with respect to $x$.",
     acceptedAnswers: ["4x^3", "dy/dx=4x^3"],
+    formulaLabel: "Power rule",
+    formula: "\\dfrac{d}{dx}\\left(x^n\\right) = n\\,x^{n-1}",
     solution: [
       "Bring the power down and reduce by 1.",
       "$\\dfrac{dy}{dx} = 4x^{4-1} = 4x^3$.",
@@ -641,6 +668,8 @@ export const QUESTIONS: Question[] = [
     difficulty: "Easy",
     question: "Differentiate $y = 3x^2 + 2x - 1$.",
     acceptedAnswers: ["6x+2", "dy/dx=6x+2"],
+    formulaLabel: "Power rule",
+    formula: "\\dfrac{d}{dx}\\left(x^n\\right) = n\\,x^{n-1}",
     solution: [
       "Differentiate term-by-term.",
       "$3x^2 \\to 6x$, $2x \\to 2$, $-1 \\to 0$.",
@@ -655,6 +684,8 @@ export const QUESTIONS: Question[] = [
     difficulty: "Easy",
     question: "Differentiate $f(x) = x^3 - 4x$.",
     acceptedAnswers: ["3x^2-4", "f'(x)=3x^2-4"],
+    formulaLabel: "Power rule",
+    formula: "\\dfrac{d}{dx}\\left(x^n\\right) = n\\,x^{n-1}",
     solution: [
       "Differentiate term-by-term.",
       "$x^3 \\to 3x^2$ and $-4x \\to -4$.",
@@ -669,6 +700,8 @@ export const QUESTIONS: Question[] = [
     difficulty: "Moderate",
     question: "Differentiate $y = \\dfrac{1}{x}$.",
     acceptedAnswers: ["-1/x^2", "-x^-2", "-x^(-2)"],
+    formulaLabel: "Power rule",
+    formula: "\\dfrac{d}{dx}\\left(x^n\\right) = n\\,x^{n-1}",
     solution: [
       "Rewrite: $y = x^{-1}$.",
       "Differentiate: $\\dfrac{dy}{dx} = -1 \\cdot x^{-2} = -\\dfrac{1}{x^2}$.",
@@ -683,6 +716,8 @@ export const QUESTIONS: Question[] = [
     difficulty: "Moderate",
     question: "Differentiate $y = \\sqrt{x}$.",
     acceptedAnswers: ["1/(2sqrt(x))", "1/(2√x)", "(1/2)x^(-1/2)"],
+    formulaLabel: "Power rule",
+    formula: "\\dfrac{d}{dx}\\left(x^n\\right) = n\\,x^{n-1}",
     solution: [
       "Rewrite as $y = x^{1/2}$.",
       "Differentiate: $\\dfrac{dy}{dx} = \\tfrac{1}{2}x^{-1/2}$.",
@@ -697,6 +732,8 @@ export const QUESTIONS: Question[] = [
     difficulty: "Moderate",
     question: "Find $f'(x)$ for $f(x) = 2x^3 - 5x^2 + x - 6$.",
     acceptedAnswers: ["6x^2-10x+1", "f'(x)=6x^2-10x+1"],
+    formulaLabel: "Power rule",
+    formula: "\\dfrac{d}{dx}\\left(x^n\\right) = n\\,x^{n-1}",
     solution: [
       "Differentiate each term.",
       "$2x^3 \\to 6x^2$, $-5x^2 \\to -10x$, $x \\to 1$, $-6 \\to 0$.",
@@ -727,6 +764,8 @@ export const QUESTIONS: Question[] = [
     question:
       "Find the equation of the tangent to $y = x^2$ at the point $(3, 9)$. Give it in the form $y=mx+c$.",
     acceptedAnswers: ["y=6x-9"],
+    formulaLabel: "Tangent at a point",
+    formula: "y - y_1 = m\\,(x - x_1),\\ \\ m = \\left.\\dfrac{dy}{dx}\\right|_{x_1}",
     solution: [
       "Differentiate: $\\dfrac{dy}{dx} = 2x$. At $x = 3$, gradient $= 6$.",
       "Use $y - y_1 = m(x - x_1)$: $y - 9 = 6(x - 3)$.",
@@ -818,6 +857,8 @@ export const QUESTIONS: Question[] = [
     question:
       "Find the equation of the normal to $y = x^2 + 1$ at the point $(1, 2)$. Give it in the form $y=mx+c$.",
     acceptedAnswers: ["y=-x/2+5/2", "y=-(1/2)x+5/2", "y=-0.5x+2.5"],
+    formulaLabel: "Normal at a point",
+    formula: "m_{\\text{normal}} = -\\dfrac{1}{m_{\\text{tangent}}}",
     solution: [
       "Differentiate: $\\dfrac{dy}{dx} = 2x$. Tangent gradient at $x = 1$ is $2$.",
       "Normal gradient $= -\\dfrac{1}{2}$.",
@@ -903,6 +944,8 @@ export const QUESTIONS: Question[] = [
     question:
       "Simplify $\\sin^2\\theta + \\cos^2\\theta$.",
     acceptedAnswers: ["1"],
+    formulaLabel: "Pythagorean identity",
+    formula: "\\sin^2\\theta + \\cos^2\\theta = 1",
     solution: [
       "This is the Pythagorean identity.",
       "$\\sin^2\\theta + \\cos^2\\theta = 1$ for all $\\theta$.",
@@ -918,6 +961,8 @@ export const QUESTIONS: Question[] = [
     question:
       "If $\\sin\\theta = \\dfrac{4}{5}$ and $\\theta$ is acute, find $\\cos\\theta$.",
     acceptedAnswers: ["3/5", "0.6"],
+    formulaLabel: "Pythagorean identity",
+    formula: "\\sin^2\\theta + \\cos^2\\theta = 1",
     solution: [
       "Use $\\sin^2\\theta + \\cos^2\\theta = 1$: $\\cos^2\\theta = 1 - \\tfrac{16}{25} = \\tfrac{9}{25}$.",
       "Since $\\theta$ is acute, $\\cos\\theta > 0$.",
@@ -933,6 +978,8 @@ export const QUESTIONS: Question[] = [
     question:
       "Express $\\dfrac{\\sin\\theta}{\\cos\\theta}$ in its simplest form.",
     acceptedAnswers: ["tan(theta)", "tantheta", "tanθ", "tan θ"],
+    formulaLabel: "Quotient identity",
+    formula: "\\tan\\theta = \\dfrac{\\sin\\theta}{\\cos\\theta}",
     solution: [
       "By definition, $\\dfrac{\\sin\\theta}{\\cos\\theta} = \\tan\\theta$.",
       "Final answer: $\\tan\\theta$.",
@@ -1024,6 +1071,8 @@ export const QUESTIONS: Question[] = [
     question:
       "If $\\cos\\theta = -\\dfrac{5}{13}$ and $\\theta$ lies in the second quadrant, find $\\sin\\theta$.",
     acceptedAnswers: ["12/13"],
+    formulaLabel: "Pythagorean identity",
+    formula: "\\sin^2\\theta + \\cos^2\\theta = 1",
     solution: [
       "Use $\\sin^2\\theta + \\cos^2\\theta = 1$: $\\sin^2\\theta = 1 - \\tfrac{25}{169} = \\tfrac{144}{169}$.",
       "In the second quadrant, $\\sin\\theta > 0$.",
@@ -1056,6 +1105,8 @@ export const QUESTIONS: Question[] = [
     question:
       "Simplify $\\dfrac{1 - \\cos^2\\theta}{\\sin\\theta}$.",
     acceptedAnswers: ["sin(theta)", "sintheta", "sinθ", "sin θ"],
+    formulaLabel: "Pythagorean identity",
+    formula: "\\sin^2\\theta + \\cos^2\\theta = 1",
     solution: [
       "Use $1 - \\cos^2\\theta = \\sin^2\\theta$.",
       "$\\dfrac{\\sin^2\\theta}{\\sin\\theta} = \\sin\\theta$.",
