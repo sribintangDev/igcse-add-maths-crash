@@ -1,0 +1,402 @@
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Link, useLocation } from "wouter";
+import {
+  ArrowLeft,
+  CheckCircle2,
+  ChevronDown,
+  RotateCcw,
+  XCircle,
+} from "lucide-react";
+import {
+  QUESTIONS,
+  SECTION_META,
+  type Question,
+  type SectionId,
+  questionsByIds,
+  questionsForSection,
+  shuffle,
+} from "@/data/questions";
+import { grade } from "@/lib/grade";
+import { mistakeIds, useProgress } from "@/lib/storage";
+import { MathText } from "@/components/Math";
+import { Footer } from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+
+interface PracticeProps {
+  sectionId: SectionId;
+}
+
+const DIFFICULTY_STYLES: Record<string, string> = {
+  Easy: "bg-success/15 text-success border-success/30",
+  Moderate: "bg-chart-3/20 text-chart-3 border-chart-3/40",
+  "Exam Style": "bg-chart-4/20 text-chart-4 border-chart-4/40",
+};
+
+export default function Practice({ sectionId }: PracticeProps) {
+  const meta = SECTION_META[sectionId];
+  const [, navigate] = useLocation();
+  const { state, recordAttempt } = useProgress();
+
+  /** Build the working queue once on mount. We freeze it so a re-render
+   * (e.g. localStorage updates) does not change the order mid-session. */
+  const [queue, setQueue] = useState<Question[]>(() => buildQueue(sectionId, state));
+  const [index, setIndex] = useState(0);
+  const [answer, setAnswer] = useState("");
+  const [feedback, setFeedback] = useState<"idle" | "correct" | "wrong">("idle");
+  const [solutionOpen, setSolutionOpen] = useState(false);
+  const [completed, setCompleted] = useState(false);
+  const [sessionStats, setSessionStats] = useState({ correct: 0, attempts: 0, wrongIds: [] as string[] });
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const current = queue[index];
+  const total = queue.length;
+
+  useEffect(() => {
+    setAnswer("");
+    setFeedback("idle");
+    setSolutionOpen(false);
+    if (inputRef.current) inputRef.current.focus();
+  }, [index]);
+
+  if (!meta) {
+    return (
+      <FallbackMessage title="Section not found" hint="This section does not exist." />
+    );
+  }
+
+  if (total === 0) {
+    return (
+      <FallbackMessage
+        title={meta.title}
+        hint={
+          sectionId === "mistakes"
+            ? "You have no mistakes saved yet. Get a question wrong somewhere to fill this list."
+            : "No questions are available in this section."
+        }
+      />
+    );
+  }
+
+  const restart = (newQueue: Question[]) => {
+    setQueue(newQueue);
+    setIndex(0);
+    setAnswer("");
+    setFeedback("idle");
+    setSolutionOpen(false);
+    setCompleted(false);
+    setSessionStats({ correct: 0, attempts: 0, wrongIds: [] });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!answer.trim() || feedback !== "idle") return;
+    const result = grade(current, answer);
+    recordAttempt(current.id, result.correct, sectionId === "mistakes");
+    setFeedback(result.correct ? "correct" : "wrong");
+    setSessionStats((s) => ({
+      correct: s.correct + (result.correct ? 1 : 0),
+      attempts: s.attempts + 1,
+      wrongIds: result.correct ? s.wrongIds.filter((id) => id !== current.id) : s.wrongIds.includes(current.id) ? s.wrongIds : [...s.wrongIds, current.id],
+    }));
+    if (!result.correct) setSolutionOpen(true);
+  };
+
+  const handleNext = () => {
+    if (index + 1 >= total) {
+      setCompleted(true);
+      return;
+    }
+    setIndex((i) => i + 1);
+  };
+
+  const handleTryAgain = () => {
+    setFeedback("idle");
+    setAnswer("");
+    setSolutionOpen(false);
+    if (inputRef.current) inputRef.current.focus();
+  };
+
+  if (completed) {
+    return (
+      <SessionSummary
+        sectionTitle={meta.title}
+        stats={sessionStats}
+        total={total}
+        onRedoWrong={() => {
+          if (sessionStats.wrongIds.length === 0) return;
+          restart(questionsByIds(sessionStats.wrongIds));
+        }}
+        onRestart={() => restart(buildQueue(sectionId, state))}
+        onHome={() => navigate("/")}
+      />
+    );
+  }
+
+  const progressValue = Math.round(((index + (feedback !== "idle" ? 1 : 0)) / total) * 100);
+
+  return (
+    <div className="flex min-h-screen flex-col bg-background">
+      <header className="border-b border-border bg-card/60 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-4 sm:px-6">
+          <Link href="/" data-testid="link-back-home">
+            <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground" data-testid="button-back-home">
+              <ArrowLeft className="h-4 w-4" />
+              <span className="hidden sm:inline">All sections</span>
+            </Button>
+          </Link>
+          <div className="flex-1 text-center">
+            <p className="font-serif text-sm font-semibold text-foreground sm:text-base" data-testid="text-section-title">
+              {meta.title}
+            </p>
+            <p className="text-xs text-muted-foreground" data-testid="text-question-progress">
+              Question {index + 1} of {total}
+            </p>
+          </div>
+          <div className="w-10" />
+        </div>
+        <div className="mx-auto max-w-3xl px-4 pb-4 sm:px-6">
+          <Progress value={progressValue} data-testid="progress-section" />
+        </div>
+      </header>
+
+      <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-8 sm:px-6">
+        <Card className="border border-card-border bg-card p-6 shadow-sm sm:p-8" data-testid={`card-question-${current.id}`}>
+          <div className="mb-4 flex flex-wrap items-center gap-2">
+            <Badge
+              variant="outline"
+              className={`${DIFFICULTY_STYLES[current.difficulty]}`}
+              data-testid={`badge-difficulty-${current.difficulty.toLowerCase().replace(" ", "-")}`}
+            >
+              {current.difficulty}
+            </Badge>
+            <Badge variant="secondary" data-testid="badge-topic">
+              {current.topic}
+            </Badge>
+            <span className="ml-auto text-xs text-muted-foreground" data-testid="text-question-id">
+              {current.id}
+            </span>
+          </div>
+
+          <div className="mb-6 font-serif text-lg leading-relaxed text-foreground sm:text-xl">
+            <MathText data-testid="text-question-prompt">{current.question}</MathText>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-3">
+            <label className="block text-xs font-medium uppercase tracking-wider text-muted-foreground" htmlFor="answer-input">
+              Your answer
+            </label>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Input
+                ref={inputRef}
+                id="answer-input"
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
+                placeholder="Type your answer here..."
+                disabled={feedback === "correct"}
+                className="font-mono text-base"
+                autoComplete="off"
+                spellCheck={false}
+                data-testid="input-answer"
+              />
+              {feedback === "idle" && (
+                <Button type="submit" disabled={!answer.trim()} data-testid="button-check-answer">
+                  Check answer
+                </Button>
+              )}
+              {feedback === "wrong" && (
+                <Button type="button" variant="secondary" onClick={handleTryAgain} data-testid="button-try-again">
+                  Try again
+                </Button>
+              )}
+              {feedback === "correct" && (
+                <Button type="button" onClick={handleNext} data-testid="button-next-question">
+                  {index + 1 >= total ? "Finish" : "Next question"}
+                </Button>
+              )}
+            </div>
+          </form>
+
+          {feedback !== "idle" && (
+            <div
+              className={`mt-5 flex items-start gap-3 rounded-lg border p-4 ${
+                feedback === "correct"
+                  ? "border-success/40 bg-success/10 text-success"
+                  : "border-destructive/40 bg-destructive/10 text-destructive"
+              }`}
+              data-testid={`feedback-${feedback}`}
+            >
+              {feedback === "correct" ? (
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none" />
+              ) : (
+                <XCircle className="mt-0.5 h-5 w-5 flex-none" />
+              )}
+              <div className="text-sm font-medium">
+                {feedback === "correct"
+                  ? "Correct! Well done."
+                  : "Not quite — review the worked solution below and try again."}
+              </div>
+            </div>
+          )}
+
+          <Collapsible open={solutionOpen} onOpenChange={setSolutionOpen} className="mt-5">
+            <CollapsibleTrigger asChild>
+              <Button
+                type="button"
+                variant="ghost"
+                className="w-full justify-between border border-dashed border-border text-sm"
+                data-testid="button-toggle-solution"
+              >
+                <span>Worked solution, step by step</span>
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${solutionOpen ? "rotate-180" : ""}`}
+                />
+              </Button>
+            </CollapsibleTrigger>
+            <CollapsibleContent className="mt-3 space-y-3 rounded-lg border border-border bg-muted/40 p-4" data-testid="content-solution">
+              <ol className="space-y-3 text-sm leading-relaxed text-foreground">
+                {current.solution.map((step, i) => (
+                  <li key={i} className="flex gap-3" data-testid={`text-solution-step-${i}`}>
+                    <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-primary/15 font-mono text-xs font-semibold text-primary">
+                      {i + 1}
+                    </span>
+                    <MathText className="flex-1">{step}</MathText>
+                  </li>
+                ))}
+              </ol>
+              <div className="flex flex-wrap gap-2 border-t border-border pt-3 text-xs text-muted-foreground">
+                <span>Accepted answers:</span>
+                {current.acceptedAnswers.map((a) => (
+                  <code
+                    key={a}
+                    className="rounded bg-card px-2 py-0.5 font-mono text-foreground"
+                    data-testid={`text-accepted-answer-${a}`}
+                  >
+                    {a}
+                  </code>
+                ))}
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+        </Card>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
+
+interface SessionSummaryProps {
+  sectionTitle: string;
+  stats: { correct: number; attempts: number; wrongIds: string[] };
+  total: number;
+  onRedoWrong: () => void;
+  onRestart: () => void;
+  onHome: () => void;
+}
+
+function SessionSummary({ sectionTitle, stats, total, onRedoWrong, onRestart, onHome }: SessionSummaryProps) {
+  const wrongCount = stats.wrongIds.length;
+  const accuracy = stats.attempts === 0 ? 0 : Math.round((stats.correct / stats.attempts) * 100);
+  return (
+    <div className="flex min-h-screen flex-col bg-background">
+      <header className="border-b border-border bg-card/60 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-3xl items-center px-4 py-4 sm:px-6">
+          <Button variant="ghost" size="sm" onClick={onHome} className="gap-2 text-muted-foreground" data-testid="button-back-home-summary">
+            <ArrowLeft className="h-4 w-4" />
+            <span>All sections</span>
+          </Button>
+        </div>
+      </header>
+      <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col items-center justify-center px-4 py-12 sm:px-6">
+        <Card className="w-full border border-card-border bg-card p-8 text-center shadow-sm" data-testid="card-session-summary">
+          <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            Session complete
+          </p>
+          <h2 className="mt-2 font-serif text-3xl font-semibold text-foreground" data-testid="text-summary-title">
+            {sectionTitle}
+          </h2>
+          <p className="mt-6 font-serif text-6xl font-semibold text-primary" data-testid="text-summary-accuracy">
+            {accuracy}%
+          </p>
+          <p className="mt-2 text-sm text-muted-foreground" data-testid="text-summary-counters">
+            {stats.correct} correct out of {stats.attempts} attempts · {total} question{total === 1 ? "" : "s"} in this run
+          </p>
+          {wrongCount > 0 ? (
+            <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-destructive/40 bg-destructive/10 px-3 py-1 text-xs font-medium text-destructive" data-testid="text-wrong-count">
+              <XCircle className="h-3.5 w-3.5" />
+              {wrongCount} question{wrongCount === 1 ? "" : "s"} still needs work
+            </p>
+          ) : (
+            <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-success/40 bg-success/10 px-3 py-1 text-xs font-medium text-success" data-testid="text-perfect-run">
+              <CheckCircle2 className="h-3.5 w-3.5" />
+              Perfect run — no mistakes
+            </p>
+          )}
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+            {wrongCount > 0 && (
+              <Button onClick={onRedoWrong} className="gap-2" data-testid="button-redo-wrong">
+                <RotateCcw className="h-4 w-4" />
+                Redo wrong questions ({wrongCount})
+              </Button>
+            )}
+            <Button variant="secondary" onClick={onRestart} data-testid="button-restart-section">
+              Restart section
+            </Button>
+            <Button variant="ghost" onClick={onHome} data-testid="button-home-from-summary">
+              Back to sections
+            </Button>
+          </div>
+        </Card>
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+function FallbackMessage({ title, hint }: { title: string; hint: string }) {
+  return (
+    <div className="flex min-h-screen flex-col bg-background">
+      <header className="border-b border-border bg-card/60 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-3xl items-center px-4 py-4 sm:px-6">
+          <Link href="/" data-testid="link-back-home-fallback">
+            <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground">
+              <ArrowLeft className="h-4 w-4" />
+              <span>All sections</span>
+            </Button>
+          </Link>
+        </div>
+      </header>
+      <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col items-center justify-center px-4 py-16 text-center sm:px-6">
+        <h2 className="font-serif text-2xl font-semibold text-foreground" data-testid="text-fallback-title">
+          {title}
+        </h2>
+        <p className="mt-3 text-sm text-muted-foreground" data-testid="text-fallback-hint">
+          {hint}
+        </p>
+        <Link href="/" className="mt-6">
+          <Button variant="secondary" data-testid="button-fallback-home">Go home</Button>
+        </Link>
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+function buildQueue(sectionId: SectionId, state: ReturnType<typeof useProgress>["state"]): Question[] {
+  if (sectionId === "mistakes") {
+    return questionsByIds(mistakeIds(state));
+  }
+  if (sectionId === "mixed") {
+    return shuffle(QUESTIONS).slice(0, 12);
+  }
+  return questionsForSection(sectionId);
+}

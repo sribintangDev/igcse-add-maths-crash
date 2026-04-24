@@ -1,0 +1,121 @@
+const questions = [
+{
+id:"ALG-001",
+topic:"Algebra Foundations",
+difficulty:"Easy",
+question:"Expand 3(x + 5).",
+acceptedAnswers:["3x+15"],
+solution:[
+"Multiply 3 by each term inside the bracket.",
+"3 × x = 3x and 3 × 5 = 15.",
+"Final answer: 3x + 15"
+]
+},
+{
+id:"ALG-002",
+topic:"Algebra Foundations",
+difficulty:"Easy",
+question:"Expand 2x(3x + 4).",
+acceptedAnswers:["6x^2+8x","6x²+8x"],
+solution:[
+"Multiply 2x by each term.",
+"2x × 3x = 6x² and 2x × 4 = 8x.",
+"Final answer: 6x² + 8x"
+]
+},
+{
+id:"ALG-003",
+topic:"Algebra Foundations",
+difficulty:"Easy",
+question:"Expand (x + 2)(x + 3).",
+acceptedAnswers:["x^2+5x+6","x²+5x+6"],
+solution:[
+"Multiply each term in the first bracket by each term in the second.",
+"x × x = x², x × 3 = 3x, 2 × x = 2x, 2 × 3 = 6.",
+"Combine like terms: x² + 3x + 2x + 6 = x² + 5x + 6."
+]
+},
+{
+id:"ALG-004",
+topic:"Algebra Foundations",
+difficulty:"Easy",
+question:"Factorise x² + 5x.",
+acceptedAnswers:["x(x+5)"],
+solution:[
+"Find the common factor.",
+"Both x² and 5x contain x.",
+"Final answer: x(x + 5)"
+]
+},
+{
+id:"ALG-005",
+topic:"Algebra Foundations",
+difficulty:"Moderate",
+question:"Factorise x² + 7x + 10.",
+acceptedAnswers:["(x+5)(x+2)","(x+2)(x+5)"],
+solution:[
+"Find two numbers that multiply to 10 and add to 7.",
+"The numbers are 5 and 2.",
+"Final answer: (x + 5)(x + 2)"
+]
+},
+{
+id:"ALG-006",
+topic:"Algebra Foundations",
+difficulty:"Moderate",
+question:"Factorise x² - 9.",
+acceptedAnswers:["(x-3)(x+3)","(x+3)(x-3)"],
+solution:[
+"This is a difference of two squares.",
+"x² - 9 = x² - 3².",
+"Final answer: (x - 3)(x + 3)"
+]
+},
+{
+id:"ALG-007",
+topic:"Algebra Foundations",
+difficulty:"Easy",
+question:"Simplify x³ × x².",
+acceptedAnswers:["x^5","x⁵"],
+solution:[
+"When multiplying powers with the same base, add the powers.",
+"x³ × x² = x³⁺².",
+"Final answer: x⁵"
+]
+},
+{
+id:"ALG-008",
+topic:"Algebra Foundations",
+difficulty:"Easy",
+question:"Simplify x⁶ ÷ x².",
+acceptedAnswers:["x^4","x⁴"],
+solution:[
+"When dividing powers with the same base, subtract the powers.",
+"x⁶ ÷ x² = x⁶⁻².",
+"Final answer: x⁴"
+]
+},
+{
+id:"ALG-009",
+topic:"Algebra Foundations",
+difficulty:"Moderate",
+question:"Simplify (x²)³.",
+acceptedAnswers:["x^6","x⁶"],
+solution:[
+"When raising a power to another power, multiply the powers.",
+"(x²)³ = x²ˣ³.",
+"Final answer: x⁶"
+]
+},
+{
+id:"ALG-010",
+topic:"Algebra Foundations",
+difficulty:"Moderate",
+question:"Simplify 4a + 3a - 2a.",
+acceptedAnswers:["5a"],
+solution:[
+"Combine like terms.",
+"4a + 3a = 7a.",
+"7a - 2a = 5a."
+]
+},

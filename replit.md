@@ -25,3 +25,9 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - `pnpm --filter @workspace/api-server run dev` — run API server locally
 
 See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details.
+
+## Artifacts
+
+- `artifacts/api-server` — Express API server (default scaffold).
+- `artifacts/mockup-sandbox` — design-time component preview.
+- `artifacts/practice` — **IGCSE Add Maths Crash Practice**: a single-student, browser-only self-marking practice web app for a 3-week IGCSE Additional Mathematics crash course. React + Vite + TypeScript + KaTeX + Tailwind v4 + shadcn/ui. No backend, no database, no auth — all progress lives in `localStorage` under key `igcse-add-maths-practice/v1`. Six sections: Algebra Foundations, Quadratics, Differentiation, Trigonometry Survival, Mixed Exam Practice, Mistake Review. Question bank lives in `src/data/questions.ts` (16 questions per topic). Answer normalisation/grading in `src/lib/grade.ts`. Mistakes are added on any wrong answer and only cleared via correct answer **inside** the Mistake Review section. Footer text is fixed: "Prepared for internal learning support by Sri Bintang Education."
