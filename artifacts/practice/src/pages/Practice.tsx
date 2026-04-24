@@ -498,12 +498,17 @@ function SessionSummary({
             </p>
           )}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
-            {wrongCount > 0 && (
-              <Button onClick={onRedoWrong} className="gap-2" data-testid="button-redo-wrong">
-                <RotateCcw className="h-4 w-4" />
-                Redo wrong questions ({wrongCount})
-              </Button>
-            )}
+            <Button
+              onClick={onRedoWrong}
+              disabled={wrongCount === 0}
+              className="gap-2"
+              data-testid="button-redo-wrong"
+            >
+              <RotateCcw className="h-4 w-4" />
+              {wrongCount > 0
+                ? `Redo wrong questions (${wrongCount})`
+                : "Redo wrong questions"}
+            </Button>
             <Button variant="secondary" onClick={onRestart} data-testid="button-restart-section">
               Restart section
             </Button>
