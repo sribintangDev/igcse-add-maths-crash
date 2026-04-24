@@ -85,6 +85,17 @@ export default function Practice({ sectionId }: PracticeProps) {
     if (inputRef.current) inputRef.current.focus();
   }, [index]);
 
+  // After every check (correct OR wrong), bring focus back to the (now
+  // read-only) answer input so the student can press Enter to advance, retry,
+  // or skip without having to click. Without this, focus stays on the
+  // just-clicked button which then unmounts, leaving focus on document.body
+  // and silently breaking the keyboard flow.
+  useEffect(() => {
+    if (feedback !== "idle" && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [feedback]);
+
   if (!meta) {
     return <FallbackMessage title="Section not found" hint="This section does not exist." />;
   }
