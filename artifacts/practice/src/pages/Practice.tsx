@@ -565,7 +565,19 @@ function buildQueue(
     return questionsByIds(mistakeIds(state));
   }
   if (sectionId === "mixed") {
-    return shuffle(QUESTIONS).slice(0, 12);
+    // Stratified sample: 3 random questions from each of the 4 core topics
+    // so every Mixed Practice run guarantees full topic coverage. The final
+    // 12-question queue is then shuffled so the topic order varies.
+    const coreSections: SectionId[] = [
+      "algebra",
+      "quadratics",
+      "differentiation",
+      "trigonometry",
+    ];
+    const picked = coreSections.flatMap((s) =>
+      shuffle(questionsForSection(s)).slice(0, 3),
+    );
+    return shuffle(picked);
   }
   return questionsForSection(sectionId);
 }
