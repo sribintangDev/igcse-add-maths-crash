@@ -1,6 +1,7 @@
 import { Link } from "wouter";
-import { ArrowRight, BookOpen, Calculator, FunctionSquare, RefreshCcw, Shuffle, Triangle } from "lucide-react";
+import { ArrowRight, BookOpen, Calculator, Clock, FunctionSquare, RefreshCcw, Shuffle, Triangle } from "lucide-react";
 import type { SectionId } from "@/data/questions";
+import { formatDuration } from "@/lib/storage";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
@@ -12,6 +13,11 @@ interface SectionCardProps {
   correct: number;
   mistakes: number;
   total: number;
+  /**
+   * Average seconds per attempt across this section's recorded timings.
+   * `null` means we have no timing data yet (so we render "—" instead of 0s).
+   */
+  avgSeconds?: number | null;
   disabled?: boolean;
 }
 
@@ -41,6 +47,7 @@ export function SectionCard({
   correct,
   mistakes,
   total,
+  avgSeconds = null,
   disabled,
 }: SectionCardProps) {
   const Icon = ICONS[id];
@@ -92,6 +99,17 @@ export function SectionCard({
               {mistakes > 0 && (
                 <Badge variant="outline" className="border-destructive/40 text-destructive" data-testid={`badge-mistakes-${id}`}>
                   {mistakes} to redo
+                </Badge>
+              )}
+              {avgSeconds !== null && (
+                <Badge
+                  variant="outline"
+                  className="gap-1 border-border text-muted-foreground"
+                  data-testid={`badge-avg-time-${id}`}
+                  title="Average time per attempt"
+                >
+                  <Clock className="h-3 w-3" />
+                  avg {formatDuration(avgSeconds)}
                 </Badge>
               )}
             </>

@@ -9,9 +9,16 @@ export interface ProgressState {
   correct: Record<string, number>;
   /** Set (as object) of question ids the student has gotten wrong and not yet redeemed. */
   mistakes: Record<string, true>;
+  /**
+   * Per-question elapsed-seconds samples. One entry is appended on every
+   * first-submit (Practice records the time from when the question first
+   * appeared until the student presses Check answer). We keep all samples so
+   * a slow question that improves over time is reflected in the average.
+   */
+  times: Record<string, number[]>;
 }
 
-const EMPTY: ProgressState = { attempted: {}, correct: {}, mistakes: {} };
+const EMPTY: ProgressState = { attempted: {}, correct: {}, mistakes: {}, times: {} };
 
 function read(): ProgressState {
   if (typeof window === "undefined") return EMPTY;
@@ -23,6 +30,7 @@ function read(): ProgressState {
       attempted: parsed.attempted ?? {},
       correct: parsed.correct ?? {},
       mistakes: parsed.mistakes ?? {},
+      times: parsed.times ?? {},
     };
   } catch {
     return EMPTY;
@@ -70,9 +78,17 @@ export function useProgress() {
    * when the question is answered correctly *inside the Mistake Review section*
    * (pass `redemptionMode: true` for that case). Regular section corrects do not
    * clear the mistake — the student still owes that question a deliberate review.
+   *
+   * `elapsedSeconds` is the time-to-first-submit for the question on this run;
+   * pass `null` to skip the timing sample (e.g. test/edge cases).
    */
   const recordAttempt = useCallback(
-    (questionId: string, wasCorrect: boolean, redemptionMode = false) => {
+    (
+      questionId: string,
+      wasCorrect: boolean,
+      redemptionMode = false,
+      elapsedSeconds: number | null = null,
+    ) => {
       setState((s) => {
         const attempted = { ...s.attempted, [questionId]: (s.attempted[questionId] ?? 0) + 1 };
         const correct = wasCorrect
@@ -84,14 +100,19 @@ export function useProgress() {
         } else if (redemptionMode) {
           delete mistakes[questionId];
         }
-        return { attempted, correct, mistakes };
+        let times = s.times;
+        if (elapsedSeconds !== null && Number.isFinite(elapsedSeconds) && elapsedSeconds >= 0) {
+          const prior = s.times[questionId] ?? [];
+          times = { ...s.times, [questionId]: [...prior, elapsedSeconds] };
+        }
+        return { attempted, correct, mistakes, times };
       });
     },
     [],
   );
 
   const reset = useCallback(() => {
-    setState(() => ({ ...EMPTY }));
+    setState(() => ({ ...EMPTY, times: {} }));
   }, []);
 
   const clearMistakes = useCallback(() => {
@@ -127,6 +148,41 @@ export function sectionStats(
     if (state.mistakes[id]) mistakes += 1;
   }
   return { attempted, correct, mistakes };
+}
+
+/**
+ * Average elapsed seconds across every recorded attempt for the given
+ * question ids. Returns `null` when there is no timing data yet so the UI
+ * can render a "no data" state instead of a misleading "0s".
+ */
+export function sectionAverageSeconds(
+  state: ProgressState,
+  sectionQuestionIds: string[],
+): number | null {
+  let total = 0;
+  let samples = 0;
+  for (const id of sectionQuestionIds) {
+    const arr = state.times[id];
+    if (!arr) continue;
+    for (const t of arr) {
+      total += t;
+      samples += 1;
+    }
+  }
+  if (samples === 0) return null;
+  return total / samples;
+}
+
+/**
+ * Format a duration in seconds for compact UI display: < 60s shows "38s",
+ * otherwise "1m 12s". Used for both section cards and session summaries.
+ */
+export function formatDuration(seconds: number): string {
+  const s = Math.max(0, Math.round(seconds));
+  if (s < 60) return `${s}s`;
+  const m = Math.floor(s / 60);
+  const rem = s % 60;
+  return rem === 0 ? `${m}m` : `${m}m ${rem}s`;
 }
 
 export function mistakeIds(state: ProgressState): string[] {

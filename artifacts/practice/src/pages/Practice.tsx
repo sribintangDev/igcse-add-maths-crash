@@ -17,7 +17,7 @@ import {
   shuffle,
 } from "@/data/questions";
 import { grade } from "@/lib/grade";
-import { mistakeIds, useProgress } from "@/lib/storage";
+import { formatDuration, mistakeIds, useProgress } from "@/lib/storage";
 import { MathText } from "@/components/Math";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -72,8 +72,23 @@ export default function Practice({ sectionId }: PracticeProps) {
     correct: 0,
     attempts: 0,
     wrongIds: [] as string[],
+    /** Per-question elapsed seconds recorded on first submit, used for the summary. */
+    times: [] as number[],
   });
   const inputRef = useRef<HTMLInputElement>(null);
+  /**
+   * Wall-clock timestamp (ms) when the *current* question first became
+   * visible. Reset whenever the index changes. We freeze it on first submit
+   * by reading it inside submitAnswer rather than clearing it, so a
+   * "Try again" press for the same question doesn't restart the clock —
+   * the recorded time is always time-to-first-attempt.
+   */
+  const questionStartRef = useRef<number>(Date.now());
+  /** Set true once the current question has been submitted at least once,
+   *  so we never record a second timing sample for the same question. */
+  const timingRecordedRef = useRef(false);
+  /** Wall-clock timestamp (ms) when this practice run started. */
+  const sessionStartRef = useRef<number>(Date.now());
 
   const current = queue[index];
   const total = queue.length;
@@ -82,6 +97,8 @@ export default function Practice({ sectionId }: PracticeProps) {
     setAnswer("");
     setFeedback("idle");
     setSolutionOpen(false);
+    questionStartRef.current = Date.now();
+    timingRecordedRef.current = false;
     if (inputRef.current) inputRef.current.focus();
   }, [index]);
 
@@ -121,7 +138,10 @@ export default function Practice({ sectionId }: PracticeProps) {
     setFeedback("idle");
     setSolutionOpen(false);
     setCompleted(false);
-    setSessionStats({ correct: 0, attempts: 0, wrongIds: [] });
+    setSessionStats({ correct: 0, attempts: 0, wrongIds: [], times: [] });
+    sessionStartRef.current = Date.now();
+    questionStartRef.current = Date.now();
+    timingRecordedRef.current = false;
   };
 
   const isRedemptionMode = mode === "mistakes" || mode === "redo";
@@ -141,7 +161,15 @@ export default function Practice({ sectionId }: PracticeProps) {
   const submitAnswer = () => {
     if (!answer.trim()) return;
     const result = grade(current, answer);
-    recordAttempt(current.id, result.correct, isRedemptionMode);
+    // Stop the per-question clock on first submit only. Subsequent
+    // "Try again" presses for the same question reuse the original sample
+    // (the "thinking time") instead of resetting it.
+    const isFirstSubmit = !timingRecordedRef.current;
+    const elapsedSeconds = isFirstSubmit
+      ? (Date.now() - questionStartRef.current) / 1000
+      : null;
+    if (isFirstSubmit) timingRecordedRef.current = true;
+    recordAttempt(current.id, result.correct, isRedemptionMode, elapsedSeconds);
     setFeedback(result.correct ? "correct" : "wrong");
     // After every check, surface the worked solution + accepted answers
     // immediately so the student can study them right away.
@@ -154,6 +182,7 @@ export default function Practice({ sectionId }: PracticeProps) {
         : s.wrongIds.includes(current.id)
         ? s.wrongIds
         : [...s.wrongIds, current.id],
+      times: elapsedSeconds === null ? s.times : [...s.times, elapsedSeconds],
     }));
   };
 
@@ -173,11 +202,18 @@ export default function Practice({ sectionId }: PracticeProps) {
   };
 
   if (completed) {
+    const totalSessionSeconds = (Date.now() - sessionStartRef.current) / 1000;
+    const avgSecondsPerQuestion =
+      sessionStats.times.length === 0
+        ? null
+        : sessionStats.times.reduce((a, b) => a + b, 0) / sessionStats.times.length;
     return (
       <SessionSummary
         sectionTitle={meta.title}
         stats={sessionStats}
         total={total}
+        totalSeconds={totalSessionSeconds}
+        avgSeconds={avgSecondsPerQuestion}
         onRedoWrong={() => {
           if (sessionStats.wrongIds.length === 0) return;
           restart(questionsByIds(sessionStats.wrongIds), "redo");
@@ -423,8 +459,10 @@ export default function Practice({ sectionId }: PracticeProps) {
 
 interface SessionSummaryProps {
   sectionTitle: string;
-  stats: { correct: number; attempts: number; wrongIds: string[] };
+  stats: { correct: number; attempts: number; wrongIds: string[]; times: number[] };
   total: number;
+  totalSeconds: number;
+  avgSeconds: number | null;
   onRedoWrong: () => void;
   onRestart: () => void;
   onHome: () => void;
@@ -434,6 +472,8 @@ function SessionSummary({
   sectionTitle,
   stats,
   total,
+  totalSeconds,
+  avgSeconds,
   onRedoWrong,
   onRestart,
   onHome,
@@ -479,6 +519,22 @@ function SessionSummary({
           <p className="mt-2 text-sm text-muted-foreground" data-testid="text-summary-counters">
             {stats.correct} correct out of {stats.attempts} attempts · {total} question
             {total === 1 ? "" : "s"} in this run
+          </p>
+          <p
+            className="mt-3 text-sm text-muted-foreground"
+            data-testid="text-summary-time"
+          >
+            <span data-testid="text-summary-total-time">
+              Total time {formatDuration(totalSeconds)}
+            </span>
+            {avgSeconds !== null && (
+              <>
+                {" · "}
+                <span data-testid="text-summary-avg-time">
+                  avg {formatDuration(avgSeconds)} per question
+                </span>
+              </>
+            )}
           </p>
           {wrongCount > 0 ? (
             <p

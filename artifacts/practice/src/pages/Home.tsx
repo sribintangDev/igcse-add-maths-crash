@@ -6,7 +6,13 @@ import {
   SECTION_ORDER,
   questionsForSection,
 } from "@/data/questions";
-import { useProgress, summarise, sectionStats, mistakeIds } from "@/lib/storage";
+import {
+  useProgress,
+  summarise,
+  sectionStats,
+  sectionAverageSeconds,
+  mistakeIds,
+} from "@/lib/storage";
 import { Footer } from "@/components/Footer";
 import { SectionCard } from "@/components/SectionCard";
 import { Button } from "@/components/ui/button";
@@ -146,6 +152,8 @@ export default function Home() {
               const stats = sectionStats(state, ids);
               const total = ids.length;
               const disabled = id === "mistakes" && mistakes.length === 0;
+              const avgSeconds =
+                id === "mistakes" ? null : sectionAverageSeconds(state, ids);
               return (
                 <SectionCard
                   key={id}
@@ -156,6 +164,7 @@ export default function Home() {
                   correct={stats.correct}
                   mistakes={id === "mistakes" ? mistakes.length : stats.mistakes}
                   total={total}
+                  avgSeconds={avgSeconds}
                   disabled={disabled}
                 />
               );
