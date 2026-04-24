@@ -14,12 +14,32 @@ export type SectionId =
   | "mixed"
   | "mistakes";
 
+/**
+ * Declared answer-input type for a question. The current question bank is
+ * entirely "short-text" (free-text answers graded against a normalised list of
+ * acceptedAnswers). The field is part of the schema so future items
+ * (multiple-choice, numeric-only, etc.) can be added without changing the
+ * shape of every existing question. The grader switches on this field.
+ */
+export type QuestionType = "short-text" | "numeric" | "multiple-choice";
+
 export interface Question {
   id: string;
   topic: Topic;
+  /**
+   * Stable id of the section this question belongs to. Derived from `topic`
+   * via TOPIC_TO_SECTION at module load (see below) so it stays in sync.
+   */
+  section: SectionId;
+  questionType: QuestionType;
   difficulty: Difficulty;
   question: string;
   acceptedAnswers: string[];
+  /**
+   * Optional choices for "multiple-choice" questions. Unused for the current
+   * short-text bank but declared so the schema is forward-compatible.
+   */
+  choices?: string[];
   solution: string[];
   /**
    * If true, the answer represents a comma-separated set whose order does not matter
@@ -98,6 +118,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "ALG-001",
     topic: "Algebra Foundations",
+    section: "algebra",
+    questionType: "short-text",
     difficulty: "Easy",
     question: "Expand $3(x + 5)$.",
     acceptedAnswers: ["3x+15", "15+3x"],
@@ -110,6 +132,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "ALG-002",
     topic: "Algebra Foundations",
+    section: "algebra",
+    questionType: "short-text",
     difficulty: "Easy",
     question: "Expand and simplify $2(x - 3) + 4(x + 1)$.",
     acceptedAnswers: ["6x-2", "-2+6x"],
@@ -122,6 +146,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "ALG-003",
     topic: "Algebra Foundations",
+    section: "algebra",
+    questionType: "short-text",
     difficulty: "Easy",
     question: "Factorise $6x + 9$.",
     acceptedAnswers: ["3(2x+3)", "3(3+2x)"],
@@ -134,6 +160,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "ALG-004",
     topic: "Algebra Foundations",
+    section: "algebra",
+    questionType: "short-text",
     difficulty: "Easy",
     question: "Solve $4x - 7 = 13$ for $x$.",
     acceptedAnswers: ["5", "x=5"],
@@ -146,6 +174,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "ALG-005",
     topic: "Algebra Foundations",
+    section: "algebra",
+    questionType: "short-text",
     difficulty: "Easy",
     question: "Simplify $\\dfrac{12x^4}{4x}$.",
     acceptedAnswers: ["3x^3", "3*x^3"],
@@ -158,6 +188,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "ALG-006",
     topic: "Algebra Foundations",
+    section: "algebra",
+    questionType: "short-text",
     difficulty: "Moderate",
     question: "Expand $(x + 4)(x - 2)$.",
     acceptedAnswers: ["x^2+2x-8", "-8+2x+x^2"],
@@ -170,6 +202,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "ALG-007",
     topic: "Algebra Foundations",
+    section: "algebra",
+    questionType: "short-text",
     difficulty: "Moderate",
     question: "Factorise fully $2x^2 - 8x$.",
     acceptedAnswers: ["2x(x-4)"],
@@ -182,6 +216,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "ALG-008",
     topic: "Algebra Foundations",
+    section: "algebra",
+    questionType: "short-text",
     difficulty: "Moderate",
     question: "Simplify $\\dfrac{x^2 - 9}{x + 3}$ where $x \\neq -3$.",
     acceptedAnswers: ["x-3"],
@@ -194,6 +230,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "ALG-009",
     topic: "Algebra Foundations",
+    section: "algebra",
+    questionType: "short-text",
     difficulty: "Moderate",
     question: "Solve $3(x - 2) = 2x + 4$.",
     acceptedAnswers: ["10", "x=10"],
@@ -206,6 +244,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "ALG-010",
     topic: "Algebra Foundations",
+    section: "algebra",
+    questionType: "short-text",
     difficulty: "Moderate",
     question: "Simplify $5\\sqrt{2} + 3\\sqrt{2}$.",
     acceptedAnswers: ["8sqrt(2)", "8sqrt2", "8√2"],
@@ -218,6 +258,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "ALG-011",
     topic: "Algebra Foundations",
+    section: "algebra",
+    questionType: "short-text",
     difficulty: "Moderate",
     question: "Evaluate $\\left(\\dfrac{1}{2}\\right)^{-3}$.",
     acceptedAnswers: ["8"],
@@ -230,6 +272,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "ALG-012",
     topic: "Algebra Foundations",
+    section: "algebra",
+    questionType: "short-text",
     difficulty: "Moderate",
     question: "Simplify $\\dfrac{a^5 \\cdot a^{-2}}{a^{-3}}$.",
     acceptedAnswers: ["a^6"],
@@ -242,6 +286,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "ALG-013",
     topic: "Algebra Foundations",
+    section: "algebra",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question:
       "Solve the simultaneous equations $2x + y = 7$ and $x - y = 2$. Give your answer as $x,y$.",
@@ -256,6 +302,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "ALG-014",
     topic: "Algebra Foundations",
+    section: "algebra",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question:
       "Make $r$ the subject of the formula $A = \\pi r^2$ (take the positive root).",
@@ -269,6 +317,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "ALG-015",
     topic: "Algebra Foundations",
+    section: "algebra",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question: "Simplify $\\dfrac{2}{x} + \\dfrac{3}{x+1}$ as a single fraction.",
     acceptedAnswers: ["(5x+2)/(x(x+1))", "(5x+2)/(x^2+x)"],
@@ -281,6 +331,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "ALG-016",
     topic: "Algebra Foundations",
+    section: "algebra",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question: "Solve $\\dfrac{x+1}{2} - \\dfrac{x-3}{4} = 2$.",
     acceptedAnswers: ["3", "x=3"],
@@ -295,6 +347,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "QUA-001",
     topic: "Quadratics",
+    section: "quadratics",
+    questionType: "short-text",
     difficulty: "Easy",
     question: "Factorise $x^2 + 7x + 12$.",
     acceptedAnswers: ["(x+3)(x+4)", "(x+4)(x+3)"],
@@ -307,6 +361,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "QUA-002",
     topic: "Quadratics",
+    section: "quadratics",
+    questionType: "short-text",
     difficulty: "Easy",
     question: "Factorise $x^2 - 5x + 6$.",
     acceptedAnswers: ["(x-2)(x-3)", "(x-3)(x-2)"],
@@ -319,6 +375,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "QUA-003",
     topic: "Quadratics",
+    section: "quadratics",
+    questionType: "short-text",
     difficulty: "Easy",
     question: "Solve $x^2 = 49$. Give both solutions, separated by a comma.",
     acceptedAnswers: ["7,-7", "x=7,x=-7"],
@@ -332,6 +390,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "QUA-004",
     topic: "Quadratics",
+    section: "quadratics",
+    questionType: "short-text",
     difficulty: "Easy",
     question: "Solve $(x - 2)(x + 5) = 0$. Give both solutions, separated by a comma.",
     acceptedAnswers: ["2,-5", "x=2,x=-5"],
@@ -345,6 +405,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "QUA-005",
     topic: "Quadratics",
+    section: "quadratics",
+    questionType: "short-text",
     difficulty: "Moderate",
     question: "Solve $x^2 - 6x + 8 = 0$. Give both solutions, separated by a comma.",
     acceptedAnswers: ["2,4", "x=2,x=4"],
@@ -358,6 +420,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "QUA-006",
     topic: "Quadratics",
+    section: "quadratics",
+    questionType: "short-text",
     difficulty: "Moderate",
     question: "Solve $2x^2 + 5x - 3 = 0$. Give both solutions, separated by a comma.",
     acceptedAnswers: ["1/2,-3", "0.5,-3", "x=1/2,x=-3"],
@@ -372,6 +436,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "QUA-007",
     topic: "Quadratics",
+    section: "quadratics",
+    questionType: "short-text",
     difficulty: "Moderate",
     question:
       "Use the quadratic formula to find the roots of $x^2 + 2x - 5 = 0$. Give the exact answer, separated by a comma.",
@@ -387,6 +453,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "QUA-008",
     topic: "Quadratics",
+    section: "quadratics",
+    questionType: "short-text",
     difficulty: "Moderate",
     question: "Find the discriminant of $3x^2 - 4x + 1 = 0$.",
     acceptedAnswers: ["4"],
@@ -399,6 +467,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "QUA-009",
     topic: "Quadratics",
+    section: "quadratics",
+    questionType: "short-text",
     difficulty: "Moderate",
     question: "Complete the square for $x^2 + 6x + 5$.",
     acceptedAnswers: ["(x+3)^2-4"],
@@ -411,6 +481,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "QUA-010",
     topic: "Quadratics",
+    section: "quadratics",
+    questionType: "short-text",
     difficulty: "Moderate",
     question:
       "Find the coordinates of the minimum point of $y = x^2 - 4x + 1$. Give your answer as $x,y$.",
@@ -425,6 +497,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "QUA-011",
     topic: "Quadratics",
+    section: "quadratics",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question:
       "Solve $x^2 - 4x - 12 = 0$. Give both solutions, separated by a comma.",
@@ -439,6 +513,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "QUA-012",
     topic: "Quadratics",
+    section: "quadratics",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question:
       "The roots of $x^2 + px + 12 = 0$ are $-2$ and $-6$. Find the value of $p$.",
@@ -453,6 +529,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "QUA-013",
     topic: "Quadratics",
+    section: "quadratics",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question:
       "For what values of $k$ does $x^2 + kx + 9 = 0$ have equal roots? Give both, separated by a comma.",
@@ -468,6 +546,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "QUA-014",
     topic: "Quadratics",
+    section: "quadratics",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question:
       "Express $2x^2 - 8x + 3$ in the form $a(x + b)^2 + c$. Give your answer as the expression.",
@@ -482,6 +562,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "QUA-015",
     topic: "Quadratics",
+    section: "quadratics",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question:
       "Find the values of $x$ where $y = x^2 - 3x - 4$ crosses the x-axis. Give both, separated by a comma.",
@@ -497,6 +579,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "QUA-016",
     topic: "Quadratics",
+    section: "quadratics",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question:
       "Find the values of $x$ for which $x^2 - x - 6 < 0$. Use interval notation, e.g. $-2<x<3$.",
@@ -512,6 +596,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "DIF-001",
     topic: "Differentiation",
+    section: "differentiation",
+    questionType: "short-text",
     difficulty: "Easy",
     question: "Differentiate $y = x^4$ with respect to $x$.",
     acceptedAnswers: ["4x^3", "dy/dx=4x^3"],
@@ -524,6 +610,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "DIF-002",
     topic: "Differentiation",
+    section: "differentiation",
+    questionType: "short-text",
     difficulty: "Easy",
     question: "Differentiate $y = 5x$.",
     acceptedAnswers: ["5", "dy/dx=5"],
@@ -535,6 +623,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "DIF-003",
     topic: "Differentiation",
+    section: "differentiation",
+    questionType: "short-text",
     difficulty: "Easy",
     question: "Differentiate $y = 7$.",
     acceptedAnswers: ["0", "dy/dx=0"],
@@ -546,6 +636,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "DIF-004",
     topic: "Differentiation",
+    section: "differentiation",
+    questionType: "short-text",
     difficulty: "Easy",
     question: "Differentiate $y = 3x^2 + 2x - 1$.",
     acceptedAnswers: ["6x+2", "dy/dx=6x+2"],
@@ -558,6 +650,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "DIF-005",
     topic: "Differentiation",
+    section: "differentiation",
+    questionType: "short-text",
     difficulty: "Easy",
     question: "Differentiate $f(x) = x^3 - 4x$.",
     acceptedAnswers: ["3x^2-4", "f'(x)=3x^2-4"],
@@ -570,6 +664,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "DIF-006",
     topic: "Differentiation",
+    section: "differentiation",
+    questionType: "short-text",
     difficulty: "Moderate",
     question: "Differentiate $y = \\dfrac{1}{x}$.",
     acceptedAnswers: ["-1/x^2", "-x^-2", "-x^(-2)"],
@@ -582,6 +678,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "DIF-007",
     topic: "Differentiation",
+    section: "differentiation",
+    questionType: "short-text",
     difficulty: "Moderate",
     question: "Differentiate $y = \\sqrt{x}$.",
     acceptedAnswers: ["1/(2sqrt(x))", "1/(2√x)", "(1/2)x^(-1/2)"],
@@ -594,6 +692,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "DIF-008",
     topic: "Differentiation",
+    section: "differentiation",
+    questionType: "short-text",
     difficulty: "Moderate",
     question: "Find $f'(x)$ for $f(x) = 2x^3 - 5x^2 + x - 6$.",
     acceptedAnswers: ["6x^2-10x+1", "f'(x)=6x^2-10x+1"],
@@ -606,6 +706,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "DIF-009",
     topic: "Differentiation",
+    section: "differentiation",
+    questionType: "short-text",
     difficulty: "Moderate",
     question:
       "Find the gradient of $y = x^2 - 3x$ at $x = 4$.",
@@ -619,6 +721,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "DIF-010",
     topic: "Differentiation",
+    section: "differentiation",
+    questionType: "short-text",
     difficulty: "Moderate",
     question:
       "Find the equation of the tangent to $y = x^2$ at the point $(3, 9)$. Give it in the form $y=mx+c$.",
@@ -632,6 +736,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "DIF-011",
     topic: "Differentiation",
+    section: "differentiation",
+    questionType: "short-text",
     difficulty: "Moderate",
     question:
       "Find the x-coordinate of the stationary point of $y = x^2 - 8x + 3$.",
@@ -645,6 +751,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "DIF-012",
     topic: "Differentiation",
+    section: "differentiation",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question:
       "Find the x-coordinates of the stationary points of $y = x^3 - 3x^2 - 9x + 1$. Give both, separated by a comma.",
@@ -659,6 +767,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "DIF-013",
     topic: "Differentiation",
+    section: "differentiation",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question:
       "Find $\\dfrac{d^2y}{dx^2}$ when $y = 4x^3 - x^2 + 7$.",
@@ -672,6 +782,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "DIF-014",
     topic: "Differentiation",
+    section: "differentiation",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question:
       "Find the gradient of the tangent to $y = 2x^3 - 5x$ at the point where $x = -1$.",
@@ -685,6 +797,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "DIF-015",
     topic: "Differentiation",
+    section: "differentiation",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question:
       "A curve has equation $y = x^3 - 12x + 4$. Find the y-coordinate of the local maximum.",
@@ -698,6 +812,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "DIF-016",
     topic: "Differentiation",
+    section: "differentiation",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question:
       "Find the equation of the normal to $y = x^2 + 1$ at the point $(1, 2)$. Give it in the form $y=mx+c$.",
@@ -713,6 +829,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "TRI-001",
     topic: "Trigonometry Survival",
+    section: "trigonometry",
+    questionType: "short-text",
     difficulty: "Easy",
     question: "Evaluate $\\sin 30°$. Give the exact value as a fraction.",
     acceptedAnswers: ["1/2", "0.5"],
@@ -724,6 +842,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "TRI-002",
     topic: "Trigonometry Survival",
+    section: "trigonometry",
+    questionType: "short-text",
     difficulty: "Easy",
     question: "Evaluate $\\cos 60°$. Give the exact value as a fraction.",
     acceptedAnswers: ["1/2", "0.5"],
@@ -735,6 +855,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "TRI-003",
     topic: "Trigonometry Survival",
+    section: "trigonometry",
+    questionType: "short-text",
     difficulty: "Easy",
     question: "Evaluate $\\tan 45°$.",
     acceptedAnswers: ["1"],
@@ -746,6 +868,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "TRI-004",
     topic: "Trigonometry Survival",
+    section: "trigonometry",
+    questionType: "short-text",
     difficulty: "Easy",
     question:
       "Evaluate $\\sin 60°$. Give the exact value (use $\\sqrt{3}$ where needed).",
@@ -758,6 +882,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "TRI-005",
     topic: "Trigonometry Survival",
+    section: "trigonometry",
+    questionType: "short-text",
     difficulty: "Easy",
     question:
       "In a right-angled triangle, the opposite side is 3 and the hypotenuse is 5. Find $\\sin\\theta$.",
@@ -771,6 +897,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "TRI-006",
     topic: "Trigonometry Survival",
+    section: "trigonometry",
+    questionType: "short-text",
     difficulty: "Moderate",
     question:
       "Simplify $\\sin^2\\theta + \\cos^2\\theta$.",
@@ -784,6 +912,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "TRI-007",
     topic: "Trigonometry Survival",
+    section: "trigonometry",
+    questionType: "short-text",
     difficulty: "Moderate",
     question:
       "If $\\sin\\theta = \\dfrac{4}{5}$ and $\\theta$ is acute, find $\\cos\\theta$.",
@@ -797,6 +927,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "TRI-008",
     topic: "Trigonometry Survival",
+    section: "trigonometry",
+    questionType: "short-text",
     difficulty: "Moderate",
     question:
       "Express $\\dfrac{\\sin\\theta}{\\cos\\theta}$ in its simplest form.",
@@ -809,6 +941,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "TRI-009",
     topic: "Trigonometry Survival",
+    section: "trigonometry",
+    questionType: "short-text",
     difficulty: "Moderate",
     question:
       "Solve $\\sin x = \\dfrac{1}{2}$ for $0° \\le x \\le 180°$. Give both values, separated by a comma.",
@@ -823,6 +957,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "TRI-010",
     topic: "Trigonometry Survival",
+    section: "trigonometry",
+    questionType: "short-text",
     difficulty: "Moderate",
     question:
       "Solve $\\cos x = -\\dfrac{1}{2}$ for $0° \\le x \\le 360°$. Give both values, separated by a comma.",
@@ -837,6 +973,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "TRI-011",
     topic: "Trigonometry Survival",
+    section: "trigonometry",
+    questionType: "short-text",
     difficulty: "Moderate",
     question: "Evaluate $\\tan 60°$ as an exact value.",
     acceptedAnswers: ["sqrt(3)", "√3"],
@@ -848,6 +986,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "TRI-012",
     topic: "Trigonometry Survival",
+    section: "trigonometry",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question:
       "Solve $2\\sin x = 1$ for $0° \\le x \\le 360°$. Give both values, separated by a comma.",
@@ -862,6 +1002,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "TRI-013",
     topic: "Trigonometry Survival",
+    section: "trigonometry",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question:
       "Solve $\\tan x = -1$ for $0° \\le x \\le 360°$. Give both values, separated by a comma.",
@@ -876,6 +1018,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "TRI-014",
     topic: "Trigonometry Survival",
+    section: "trigonometry",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question:
       "If $\\cos\\theta = -\\dfrac{5}{13}$ and $\\theta$ lies in the second quadrant, find $\\sin\\theta$.",
@@ -889,6 +1033,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "TRI-015",
     topic: "Trigonometry Survival",
+    section: "trigonometry",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question:
       "Solve $2\\cos^2 x - 1 = 0$ for $0° \\le x \\le 180°$. Give both values, separated by a comma.",
@@ -904,6 +1050,8 @@ export const QUESTIONS: Question[] = [
   {
     id: "TRI-016",
     topic: "Trigonometry Survival",
+    section: "trigonometry",
+    questionType: "short-text",
     difficulty: "Exam Style",
     question:
       "Simplify $\\dfrac{1 - \\cos^2\\theta}{\\sin\\theta}$.",
