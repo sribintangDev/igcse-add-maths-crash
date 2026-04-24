@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 export default function Home() {
-  const { state, reset } = useProgress();
+  const { state, reset, clearMistakes } = useProgress();
   const summary = useMemo(() => summarise(state), [state]);
   const mistakes = mistakeIds(state);
   const [resetOpen, setResetOpen] = useState(false);
@@ -61,14 +61,31 @@ export default function Home() {
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
-                <AlertDialogTitle>Reset all progress?</AlertDialogTitle>
+                <AlertDialogTitle>What would you like to clear?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  This will clear your attempted-question counts, correct-answer counts and your
-                  saved mistakes list from this browser. There is no undo.
+                  Choose a scope. There is no undo for either action.
+                  <span className="mt-3 block text-foreground">
+                    <strong>Clear mistakes only</strong> empties your saved mistakes list but keeps
+                    your attempt history.
+                  </span>
+                  <span className="mt-2 block text-foreground">
+                    <strong>Reset everything</strong> wipes attempts, correct counts and mistakes
+                    for this browser.
+                  </span>
                 </AlertDialogDescription>
               </AlertDialogHeader>
-              <AlertDialogFooter>
+              <AlertDialogFooter className="flex-col gap-2 sm:flex-row sm:justify-end">
                 <AlertDialogCancel data-testid="button-reset-cancel">Cancel</AlertDialogCancel>
+                <Button
+                  variant="secondary"
+                  data-testid="button-clear-mistakes"
+                  onClick={() => {
+                    clearMistakes();
+                    setResetOpen(false);
+                  }}
+                >
+                  Clear mistakes only
+                </Button>
                 <AlertDialogAction
                   data-testid="button-reset-confirm"
                   onClick={() => {
@@ -76,7 +93,7 @@ export default function Home() {
                     setResetOpen(false);
                   }}
                 >
-                  Yes, reset
+                  Reset everything
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>

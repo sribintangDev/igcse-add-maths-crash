@@ -297,9 +297,19 @@ export default function Practice({ sectionId }: PracticeProps) {
                 </Button>
               )}
               {feedback === "wrong" && (
-                <Button type="submit" variant="secondary" data-testid="button-try-again">
-                  Try again
-                </Button>
+                <>
+                  <Button type="submit" variant="secondary" data-testid="button-try-again">
+                    Try again
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    onClick={goNext}
+                    data-testid="button-skip-question"
+                  >
+                    {index + 1 >= total ? "Finish" : "Skip"}
+                  </Button>
+                </>
               )}
               {feedback === "correct" && (
                 <Button type="submit" data-testid="button-next-question">
