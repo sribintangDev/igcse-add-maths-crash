@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { Link } from "wouter";
 import {
   ArrowLeft,
@@ -142,6 +142,16 @@ export default function IntermediatePractice({ topicId, level }: IntermediatePra
       : "active",
   );
 
+  // If all parts were already answered on a previous session and we hydrated into
+  // set-done / all-done, ensure the variantGroup is recorded as complete in storage.
+  useEffect(() => {
+    if (allPartsAnswered && firstSet && !isGroupComplete(state, firstSet.variantGroup)) {
+      completeVariantGroup(firstSet.variantGroup);
+    }
+    // Intentionally run once on mount only.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const currentSet = sessionSets[setIndex] ?? null;
   const currentPart = currentSet?.parts[partIndex] ?? null;
   const isLastPart = currentSet ? partIndex === currentSet.parts.length - 1 : false;
@@ -170,6 +180,11 @@ export default function IntermediatePractice({ topicId, level }: IntermediatePra
     };
     savePartAnswer(currentSet.id, currentPart.id, { selectedKey, correct, answerText, keyValue: kv });
     setAnsweredParts((prev) => [...prev, newPart]);
+    // Record set completion at the moment the last part is answered so it
+    // survives any reload before the user clicks "Complete set".
+    if (isLastPart) {
+      completeVariantGroup(currentSet.variantGroup);
+    }
   }
 
   function handleNext() {
