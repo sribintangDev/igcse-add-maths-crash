@@ -78,6 +78,27 @@ export default function Practice({ sectionId }: PracticeProps) {
     times: [] as number[],
   });
   const inputRef = useRef<HTMLInputElement>(null);
+
+  /**
+   * True while the device's virtual keyboard (iOS/Android) is visible.
+   * We detect this via the `visualViewport` resize event: the visible
+   * viewport shrinks whenever a system keyboard slides up. When it is
+   * visible we suppress the on-screen math keyboard so both keyboards
+   * don't stack on top of each other and hide the question.
+   */
+  const [systemKbVisible, setSystemKbVisible] = useState(false);
+  useEffect(() => {
+    const vv = window.visualViewport;
+    if (!vv) return;
+    const check = () => {
+      // iOS keyboard typically takes 250–350 px. Use a 150-px threshold
+      // so we don't trigger on minor viewport fluctuations.
+      setSystemKbVisible(window.innerHeight - vv.height > 150);
+    };
+    vv.addEventListener("resize", check);
+    return () => vv.removeEventListener("resize", check);
+  }, []);
+
   /**
    * Wall-clock timestamp (ms) when the *current* question first became
    * visible. Reset whenever the index changes. We freeze it on first submit
@@ -427,7 +448,7 @@ export default function Practice({ sectionId }: PracticeProps) {
               )}
             </div>
             <AnswerPreview value={answer} />
-            {feedback !== "correct" && (
+            {feedback !== "correct" && !systemKbVisible && (
               <MathKeyboard inputRef={inputRef} value={answer} onChange={setAnswer} />
             )}
             {feedback === "correct" && (
