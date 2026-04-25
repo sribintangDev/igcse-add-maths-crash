@@ -29,19 +29,9 @@ See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and pa
 ## GitHub Repository
 
 - **URL**: https://github.com/sribintangDev/igcse-add-maths-crash
-- **Auto-sync**: every Replit commit triggers a `post-commit` hook (`.githooks/post-commit`)
-  that runs `pnpm --filter @workspace/scripts run github-sync`. The hook is synchronous
-  so sync errors appear immediately in commit output. Logs appended to `/tmp/github-sync.log`.
-- **Sync mechanism**: `scripts/src/github-sync.ts` uses the Replit GitHub integration
-  (`@replit/connectors-sdk`) to push via the GitHub Git Data API (no personal token needed).
-  Preserves per-commit history: walks local commits since the last sync and creates one GitHub
-  commit per local commit (same message, author, date). Reuses unchanged blobs by SHA for
-  efficiency; uses a safe fast-forward ref update (`force: false`). State tracked in
-  `.git/github-sync-sha` (last synced local HEAD SHA). On first run with no state file, scans
-  backwards up to 50 commits to find the fork point (e.g. from a prior real `git push`).
-  Retries transient 502/503 errors up to 3 times.
-- **Manual sync**: `pnpm --filter @workspace/scripts run github-sync`
-- **Hook setup**: `core.hooksPath = .githooks` (set in `.git/config`; re-applied by `scripts/post-merge.sh` after task merges)
+- **Remote**: `origin` → `https://github.com/sribintangDev/igcse-add-maths-crash.git`
+- The main branch is pushed and up to date on GitHub.
+- To push future changes: `git push origin main`
 
 ## Artifacts
 
