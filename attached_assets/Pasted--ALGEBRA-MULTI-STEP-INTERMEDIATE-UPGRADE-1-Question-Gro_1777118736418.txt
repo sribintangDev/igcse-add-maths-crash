@@ -1,0 +1,762 @@
+📘 ALGEBRA – MULTI-STEP (INTERMEDIATE UPGRADE)
+
+👉 1 Question Group × 4 Variants (Preview — Higher Level)
+👉 Each has 3–5 parts
+👉 Requires thinking, not just steps
+
+⸻
+
+🔥 QUESTION 1 — FRACTION + EXPRESSION + SUBSTITUTION
+ ALGEBRA (INTERMEDIATE) 
+
+{
+groupId:"MULTI-ALG-INT-ADV-001",
+topic:"Algebra",
+level:"Intermediate",
+diagram:null,
+variants:[
+
+{
+context:"Given that y = (2x + 3)/x, where x ≠ 0.",
+parts:[
+
+{
+part:"A",
+question:"Rewrite y in the form a + b/x.",
+options:{
+A:"2 + 3/x",
+B:"2 + x/3",
+C:"(2x + 3)/x",
+D:"2x + 3/x"
+},
+correctAnswer:"A",
+workedSolution:[
+"Split the fraction:",
+"(2x + 3)/x = 2x/x + 3/x = 2 + 3/x."
+]
+},
+
+{
+part:"B",
+question:"Find the value of y when x = 3.",
+options:{A:"3",B:"5",C:"2",D:"1"},
+correctAnswer:"A",
+workedSolution:[
+"Substitute x = 3:",
+"y = 2 + 3/3 = 2 + 1 = 3."
+]
+},
+
+{
+part:"C",
+question:"Solve y = 5.",
+options:{
+A:"x = 1",
+B:"x = 3",
+C:"x = 2",
+D:"x = -1"
+},
+correctAnswer:"A",
+workedSolution:[
+"5 = 2 + 3/x",
+"3 = 3/x",
+"x = 1."
+]
+},
+
+{
+part:"D",
+question:"Which statement is true?",
+options:{
+A:"y decreases as x increases",
+B:"y increases as x increases",
+C:"y is constant",
+D:"y = 2 always"
+},
+correctAnswer:"A",
+workedSolution:[
+"As x increases, 3/x decreases.",
+"So y approaches 2 from above.",
+"Hence y decreases."
+]
+}
+
+]
+},
+
+/* ================= VARIANT 2 ================= */
+
+{
+context:"Given y = (3x - 4)/x, x ≠ 0.",
+parts:[
+{
+part:"A",
+question:"Rewrite in form a + b/x.",
+options:{
+A:"3 - 4/x",
+B:"3 + x/4",
+C:"(3x - 4)/x",
+D:"3x - 4/x"
+},
+correctAnswer:"A",
+workedSolution:["Split → 3 - 4/x"]
+},
+{
+part:"B",
+question:"Find y when x = 2.",
+options:{A:"1",B:"2",C:"3",D:"-1"},
+correctAnswer:"A",
+workedSolution:["3 - 4/2 = 1"]
+},
+{
+part:"C",
+question:"Solve y = 1.",
+options:{A:"x = 2",B:"x = 1",C:"x = 4",D:"x = -2"},
+correctAnswer:"A",
+workedSolution:["1 = 3 - 4/x → x = 2"]
+},
+{
+part:"D",
+question:"Behaviour as x increases?",
+options:{
+A:"y approaches 3",
+B:"y approaches 0",
+C:"y increases indefinitely",
+D:"y decreases indefinitely"
+},
+correctAnswer:"A",
+workedSolution:["-4/x → 0, so y → 3"]
+}
+]
+},
+
+/* ================= VARIANT 3 ================= */
+
+{
+context:"Given y = (x + 6)/x.",
+parts:[
+{
+part:"A",
+question:"Rewrite in form a + b/x.",
+options:{
+A:"1 + 6/x",
+B:"1 + x/6",
+C:"x + 6/x",
+D:"(x + 6)/x"
+},
+correctAnswer:"A",
+workedSolution:["Split → 1 + 6/x"]
+},
+{
+part:"B",
+question:"Find y when x = 2.",
+options:{A:"4",B:"3",C:"2",D:"1"},
+correctAnswer:"A",
+workedSolution:["1 + 6/2 = 4"]
+},
+{
+part:"C",
+question:"Solve y = 7.",
+options:{A:"x = 1",B:"x = 2",C:"x = 3",D:"x = 6"},
+correctAnswer:"A",
+workedSolution:["7 = 1 + 6/x → x = 1"]
+},
+{
+part:"D",
+question:"Minimum possible value of y (x > 0)?",
+options:{
+A:"1",
+B:"6",
+C:"0",
+D:"7"
+},
+correctAnswer:"A",
+workedSolution:[
+"As x increases, 6/x → 0.",
+"So y approaches 1."
+]
+}
+]
+},
+
+/* ================= VARIANT 4 ================= */
+
+{
+context:"Given y = (4x + 8)/x.",
+parts:[
+{
+part:"A",
+question:"Rewrite in form a + b/x.",
+options:{
+A:"4 + 8/x",
+B:"4 + x/8",
+C:"(4x + 8)/x",
+D:"4x + 8/x"
+},
+correctAnswer:"A",
+workedSolution:["Split → 4 + 8/x"]
+},
+{
+part:"B",
+question:"Find y when x = 2.",
+options:{A:"8",B:"6",C:"4",D:"2"},
+correctAnswer:"A",
+workedSolution:["4 + 8/2 = 8"]
+},
+{
+part:"C",
+question:"Solve y = 6.",
+options:{A:"x = 4",B:"x = 2",C:"x = 1",D:"x = 8"},
+correctAnswer:"A",
+workedSolution:["6 = 4 + 8/x → x = 4"]
+},
+{
+part:"D",
+question:"What does y approach as x increases?",
+options:{
+A:"4",
+B:"8",
+C:"0",
+D:"∞"
+},
+correctAnswer:"A",
+workedSolution:["8/x → 0 → y → 4"]
+}
+]
+}
+
+]
+}
+
+
+📘 MULTI-STEP SET — ALGEBRA (INTERMEDIATE)
+
+🔥 QUESTION 2 — ALGEBRAIC FRACTIONS
+
+{
+groupId:"MULTI-ALG-INT-ADV-002",
+topic:"Algebra",
+level:"Intermediate",
+diagram:null,
+variants:[
+
+/* ================= VARIANT 1 ================= */
+
+{
+context:"Solve the equation (x + 2)/(x - 1) = 3, where x ≠ 1.",
+parts:[
+
+{
+part:"A",
+question:"Which step correctly removes the denominator?",
+options:{
+A:"x + 2 = 3(x - 1)",
+B:"(x + 2)(x - 1) = 3",
+C:"x + 2 = 3x - 1",
+D:"x + 2 = 3x"
+},
+correctAnswer:"A",
+workedSolution:[
+"Multiply both sides by (x - 1).",
+"Result: x + 2 = 3(x - 1)."
+]
+},
+
+{
+part:"B",
+question:"Simplify the equation.",
+options:{
+A:"x + 2 = 3x - 3",
+B:"x + 2 = 3x - 1",
+C:"x + 2 = 3x + 3",
+D:"x + 2 = x - 3"
+},
+correctAnswer:"A",
+workedSolution:[
+"Expand RHS: 3x - 3."
+]
+},
+
+{
+part:"C",
+question:"Solve the equation.",
+options:{
+A:"x = 5/2",
+B:"x = 2",
+C:"x = -5/2",
+D:"x = 1"
+},
+correctAnswer:"A",
+workedSolution:[
+"x + 2 = 3x - 3",
+"5 = 2x",
+"x = 5/2."
+]
+},
+
+{
+part:"D",
+question:"Which statement is correct?",
+options:{
+A:"Solution is valid",
+B:"x = 1 is solution",
+C:"No solution",
+D:"Infinite solutions"
+},
+correctAnswer:"A",
+workedSolution:[
+"x ≠ 1 (restriction).",
+"x = 5/2 is valid."
+]
+}
+
+]
+},
+
+/* ================= VARIANT 2 ================= */
+
+{
+context:"Solve (x - 3)/(x + 2) = 2, where x ≠ -2.",
+parts:[
+{
+part:"A",
+question:"Remove denominator.",
+options:{
+A:"x - 3 = 2(x + 2)",
+B:"(x - 3)(x + 2) = 2",
+C:"x - 3 = 2x + 2",
+D:"x - 3 = x + 2"
+},
+correctAnswer:"A",
+workedSolution:["Multiply both sides."]
+},
+{
+part:"B",
+question:"Simplify.",
+options:{
+A:"x - 3 = 2x + 4",
+B:"x - 3 = 2x + 2",
+C:"x - 3 = x + 4",
+D:"x - 3 = x + 2"
+},
+correctAnswer:"A",
+workedSolution:["Expand RHS."]
+},
+{
+part:"C",
+question:"Solve.",
+options:{
+A:"x = -7",
+B:"x = 7",
+C:"x = 1",
+D:"x = -1"
+},
+correctAnswer:"A",
+workedSolution:[
+"x - 3 = 2x + 4",
+"-x = 7",
+"x = -7"
+]
+},
+{
+part:"D",
+question:"Check validity.",
+options:{
+A:"Valid",
+B:"Invalid",
+C:"x = -2",
+D:"No solution"
+},
+correctAnswer:"A",
+workedSolution:["x ≠ -2 → valid"]
+}
+]
+},
+
+/* ================= VARIANT 3 ================= */
+
+{
+context:"Solve (2x + 1)/(x - 3) = 4, where x ≠ 3.",
+parts:[
+{
+part:"A",
+question:"Remove denominator.",
+options:{
+A:"2x + 1 = 4(x - 3)",
+B:"(2x + 1)(x - 3) = 4",
+C:"2x + 1 = 4x - 3",
+D:"2x + 1 = 4x"
+},
+correctAnswer:"A",
+workedSolution:["Multiply both sides."]
+},
+{
+part:"B",
+question:"Simplify.",
+options:{
+A:"2x + 1 = 4x - 12",
+B:"2x + 1 = 4x - 3",
+C:"2x + 1 = x - 12",
+D:"2x + 1 = x - 3"
+},
+correctAnswer:"A",
+workedSolution:["Expand RHS."]
+},
+{
+part:"C",
+question:"Solve.",
+options:{
+A:"x = 13/2",
+B:"x = 2",
+C:"x = -13/2",
+D:"x = 13"
+},
+correctAnswer:"A",
+workedSolution:[
+"2x + 1 = 4x - 12",
+"13 = 2x",
+"x = 13/2"
+]
+},
+{
+part:"D",
+question:"Valid solution?",
+options:{
+A:"Yes",
+B:"No",
+C:"x = 3",
+D:"No solution"
+},
+correctAnswer:"A",
+workedSolution:["x ≠ 3 → valid"]
+}
+]
+},
+
+/* ================= VARIANT 4 ================= */
+
+{
+context:"Solve (x + 5)/(x - 2) = 3, where x ≠ 2.",
+parts:[
+{
+part:"A",
+question:"Remove denominator.",
+options:{
+A:"x + 5 = 3(x - 2)",
+B:"(x + 5)(x - 2) = 3",
+C:"x + 5 = 3x - 2",
+D:"x + 5 = 3x"
+},
+correctAnswer:"A",
+workedSolution:["Multiply both sides."]
+},
+{
+part:"B",
+question:"Simplify.",
+options:{
+A:"x + 5 = 3x - 6",
+B:"x + 5 = 3x - 2",
+C:"x + 5 = x - 6",
+D:"x + 5 = x - 2"
+},
+correctAnswer:"A",
+workedSolution:["Expand RHS."]
+},
+{
+part:"C",
+question:"Solve.",
+options:{
+A:"x = 11/2",
+B:"x = 2",
+C:"x = -11/2",
+D:"x = 11"
+},
+correctAnswer:"A",
+workedSolution:[
+"x + 5 = 3x - 6",
+"11 = 2x",
+"x = 11/2"
+]
+},
+{
+part:"D",
+question:"Conclusion?",
+options:{
+A:"Valid solution",
+B:"Invalid solution",
+C:"x = 2",
+D:"No solution"
+},
+correctAnswer:"A",
+workedSolution:["x ≠ 2 → valid"]
+}
+]
+}
+
+]
+}
+
+📘 MULTI-STEP SET — ALGEBRA (INTERMEDIATE)
+
+🔥 QUESTION 3 — SIMULTANEOUS EQUATIONS
+
+{
+groupId:"MULTI-ALG-INT-ADV-003",
+topic:"Algebra",
+level:"Intermediate",
+diagram:"Two straight lines intersecting at a point",
+variants:[
+
+/* ================= VARIANT 1 ================= */
+
+{
+context:"Solve the simultaneous equations:\n y = 2x + 1\n y = x + 4",
+parts:[
+
+{
+part:"A",
+question:"What equation is formed by equating both expressions for y?",
+options:{
+A:"2x + 1 = x + 4",
+B:"2x + 1 = x - 4",
+C:"2x + 1 = 4x",
+D:"x + 4 = 2x - 1"
+},
+correctAnswer:"A",
+workedSolution:[
+"Both equal y, so set them equal:",
+"2x + 1 = x + 4."
+]
+},
+
+{
+part:"B",
+question:"Solve for x.",
+options:{
+A:"x = 3",
+B:"x = -3",
+C:"x = 2",
+D:"x = 1"
+},
+correctAnswer:"A",
+workedSolution:[
+"2x + 1 = x + 4",
+"x = 3."
+]
+},
+
+{
+part:"C",
+question:"Find y.",
+options:{
+A:"7",
+B:"5",
+C:"4",
+D:"3"
+},
+correctAnswer:"A",
+workedSolution:[
+"Substitute x = 3 into y = 2x + 1:",
+"y = 7."
+]
+},
+
+{
+part:"D",
+question:"What does the solution represent?",
+options:{
+A:"Point of intersection",
+B:"Gradient",
+C:"y-intercept",
+D:"Parallel lines"
+},
+correctAnswer:"A",
+workedSolution:[
+"The solution is where both lines meet."
+]
+}
+
+]
+},
+
+/* ================= VARIANT 2 ================= */
+
+{
+context:"Solve:\n y = 3x - 2\n y = x + 6",
+parts:[
+{
+part:"A",
+question:"Form equation.",
+options:{
+A:"3x - 2 = x + 6",
+B:"3x - 2 = x - 6",
+C:"3x = x + 6",
+D:"x - 2 = x + 6"
+},
+correctAnswer:"A",
+workedSolution:["Equate both y expressions."]
+},
+{
+part:"B",
+question:"Solve x.",
+options:{
+A:"x = 4",
+B:"x = -4",
+C:"x = 2",
+D:"x = 3"
+},
+correctAnswer:"A",
+workedSolution:[
+"3x - 2 = x + 6",
+"2x = 8",
+"x = 4."
+]
+},
+{
+part:"C",
+question:"Find y.",
+options:{A:"10",B:"8",C:"6",D:"4"},
+correctAnswer:"A",
+workedSolution:[
+"y = x + 6 = 10."
+]
+},
+{
+part:"D",
+question:"Interpretation?",
+options:{
+A:"Intersection point",
+B:"No solution",
+C:"Infinite solutions",
+D:"Parallel"
+},
+correctAnswer:"A",
+workedSolution:["Lines intersect."]
+}
+]
+},
+
+/* ================= VARIANT 3 ================= */
+
+{
+context:"Solve:\n y = 2x + 3\n y = 2x - 1",
+parts:[
+{
+part:"A",
+question:"What equation is formed?",
+options:{
+A:"2x + 3 = 2x - 1",
+B:"2x + 3 = 2x + 1",
+C:"2x = 2x - 1",
+D:"x + 3 = x - 1"
+},
+correctAnswer:"A",
+workedSolution:["Equate expressions."]
+},
+{
+part:"B",
+question:"Solve.",
+options:{
+A:"No solution",
+B:"x = 2",
+C:"x = -2",
+D:"Infinite solutions"
+},
+correctAnswer:"A",
+workedSolution:[
+"2x + 3 = 2x - 1",
+"3 = -1 (false)",
+"So no solution."
+]
+},
+{
+part:"C",
+question:"What does this mean?",
+options:{
+A:"Lines are parallel",
+B:"Lines intersect",
+C:"Same line",
+D:"Perpendicular"
+},
+correctAnswer:"A",
+workedSolution:[
+"Same gradient, different intercept → parallel."
+]
+},
+{
+part:"D",
+question:"Number of solutions?",
+options:{
+A:"0",
+B:"1",
+C:"Infinite",
+D:"2"
+},
+correctAnswer:"A",
+workedSolution:["No intersection."]
+}
+]
+},
+
+/* ================= VARIANT 4 ================= */
+
+{
+context:"Solve:\n y = x + 2\n y = x + 2",
+parts:[
+{
+part:"A",
+question:"Equation formed?",
+options:{
+A:"x + 2 = x + 2",
+B:"x + 2 = x - 2",
+C:"x = 2",
+D:"x = -2"
+},
+correctAnswer:"A",
+workedSolution:["Equate expressions."]
+},
+{
+part:"B",
+question:"Solve.",
+options:{
+A:"Infinite solutions",
+B:"No solution",
+C:"x = 2",
+D:"x = -2"
+},
+correctAnswer:"A",
+workedSolution:[
+"Identity true for all x."
+]
+},
+{
+part:"C",
+question:"Interpretation?",
+options:{
+A:"Same line",
+B:"Parallel",
+C:"Intersecting",
+D:"Perpendicular"
+},
+correctAnswer:"A",
+workedSolution:[
+"Both equations identical."
+]
+},
+{
+part:"D",
+question:"Number of solutions?",
+options:{
+A:"Infinite",
+B:"0",
+C:"1",
+D:"2"
+},
+correctAnswer:"A",
+workedSolution:["Infinite solutions."]
+}
+]
+}
+
+]
+}
