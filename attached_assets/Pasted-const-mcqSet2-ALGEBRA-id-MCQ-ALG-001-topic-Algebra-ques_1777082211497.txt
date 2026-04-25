@@ -1,0 +1,162 @@
+const mcqSet2 = [
+
+/* ALGEBRA */
+{
+id:"MCQ-ALG-001",
+topic:"Algebra",
+question:"Expand (2x + 3)(x - 4).",
+options:{
+A:"2x² - 8x + 3x - 12",
+B:"2x² - 5x - 12",
+C:"2x² - 11x - 12",
+D:"2x² + x - 12"
+},
+correctAnswer:"B",
+explanation:"Expand: 2x² - 8x + 3x - 12 = 2x² - 5x - 12."
+},
+
+{
+id:"MCQ-ALG-002",
+topic:"Algebra",
+question:"Simplify (3x²y)(2xy²).",
+options:{
+A:"6x³y³",
+B:"5x³y³",
+C:"6x²y³",
+D:"6x³y²"
+},
+correctAnswer:"A",
+explanation:"Multiply coefficients: 3×2=6, add powers: x²×x=x³, y×y²=y³."
+},
+
+/* QUADRATICS */
+{
+id:"MCQ-QUAD-001",
+topic:"Quadratics",
+question:"Solve x² - 2x - 3 = 0.",
+options:{
+A:"x = 3 or x = -1",
+B:"x = -3 or x = 1",
+C:"x = 3 or x = 1",
+D:"x = -3 or x = -1"
+},
+correctAnswer:"A",
+explanation:"Factorise: (x - 3)(x + 1) = 0."
+},
+
+{
+id:"MCQ-QUAD-002",
+topic:"Quadratics",
+question:"Solve 3x² - 5x - 2 = 0.",
+options:{
+A:"x = 2 or x = -1/3",
+B:"x = -2 or x = 1/3",
+C:"x = 2 or x = 1/3",
+D:"x = -2 or x = -1/3"
+},
+correctAnswer:"A",
+explanation:"Factorise: (3x + 1)(x - 2)."
+},
+
+/* DIFFERENTIATION */
+{
+id:"MCQ-DIFF-001",
+topic:"Differentiation",
+question:"Differentiate 6x³ - 4x² + x.",
+options:{
+A:"18x² - 8x + 1",
+B:"6x² - 8x + 1",
+C:"18x² - 4x + 1",
+D:"18x² - 8x"
+},
+correctAnswer:"A",
+explanation:"Differentiate term by term."
+},
+
+{
+id:"MCQ-DIFF-002",
+topic:"Differentiation",
+question:"Find the gradient of y = x² + 3x at x = 2.",
+options:{
+A:"5",
+B:"6",
+C:"7",
+D:"8"
+},
+correctAnswer:"C",
+explanation:"dy/dx = 2x + 3 → 2(2)+3=7."
+},
+
+/* TRIG */
+{
+id:"MCQ-TRIG-001",
+topic:"Trigonometry",
+question:"Solve sin x = 0.5 for 0° ≤ x ≤ 360°.",
+options:{
+A:"30°, 150°",
+B:"30°, 210°",
+C:"150°, 330°",
+D:"60°, 120°"
+},
+correctAnswer:"A",
+explanation:"sin⁻¹(0.5)=30°, second angle 150°."
+},
+
+{
+id:"MCQ-TRIG-002",
+topic:"Trigonometry",
+question:"Solve cos x = 0.5 for 0° ≤ x ≤ 360°.",
+options:{
+A:"60°, 120°",
+B:"60°, 300°",
+C:"120°, 300°",
+D:"30°, 330°"
+},
+correctAnswer:"B",
+explanation:"cos⁻¹(0.5)=60°, second angle 300°."
+},
+
+{
+id:"MCQ-TRIG-003",
+topic:"Trigonometry",
+question:"Solve tan x = 1 for 0° ≤ x ≤ 360°.",
+options:{
+A:"45°, 225°",
+B:"45°, 180°",
+C:"90°, 270°",
+D:"30°, 210°"
+},
+correctAnswer:"A",
+explanation:"tan⁻¹(1)=45°, repeat every 180°."
+},
+
+/* MIXED */
+{
+id:"MCQ-MIX-001",
+topic:"Mixed",
+question:"Solve x² + x - 12 = 0.",
+options:{
+A:"x = 3 or x = -4",
+B:"x = -3 or x = 4",
+C:"x = 6 or x = -2",
+D:"x = -6 or x = 2"
+},
+correctAnswer:"A",
+explanation:"Factorise: (x + 4)(x - 3)."
+},
+
+{
+id:"MCQ-MIX-002",
+topic:"Mixed",
+question:"Differentiate 5x² - 3x + 7.",
+options:{
+A:"10x - 3",
+B:"5x - 3",
+C:"10x + 3",
+D:"5x + 3"
+},
+correctAnswer:"A",
+explanation:"Differentiate term by term."
+}
+
+];
