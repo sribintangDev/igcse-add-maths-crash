@@ -1,0 +1,118 @@
+📘 IGCSE ADD MATHS – ADAPTIVE TOPIC LIST (Optimised)
+
+🔴 CORE FOUNDATION (Must Start Here)
+
+These are non-negotiable — everything depends on them.
+
+1. Algebra Basics
+    * Expand & simplify
+    * Factorisation
+    * Indices
+2. Surds
+    * Simplification
+    * Rationalising denominators
+    * Operations
+
+⸻
+
+🟠 CORE SCORING TOPICS (High ROI)
+
+These give the most marks quickly.
+
+3. Quadratic Equations
+    * Factorisation
+    * Quadratic formula
+    * Discriminant
+    * Roots relationships
+4. Functions (Basic Only)
+    * f(x) notation
+    * Substitution
+    * Simple composite
+
+⸻
+
+🟡 MAIN EXAM ENGINE
+
+These are the backbone of Add Maths papers.
+
+5. Differentiation
+    * Power rule
+    * Product (expand first)
+    * Stationary points
+    * Gradient
+6. Integration (Basic Only)
+    * Reverse differentiation
+    * Simple area
+
+⸻
+
+🟢 CONTROLLED TRIG (Do NOT Over-expand)
+
+Only what is necessary for marks.
+
+7. Trigonometry
+    * Basic values
+    * Solve equations
+    * Graph awareness (light)
+    * sin²x + cos²x
+
+⸻
+
+🔵 SUPPORT / LIGHT EXPOSURE
+
+Only if time allows.
+
+8. Polynomials
+    * Factor theorem (light)
+9. Graphs (Basic)
+    * Shape understanding
+    * Turning points
+
+⸻
+
+⚫ SKIP / MINIMAL (FOR NOW)
+
+These are time traps in a crash course:
+
+* Advanced trig identities
+* Proofs
+* Complex transformations
+* Logarithms (unless very basic)
+* Binomial expansion (advanced)
+
+⸻
+
+🧠 HOW TO STRUCTURE IN YOUR APP
+
+Each topic must have:
+
+* Basic → Intermediate → Advanced
+* Each level = clusters of 4 similar questions
+* Progression unlock:
+    * Basic → must pass → unlock Intermediate
+    * Intermediate → must pass → unlock Advanced
+
+⸻
+
+🎯 Recommended Order in App
+
+1. Algebra
+2. Surds
+3. Quadratics
+4. Differentiation
+5. Integration
+6. Trigonometry
+7. Mixed Practice
+
+⸻
+
+💡 Very Important Design Insight
+
+Sherine, your system will work best if:
+
+👉 You group topics by skill, not by textbook chapters
+
+For example:
+
+* Surds + Quadratics → often linked
+* Algebra + Differentiation → strongly linked
