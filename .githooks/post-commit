@@ -1,13 +1,11 @@
 #!/bin/bash
 # Auto-sync to GitHub after every Replit commit.
 # Uses the Replit GitHub integration via the Git Data API — no personal token needed.
+# Runs synchronously so any failure is immediately visible in the commit output.
 
 WORKSPACE_ROOT="$(git rev-parse --show-toplevel)"
 
-# Run in background so it doesn't block the commit
-(
-  cd "$WORKSPACE_ROOT"
-  pnpm --filter @workspace/scripts run github-sync >> /tmp/github-sync.log 2>&1
-) &
+cd "$WORKSPACE_ROOT"
+pnpm --filter @workspace/scripts run github-sync 2>&1 | tee -a /tmp/github-sync.log
 
 exit 0

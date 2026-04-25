@@ -5,7 +5,6 @@ import { ReplitConnectors } from "@replit/connectors-sdk";
 
 const OWNER = "sribintangDev";
 const REPO = "igcse-add-maths-crash";
-const MAX_BLOB_BYTES = 900_000;
 
 const GIT_ROOT = execSync("git rev-parse --show-toplevel", {
   encoding: "utf8",
@@ -28,7 +27,6 @@ interface RemoteEntry {
   mode: string;
   type: string;
   sha: string;
-  size?: number;
 }
 
 interface GithubRef {
@@ -64,7 +62,7 @@ async function githubApi<T>(
   if (!response.ok) {
     const text = await response.text();
     throw new Error(
-      `GitHub API ${method} ${path} => ${response.status}: ${text.substring(0, 300)}`
+      `GitHub API ${method} ${path} => ${response.status}: ${text.substring(0, 400)}`
     );
   }
   return response.json() as Promise<T>;
@@ -92,9 +90,7 @@ function getLocalTree(): Map<string, LocalEntry> {
   return map;
 }
 
-async function getRemoteTree(
-  treeSha: string
-): Promise<Map<string, RemoteEntry>> {
+async function getRemoteTree(treeSha: string): Promise<Map<string, RemoteEntry>> {
   const data = await githubApi<GithubTree>(
     `/repos/${OWNER}/${REPO}/git/trees/${treeSha}?recursive=1`
   );
@@ -107,15 +103,10 @@ async function getRemoteTree(
   return map;
 }
 
-async function uploadBlob(filePath: string, sizeBytes: number): Promise<string> {
-  if (sizeBytes > MAX_BLOB_BYTES) {
-    throw new Error(
-      `File too large to sync (${Math.round(sizeBytes / 1024)}KB > ${Math.round(MAX_BLOB_BYTES / 1024)}KB limit): ${filePath}`
-    );
-  }
+async function uploadBlob(filePath: string): Promise<string> {
   const content = execSync(`git show "HEAD:${filePath}"`, {
     encoding: "base64",
-    maxBuffer: 50 * 1024 * 1024,
+    maxBuffer: 200 * 1024 * 1024,
   });
   const blob = await githubApi<GithubBlob>(
     `/repos/${OWNER}/${REPO}/git/blobs`,
@@ -166,7 +157,8 @@ async function run(): Promise<void> {
     remoteTree = await getRemoteTree(remoteTreeSha);
     console.log(`Remote tree: ${remoteTree.size} files`);
   } catch (err) {
-    if ((err as Error).message.includes("404")) {
+    const msg = (err as Error).message;
+    if (msg.includes("404")) {
       console.log(`Branch '${branch}' not on GitHub yet — initial push`);
     } else {
       throw err;
@@ -182,8 +174,6 @@ async function run(): Promise<void> {
 
   let uploaded = 0;
   let reused = 0;
-  let errors = 0;
-  const failedFiles: string[] = [];
 
   for (const [path, local] of localTree) {
     if (local.type !== "blob") continue;
@@ -193,32 +183,21 @@ async function run(): Promise<void> {
       treeEntries.push({ path, mode: local.mode, type: "blob", sha: remote.sha });
       reused++;
     } else {
-      try {
-        const newSha = await uploadBlob(path, local.size ?? 0);
-        treeEntries.push({ path, mode: local.mode, type: "blob", sha: newSha });
-        uploaded++;
-      } catch (err) {
-        console.error(`  ERROR: ${(err as Error).message}`);
-        failedFiles.push(path);
-        errors++;
-        if (remote) {
-          console.log(`    → Keeping stale version on GitHub (content differs)`);
-          treeEntries.push({ path, mode: local.mode, type: "blob", sha: remote.sha });
-        }
-      }
+      process.stdout.write(`  Uploading ${path} (${Math.round(local.size / 1024)}KB)...`);
+      const newSha = await uploadBlob(path);
+      process.stdout.write(` ${newSha.substring(0, 7)}\n`);
+      treeEntries.push({ path, mode: local.mode, type: "blob", sha: newSha });
+      uploaded++;
     }
   }
 
-  const deletedFiles = [...remoteTree.keys()].filter(
+  const deletedCount = [...remoteTree.keys()].filter(
     (p) => !localTree.has(p)
-  );
+  ).length;
 
   console.log(
-    `Blobs — uploaded: ${uploaded}, reused: ${reused}, errors: ${errors}`
+    `Blobs — uploaded: ${uploaded}, reused: ${reused}, deleted: ${deletedCount}`
   );
-  if (deletedFiles.length > 0) {
-    console.log(`Deleted files: ${deletedFiles.length}`);
-  }
 
   console.log("Creating tree...");
   const newTree = await githubApi<GithubTree>(
@@ -227,10 +206,8 @@ async function run(): Promise<void> {
   );
 
   if (newTree.sha === remoteTreeSha) {
-    console.log("Tree unchanged on GitHub — nothing new to commit.");
-    if (errors === 0) {
-      writeFileSync(STATE_FILE, localHead);
-    }
+    console.log("Tree unchanged — nothing new to commit. State saved.");
+    writeFileSync(STATE_FILE, localHead);
     return;
   }
 
@@ -257,7 +234,7 @@ async function run(): Promise<void> {
   if (remoteHeadSha) {
     await githubApi(`/repos/${OWNER}/${REPO}/git/refs/heads/${branch}`, {
       method: "PATCH",
-      body: { sha: newCommit.sha, force: true },
+      body: { sha: newCommit.sha, force: false },
     });
   } else {
     await githubApi(`/repos/${OWNER}/${REPO}/git/refs`, {
@@ -266,21 +243,10 @@ async function run(): Promise<void> {
     });
   }
 
-  if (errors === 0) {
-    writeFileSync(STATE_FILE, localHead);
-    console.log(
-      `✓ Synced → https://github.com/${OWNER}/${REPO}/tree/${branch}`
-    );
-  } else {
-    console.error(
-      `⚠ Partial sync — ${errors} file(s) could not be uploaded and may be stale on GitHub:`
-    );
-    for (const f of failedFiles) {
-      console.error(`  - ${f}`);
-    }
-    console.error("State NOT saved — sync will be retried on next commit.");
-    process.exit(1);
-  }
+  writeFileSync(STATE_FILE, localHead);
+  console.log(
+    `✓ Synced → https://github.com/${OWNER}/${REPO}/tree/${branch}`
+  );
 }
 
 run().catch((err) => {
