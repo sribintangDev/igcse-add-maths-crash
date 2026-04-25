@@ -1,0 +1,455 @@
+{
+groupId:"TRIG-BASIC-001",
+topic:"Trigonometry",
+level:"Basic",
+variants:[
+{
+question:"sin 30° = ?",
+options:{A:"0.5",B:"1",C:"0",D:"√3/2"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Recall standard values.",
+"sin 30° = 1/2.",
+"Final answer: 0.5"
+]
+},
+{
+question:"cos 60° = ?",
+options:{A:"0.5",B:"1",C:"0",D:"√3/2"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: cos 60° = 1/2.",
+"Final answer: 0.5"
+]
+},
+{
+question:"tan 45° = ?",
+options:{A:"1",B:"0",C:"√3",D:"0.5"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: tan 45° = 1.",
+"Final answer: 1"
+]
+},
+{
+question:"sin 90° = ?",
+options:{A:"1",B:"0",C:"0.5",D:"√3/2"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: sin 90° = 1.",
+"Final answer: 1"
+]
+}
+]
+}
+
+{
+groupId:"TRIG-BASIC-002",
+topic:"Trigonometry",
+level:"Basic",
+variants:[
+{
+question:"cos 0° = ?",
+options:{A:"1",B:"0",C:"0.5",D:"√3/2"},
+correctAnswer:"A",
+workedSolution:["cos 0° = 1.","Final answer: 1"]
+},
+{
+question:"sin 0° = ?",
+options:{A:"0",B:"1",C:"0.5",D:"√3/2"},
+correctAnswer:"A",
+workedSolution:["sin 0° = 0.","Final answer: 0"]
+},
+{
+question:"tan 0° = ?",
+options:{A:"0",B:"1",C:"undefined",D:"0.5"},
+correctAnswer:"A",
+workedSolution:["tan 0° = 0.","Final answer: 0"]
+},
+{
+question:"cos 90° = ?",
+options:{A:"0",B:"1",C:"0.5",D:"√3/2"},
+correctAnswer:"A",
+workedSolution:["cos 90° = 0.","Final answer: 0"]
+}
+]
+}
+
+{
+groupId:"TRIG-BASIC-003",
+topic:"Trigonometry",
+level:"Basic",
+variants:[
+{
+question:"Solve sin x = 0.5 (0°–360°).",
+options:{A:"30°,150°",B:"60°,120°",C:"45°,135°",D:"90°,270°"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: sin x = 0.5 → reference angle = 30°.",
+"Step 2: sin is positive in Q1 and Q2.",
+"Final answer: 30°, 150°"
+]
+},
+{
+question:"Solve sin x = √3/2.",
+options:{A:"60°,120°",B:"30°,150°",C:"45°,135°",D:"90°,270°"},
+correctAnswer:"A",
+workedSolution:[
+"Reference angle = 60°.",
+"sin positive in Q1 and Q2.",
+"Final answer: 60°, 120°"
+]
+},
+{
+question:"Solve sin x = 1.",
+options:{A:"90°",B:"0°,180°",C:"45°,135°",D:"60°,120°"},
+correctAnswer:"A",
+workedSolution:[
+"sin x = 1 occurs only at 90°.",
+"Final answer: 90°"
+]
+},
+{
+question:"Solve sin x = 0.",
+options:{A:"0°,180°",B:"90°,270°",C:"45°,135°",D:"60°,120°"},
+correctAnswer:"A",
+workedSolution:[
+"sin x = 0 at 0° and 180°.",
+"Final answer: 0°, 180°"
+]
+}
+]
+}
+
+{
+groupId:"TRIG-BASIC-004",
+topic:"Trigonometry",
+level:"Basic",
+variants:[
+{
+question:"Solve cos x = 0.5.",
+options:{A:"60°,300°",B:"30°,330°",C:"120°,240°",D:"90°,270°"},
+correctAnswer:"A",
+workedSolution:[
+"cos 60° = 0.5.",
+"cos positive in Q1 and Q4.",
+"Final answer: 60°, 300°"
+]
+},
+{
+question:"Solve cos x = -0.5.",
+options:{A:"120°,240°",B:"60°,300°",C:"30°,330°",D:"90°,270°"},
+correctAnswer:"A",
+workedSolution:[
+"cos negative in Q2 and Q3.",
+"Final answer: 120°, 240°"
+]
+},
+{
+question:"Solve cos x = 1.",
+options:{A:"0°",B:"90°",C:"180°",D:"270°"},
+correctAnswer:"A",
+workedSolution:["cos x = 1 at 0°.","Final answer: 0°"]
+},
+{
+question:"Solve cos x = 0.",
+options:{A:"90°,270°",B:"0°,180°",C:"45°,135°",D:"60°,120°"},
+correctAnswer:"A",
+workedSolution:["cos x = 0 at 90° and 270°.","Final answer: 90°, 270°"]
+}
+]
+}
+
+{
+groupId:"TRIG-BASIC-005",
+topic:"Trigonometry",
+level:"Basic",
+variants:[
+{
+question:"Solve tan x = 1.",
+options:{A:"45°,225°",B:"30°,210°",C:"60°,240°",D:"90°,270°"},
+correctAnswer:"A",
+workedSolution:[
+"tan 45° = 1.",
+"tan repeats every 180°.",
+"Final answer: 45°, 225°"
+]
+},
+{
+question:"Solve tan x = √3.",
+options:{A:"60°,240°",B:"30°,210°",C:"45°,225°",D:"90°,270°"},
+correctAnswer:"A",
+workedSolution:[
+"tan 60° = √3.",
+"Final answer: 60°, 240°"
+]
+},
+{
+question:"Solve tan x = 0.",
+options:{A:"0°,180°",B:"90°,270°",C:"45°,135°",D:"60°,120°"},
+correctAnswer:"A",
+workedSolution:["tan x = 0 at 0° and 180°."]
+},
+{
+question:"Solve tan x = -1.",
+options:{A:"135°,315°",B:"45°,225°",C:"60°,240°",D:"30°,210°"},
+correctAnswer:"A",
+workedSolution:[
+"tan negative in Q2 and Q4.",
+"Final answer: 135°, 315°"
+]
+}
+]
+}
+
+{
+groupId:"TRIG-BASIC-006",
+topic:"Trigonometry",
+level:"Basic",
+variants:[
+{
+question:"If sin x = 0.6, find cos x (x acute).",
+options:{A:"0.8",B:"0.6",C:"0.4",D:"1"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Use identity: sin²x + cos²x = 1.",
+"Step 2: (0.6)² + cos²x = 1.",
+"0.36 + cos²x = 1.",
+"Step 3: cos²x = 0.64.",
+"Step 4: cos x = √0.64 = 0.8.",
+"Final answer: 0.8"
+]
+},
+{
+question:"If sin x = 0.8, find cos x (x acute).",
+options:{A:"0.6",B:"0.8",C:"0.4",D:"1"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: sin²x + cos²x = 1.",
+"0.64 + cos²x = 1.",
+"cos²x = 0.36.",
+"cos x = 0.6.",
+"Final answer: 0.6"
+]
+},
+{
+question:"If cos x = 0.5, find sin x (x acute).",
+options:{A:"√3/2",B:"0.5",C:"1",D:"0"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: sin²x = 1 - cos²x.",
+"= 1 - 0.25 = 0.75.",
+"Step 2: sin x = √0.75 = √3/2.",
+"Final answer: √3/2"
+]
+},
+{
+question:"If cos x = 0.8, find sin x (x acute).",
+options:{A:"0.6",B:"0.8",C:"0.4",D:"1"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: sin²x = 1 - 0.64 = 0.36.",
+"Step 2: sin x = 0.6.",
+"Final answer: 0.6"
+]
+}
+]
+}
+
+
+{
+groupId:"TRIG-BASIC-007",
+topic:"Trigonometry",
+level:"Basic",
+variants:[
+{
+question:"If sin x = 3/5, find cos x (x acute).",
+options:{A:"4/5",B:"3/5",C:"5/3",D:"1"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Use Pythagoras idea.",
+"sin x = opposite/hypotenuse = 3/5.",
+"Step 2: Triangle is 3-4-5.",
+"cos x = adjacent/hypotenuse = 4/5.",
+"Final answer: 4/5"
+]
+},
+{
+question:"If cos x = 5/13, find sin x (x acute).",
+options:{A:"12/13",B:"5/13",C:"13/5",D:"1"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Use triangle (5-12-13).",
+"Step 2: sin x = 12/13.",
+"Final answer: 12/13"
+]
+},
+{
+question:"If sin x = 4/5, find cos x.",
+options:{A:"3/5",B:"4/5",C:"5/4",D:"1"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Triangle 3-4-5.",
+"Step 2: cos x = 3/5.",
+"Final answer: 3/5"
+]
+},
+{
+question:"If cos x = 3/5, find sin x.",
+options:{A:"4/5",B:"3/5",C:"5/3",D:"1"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Triangle 3-4-5.",
+"Step 2: sin x = 4/5.",
+"Final answer: 4/5"
+]
+}
+]
+}
+
+
+{
+groupId:"TRIG-BASIC-008",
+topic:"Trigonometry",
+level:"Basic",
+variants:[
+{
+question:"Solve 2sin x = 1.",
+options:{A:"30°,150°",B:"60°,120°",C:"45°,135°",D:"90°,270°"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: sin x = 1/2.",
+"Step 2: Reference angle = 30°.",
+"Step 3: sin positive in Q1 & Q2.",
+"Final answer: 30°, 150°"
+]
+},
+{
+question:"Solve 2cos x = 1.",
+options:{A:"60°,300°",B:"30°,330°",C:"120°,240°",D:"90°,270°"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: cos x = 1/2.",
+"Step 2: cos positive in Q1 & Q4.",
+"Final answer: 60°, 300°"
+]
+},
+{
+question:"Solve 3tan x = 3.",
+options:{A:"45°,225°",B:"30°,210°",C:"60°,240°",D:"90°,270°"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: tan x = 1.",
+"Step 2: tan repeats every 180°.",
+"Final answer: 45°, 225°"
+]
+},
+{
+question:"Solve sin x = 1/2.",
+options:{A:"30°,150°",B:"60°,120°",C:"45°,135°",D:"90°,270°"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Reference angle = 30°.",
+"Step 2: sin positive in Q1 & Q2.",
+"Final answer: 30°, 150°"
+]
+}
+]
+}
+
+{
+groupId:"TRIG-BASIC-009",
+topic:"Trigonometry",
+level:"Basic",
+variants:[
+{
+question:"In which quadrants is sin x positive?",
+options:{A:"I and II",B:"II and III",C:"III and IV",D:"I and IV"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: sin positive in top half of unit circle.",
+"Step 2: That is Quadrants I and II.",
+"Final answer: I and II"
+]
+},
+{
+question:"In which quadrants is cos x positive?",
+options:{A:"I and IV",B:"I and II",C:"II and III",D:"III and IV"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: cos positive on right side.",
+"Step 2: Quadrants I and IV.",
+"Final answer: I and IV"
+]
+},
+{
+question:"In which quadrants is tan x positive?",
+options:{A:"I and III",B:"I and II",C:"II and IV",D:"III and IV"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: tan = sin/cos.",
+"Step 2: Positive when both have same sign.",
+"Final answer: I and III"
+]
+},
+{
+question:"In which quadrants is sin x negative?",
+options:{A:"III and IV",B:"I and II",C:"II and III",D:"I and IV"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: sin negative in lower half.",
+"Final answer: III and IV"
+]
+}
+]
+}
+
+{
+groupId:"TRIG-BASIC-010",
+topic:"Trigonometry",
+level:"Basic",
+variants:[
+{
+question:"Solve sin x = -0.5.",
+options:{A:"210°,330°",B:"30°,150°",C:"120°,240°",D:"60°,300°"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Reference angle = 30°.",
+"Step 2: sin negative in Q3 & Q4.",
+"Final answer: 210°, 330°"
+]
+},
+{
+question:"Solve cos x = -0.5.",
+options:{A:"120°,240°",B:"60°,300°",C:"30°,330°",D:"90°,270°"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Reference angle = 60°.",
+"Step 2: cos negative in Q2 & Q3.",
+"Final answer: 120°, 240°"
+]
+},
+{
+question:"Solve tan x = -1.",
+options:{A:"135°,315°",B:"45°,225°",C:"60°,240°",D:"30°,210°"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Reference angle = 45°.",
+"Step 2: tan negative in Q2 & Q4.",
+"Final answer: 135°, 315°"
+]
+},
+{
+question:"Solve cos x = 0.",
+options:{A:"90°,270°",B:"0°,180°",C:"45°,135°",D:"60°,120°"},
+correctAnswer:"A",
+workedSolution:[
+"cos x = 0 at 90° and 270°.",
+"Final answer: 90°, 270°"
+]
+}
+]
+}
+
+
+
