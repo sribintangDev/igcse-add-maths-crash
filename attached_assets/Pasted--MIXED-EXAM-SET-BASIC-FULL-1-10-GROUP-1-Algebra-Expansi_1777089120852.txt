@@ -1,0 +1,504 @@
+
+⸻
+ 
+📘 
+MIXED EXAM SET – BASIC (FULL 1–10)
+ 
+⸻
+ 
+🔹 
+GROUP 1 — Algebra + Expansion
+{
+groupId:"MIX-BASIC-001",
+topic:"Mixed",
+level:"Basic",
+variants:[
+{
+question:"Expand 2(x + 3) + x.",
+options:{A:"3x + 6",B:"2x + 3",C:"x + 6",D:"3x + 3"},
+correctAnswer:"A",
+workedSolution:[
+"Expand: 2x + 6 + x.",
+"Combine: 3x + 6.",
+"Final answer: 3x + 6"
+]
+},
+{
+question:"Expand 3(x + 2) + x.",
+options:{A:"4x + 6",B:"3x + 2",C:"x + 6",D:"4x + 2"},
+correctAnswer:"A",
+workedSolution:[
+"Expand: 3x + 6 + x.",
+"Combine: 4x + 6.",
+"Final answer: 4x + 6"
+]
+},
+{
+question:"Expand 4(x + 1) + x.",
+options:{A:"5x + 4",B:"4x + 1",C:"x + 4",D:"5x + 1"},
+correctAnswer:"A",
+workedSolution:[
+"Expand and combine.",
+"Final answer: 5x + 4"
+]
+},
+{
+question:"Expand 5(x + 2) + x.",
+options:{A:"6x + 10",B:"5x + 2",C:"x + 10",D:"6x + 2"},
+correctAnswer:"A",
+workedSolution:[
+"Expand and combine.",
+"Final answer: 6x + 10"
+]
+}
+]
+}
+ 
+⸻
+ 
+🔹 
+GROUP 2 — Surds Simplification
+{
+groupId:"MIX-BASIC-002",
+topic:"Mixed",
+level:"Basic",
+variants:[
+{
+question:"Simplify √50.",
+options:{A:"5√2",B:"10√5",C:"25√2",D:"√25"},
+correctAnswer:"A",
+workedSolution:[
+"50 = 25×2.",
+"√50 = 5√2.",
+"Final answer: 5√2"
+]
+},
+{
+question:"Simplify √72.",
+options:{A:"6√2",B:"8√3",C:"12√2",D:"4√3"},
+correctAnswer:"A",
+workedSolution:[
+"72 = 36×2.",
+"√72 = 6√2.",
+"Final answer: 6√2"
+]
+},
+{
+question:"Simplify √18.",
+options:{A:"3√2",B:"6√2",C:"9√2",D:"2√9"},
+correctAnswer:"A",
+workedSolution:[
+"18 = 9×2.",
+"√18 = 3√2.",
+"Final answer: 3√2"
+]
+},
+{
+question:"Simplify √98.",
+options:{A:"7√2",B:"14√2",C:"9√2",D:"2√49"},
+correctAnswer:"A",
+workedSolution:[
+"98 = 49×2.",
+"√98 = 7√2.",
+"Final answer: 7√2"
+]
+}
+]
+}
+ 
+⸻
+ 
+🔹 
+GROUP 3 — Quadratics Solve
+{
+groupId:"MIX-BASIC-003",
+topic:"Mixed",
+level:"Basic",
+variants:[
+{
+question:"Solve x² + 5x + 6 = 0.",
+options:{A:"-2,-3",B:"2,3",C:"-1,-6",D:"1,6"},
+correctAnswer:"A",
+workedSolution:[
+"(x+2)(x+3)=0.",
+"x=-2 or x=-3.",
+"Final answer: -2, -3"
+]
+},
+{
+question:"Solve x² + 6x + 8 = 0.",
+options:{A:"-2,-4",B:"2,4",C:"-1,-8",D:"1,8"},
+correctAnswer:"A",
+workedSolution:[
+"(x+2)(x+4)=0.",
+"Final answer: -2, -4"
+]
+},
+{
+question:"Solve x² - x - 6 = 0.",
+options:{A:"3,-2",B:"-3,2",C:"1,-6",D:"-1,6"},
+correctAnswer:"A",
+workedSolution:[
+"(x-3)(x+2)=0.",
+"Final answer: 3, -2"
+]
+},
+{
+question:"Solve x² - 4x - 5 = 0.",
+options:{A:"5,-1",B:"-5,1",C:"1,-5",D:"-1,5"},
+correctAnswer:"A",
+workedSolution:[
+"(x-5)(x+1)=0.",
+"Final answer: 5, -1"
+]
+}
+]
+}
+ 
+⸻
+ 
+🔹 
+GROUP 4 — Differentiation Basic
+{
+groupId:"MIX-BASIC-004",
+topic:"Mixed",
+level:"Basic",
+variants:[
+{
+question:"Differentiate x³.",
+options:{A:"3x²",B:"x²",C:"3x",D:"x³"},
+correctAnswer:"A",
+workedSolution:[
+"Use power rule.",
+"Final answer: 3x²"
+]
+},
+{
+question:"Differentiate 5x².",
+options:{A:"10x",B:"5x",C:"10x²",D:"5x²"},
+correctAnswer:"A",
+workedSolution:[
+"5×2=10.",
+"Final answer: 10x"
+]
+},
+{
+question:"Differentiate 3x³.",
+options:{A:"9x²",B:"3x²",C:"9x",D:"3x³"},
+correctAnswer:"A",
+workedSolution:[
+"3×3=9.",
+"Final answer: 9x²"
+]
+},
+{
+question:"Differentiate x⁴.",
+options:{A:"4x³",B:"x³",C:"4x²",D:"x⁴"},
+correctAnswer:"A",
+workedSolution:[
+"Final answer: 4x³"
+]
+}
+]
+}
+ 
+⸻
+ 
+🔹 
+GROUP 5 — Trigonometry Values
+{
+groupId:"MIX-BASIC-005",
+topic:"Mixed",
+level:"Basic",
+variants:[
+{
+question:"sin 30° = ?",
+options:{A:"0.5",B:"1",C:"0",D:"√3/2"},
+correctAnswer:"A",
+workedSolution:["Final answer: 0.5"]
+},
+{
+question:"cos 60° = ?",
+options:{A:"0.5",B:"1",C:"0",D:"√3/2"},
+correctAnswer:"A",
+workedSolution:["Final answer: 0.5"]
+},
+{
+question:"tan 45° = ?",
+options:{A:"1",B:"0",C:"√3",D:"0.5"},
+correctAnswer:"A",
+workedSolution:["Final answer: 1"]
+},
+{
+question:"sin 90° = ?",
+options:{A:"1",B:"0",C:"0.5",D:"√3/2"},
+correctAnswer:"A",
+workedSolution:["Final answer: 1"]
+}
+]
+}
+ 
+
+ 📘 
+MIXED EXAM SET – BASIC (GROUPS 6–10)
+ 
+⸻
+ 
+🔹 
+GROUP 6 — Algebra + Indices
+{
+groupId:"MIX-BASIC-006",
+topic:"Mixed",
+level:"Basic",
+variants:[
+{
+question:"Simplify x³ × x².",
+options:{A:"x⁵",B:"x⁶",C:"x⁴",D:"x¹"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: When multiplying, add powers.",
+"3 + 2 = 5.",
+"Final answer: x⁵"
+]
+},
+{
+question:"Simplify x⁶ ÷ x².",
+options:{A:"x⁴",B:"x⁸",C:"x²",D:"x³"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: When dividing, subtract powers.",
+"6 - 2 = 4.",
+"Final answer: x⁴"
+]
+},
+{
+question:"Simplify (x²)³.",
+options:{A:"x⁶",B:"x⁵",C:"x⁸",D:"x⁹"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Multiply powers.",
+"2 × 3 = 6.",
+"Final answer: x⁶"
+]
+},
+{
+question:"Simplify x⁴ × x³.",
+options:{A:"x⁷",B:"x¹²",C:"x¹",D:"x⁶"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Add powers.",
+"4 + 3 = 7.",
+"Final answer: x⁷"
+]
+}
+]
+}
+ 
+⸻
+ 
+🔹 
+GROUP 7 — Surds + Algebra
+{
+groupId:"MIX-BASIC-007",
+topic:"Mixed",
+level:"Basic",
+variants:[
+{
+question:"Simplify √8 + √18.",
+options:{A:"5√2",B:"3√2",C:"4√2",D:"6√2"},
+correctAnswer:"A",
+workedSolution:[
+"√8 = 2√2, √18 = 3√2.",
+"Add: 5√2.",
+"Final answer: 5√2"
+]
+},
+{
+question:"Simplify √12 + √27.",
+options:{A:"5√3",B:"3√3",C:"6√3",D:"4√3"},
+correctAnswer:"A",
+workedSolution:[
+"√12 = 2√3, √27 = 3√3.",
+"Add: 5√3.",
+"Final answer: 5√3"
+]
+},
+{
+question:"Simplify √50 + √8.",
+options:{A:"7√2",B:"5√2",C:"6√2",D:"8√2"},
+correctAnswer:"A",
+workedSolution:[
+"√50 = 5√2, √8 = 2√2.",
+"Add: 7√2.",
+"Final answer: 7√2"
+]
+},
+{
+question:"Simplify √20 + √45.",
+options:{A:"5√5",B:"3√5",C:"6√5",D:"4√5"},
+correctAnswer:"A",
+workedSolution:[
+"√20 = 2√5, √45 = 3√5.",
+"Add: 5√5.",
+"Final answer: 5√5"
+]
+}
+]
+}
+ 
+⸻
+ 
+🔹 
+GROUP 8 — Differentiation + Substitution
+{
+groupId:"MIX-BASIC-008",
+topic:"Mixed",
+level:"Basic",
+variants:[
+{
+question:"Find gradient of y = x² at x = 4.",
+options:{A:"8",B:"16",C:"4",D:"12"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: dy/dx = 2x.",
+"Step 2: Substitute x = 4.",
+"2(4) = 8.",
+"Final answer: 8"
+]
+},
+{
+question:"Find gradient of y = x³ at x = 2.",
+options:{A:"12",B:"8",C:"6",D:"4"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: dy/dx = 3x².",
+"Step 2: 3(4) = 12.",
+"Final answer: 12"
+]
+},
+{
+question:"Find gradient of y = x² + 2x at x = 1.",
+options:{A:"4",B:"3",C:"2",D:"5"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: dy/dx = 2x + 2.",
+"Step 2: Substitute x = 1.",
+"2 + 2 = 4.",
+"Final answer: 4"
+]
+},
+{
+question:"Find gradient of y = x³ + x at x = 2.",
+options:{A:"13",B:"12",C:"10",D:"8"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: dy/dx = 3x² + 1.",
+"Step 2: Substitute x = 2.",
+"3(4) + 1 = 13.",
+"Final answer: 13"
+]
+}
+]
+}
+ 
+⸻
+ 
+🔹 
+GROUP 9 — Trigonometry Equations
+{
+groupId:"MIX-BASIC-009",
+topic:"Mixed",
+level:"Basic",
+variants:[
+{
+question:"Solve sin x = 0.5.",
+options:{A:"30°,150°",B:"60°,120°",C:"45°,135°",D:"90°,270°"},
+correctAnswer:"A",
+workedSolution:[
+"Reference angle = 30°.",
+"sin positive in Q1 & Q2.",
+"Final answer: 30°, 150°"
+]
+},
+{
+question:"Solve cos x = 0.5.",
+options:{A:"60°,300°",B:"30°,330°",C:"120°,240°",D:"90°,270°"},
+correctAnswer:"A",
+workedSolution:[
+"Reference angle = 60°.",
+"cos positive in Q1 & Q4.",
+"Final answer: 60°, 300°"
+]
+},
+{
+question:"Solve tan x = 1.",
+options:{A:"45°,225°",B:"30°,210°",C:"60°,240°",D:"90°,270°"},
+correctAnswer:"A",
+workedSolution:[
+"Reference angle = 45°.",
+"tan repeats every 180°.",
+"Final answer: 45°, 225°"
+]
+},
+{
+question:"Solve sin x = -0.5.",
+options:{A:"210°,330°",B:"30°,150°",C:"120°,240°",D:"60°,300°"},
+correctAnswer:"A",
+workedSolution:[
+"Reference angle = 30°.",
+"sin negative in Q3 & Q4.",
+"Final answer: 210°, 330°"
+]
+}
+]
+}
+ 
+⸻
+ 
+🔹 
+GROUP 10 — Full Mixed Exam Style
+{
+groupId:"MIX-BASIC-010",
+topic:"Mixed",
+level:"Basic",
+variants:[
+{
+question:"Solve x² + 3x + 2 = 0.",
+options:{A:"-1,-2",B:"1,2",C:"-3,-2",D:"3,2"},
+correctAnswer:"A",
+workedSolution:[
+"(x+1)(x+2)=0.",
+"Final answer: -1, -2"
+]
+},
+{
+question:"Differentiate 3x² + 2x.",
+options:{A:"6x + 2",B:"3x + 2",C:"6x + x",D:"3x + x"},
+correctAnswer:"A",
+workedSolution:[
+"3x² → 6x, 2x → 2.",
+"Final answer: 6x + 2"
+]
+},
+{
+question:"Simplify √18.",
+options:{A:"3√2",B:"6√2",C:"9√2",D:"2√9"},
+correctAnswer:"A",
+workedSolution:[
+"18 = 9×2.",
+"Final answer: 3√2"
+]
+},
+{
+question:"sin 30° = ?",
+options:{A:"0.5",B:"1",C:"0",D:"√3/2"},
+correctAnswer:"A",
+workedSolution:[
+"Final answer: 0.5"
+]
+}
+]
+}
+ 
+⸻
+

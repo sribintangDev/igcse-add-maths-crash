@@ -1,0 +1,488 @@
+{
+groupId:"DIFF-BASIC-001",
+topic:"Differentiation",
+level:"Basic",
+variants:[
+{
+question:"Differentiate x³.",
+options:{A:"3x²",B:"x²",C:"3x",D:"x³"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Use power rule: d/dx(xⁿ) = nxⁿ⁻¹.",
+"Step 2: Bring down the power 3.",
+"Step 3: x³ → 3x².",
+"Final answer: 3x²"
+]
+},
+{
+question:"Differentiate x⁴.",
+options:{A:"4x³",B:"x³",C:"4x²",D:"x⁴"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Apply power rule.",
+"Step 2: 4x³.",
+"Final answer: 4x³"
+]
+},
+{
+question:"Differentiate x⁵.",
+options:{A:"5x⁴",B:"x⁴",C:"5x³",D:"x⁵"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Apply power rule.",
+"Step 2: 5x⁴.",
+"Final answer: 5x⁴"
+]
+},
+{
+question:"Differentiate x².",
+options:{A:"2x",B:"x",C:"2",D:"x²"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Apply power rule.",
+"Step 2: 2x.",
+"Final answer: 2x"
+]
+}
+]
+}
+
+{
+groupId:"DIFF-BASIC-002",
+topic:"Differentiation",
+level:"Basic",
+variants:[
+{
+question:"Differentiate 5x².",
+options:{A:"10x",B:"5x",C:"10x²",D:"5x²"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Multiply coefficient by power.",
+"Step 2: 5 × 2 = 10.",
+"Step 3: x² → x¹.",
+"Final answer: 10x"
+]
+},
+{
+question:"Differentiate 3x³.",
+options:{A:"9x²",B:"3x²",C:"9x",D:"3x³"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: 3 × 3 = 9.",
+"Step 2: x³ → x².",
+"Final answer: 9x²"
+]
+},
+{
+question:"Differentiate 7x⁴.",
+options:{A:"28x³",B:"7x³",C:"28x⁴",D:"7x⁴"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: 7 × 4 = 28.",
+"Step 2: x⁴ → x³.",
+"Final answer: 28x³"
+]
+},
+{
+question:"Differentiate 2x⁵.",
+options:{A:"10x⁴",B:"2x⁴",C:"10x⁵",D:"2x⁵"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: 2 × 5 = 10.",
+"Step 2: x⁵ → x⁴.",
+"Final answer: 10x⁴"
+]
+}
+]
+}
+
+{
+groupId:"DIFF-BASIC-003",
+topic:"Differentiation",
+level:"Basic",
+variants:[
+{
+question:"Differentiate 3x³ + 2x.",
+options:{A:"9x² + 2",B:"3x² + 2",C:"9x² + x",D:"3x² + x"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Differentiate each term separately.",
+"Step 2: 3x³ → 9x².",
+"Step 3: 2x → 2.",
+"Final answer: 9x² + 2"
+]
+},
+{
+question:"Differentiate 4x³ + x.",
+options:{A:"12x² + 1",B:"4x² + 1",C:"12x² + x",D:"4x² + x"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: 4x³ → 12x².",
+"Step 2: x → 1.",
+"Final answer: 12x² + 1"
+]
+},
+{
+question:"Differentiate 5x² + 3x.",
+options:{A:"10x + 3",B:"5x + 3",C:"10x + x",D:"5x + x"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: 5x² → 10x.",
+"Step 2: 3x → 3.",
+"Final answer: 10x + 3"
+]
+},
+{
+question:"Differentiate 6x³ + 4x².",
+options:{A:"18x² + 8x",B:"6x² + 8x",C:"18x² + 4x",D:"6x² + 4x"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: 6x³ → 18x².",
+"Step 2: 4x² → 8x.",
+"Final answer: 18x² + 8x"
+]
+}
+]
+}
+
+{
+groupId:"DIFF-BASIC-004",
+topic:"Differentiation",
+level:"Basic",
+variants:[
+{
+question:"Differentiate 3x² + 5.",
+options:{A:"6x",B:"6x + 5",C:"3x + 5",D:"3x"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: 3x² → 6x.",
+"Step 2: Constant 5 → 0.",
+"Final answer: 6x"
+]
+},
+{
+question:"Differentiate 4x³ + 2.",
+options:{A:"12x²",B:"12x² + 2",C:"4x²",D:"4x² + 2"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: 4x³ → 12x².",
+"Step 2: Constant disappears.",
+"Final answer: 12x²"
+]
+},
+{
+question:"Differentiate 5x + 7.",
+options:{A:"5",B:"5 + 7",C:"7",D:"0"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: 5x → 5.",
+"Step 2: 7 → 0.",
+"Final answer: 5"
+]
+},
+{
+question:"Differentiate 2x⁴ + 9.",
+options:{A:"8x³",B:"8x³ + 9",C:"2x³",D:"2x³ + 9"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: 2x⁴ → 8x³.",
+"Step 2: Constant disappears.",
+"Final answer: 8x³"
+]
+}
+]
+}
+
+{
+groupId:"DIFF-BASIC-005",
+topic:"Differentiation",
+level:"Basic",
+variants:[
+{
+question:"Find gradient of y = x² at x = 3.",
+options:{A:"6",B:"9",C:"3",D:"12"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Differentiate y = x² → 2x.",
+"Step 2: Substitute x = 3.",
+"Step 3: 2(3) = 6.",
+"Final answer: 6"
+]
+},
+{
+question:"Find gradient of y = x² at x = 2.",
+options:{A:"4",B:"2",C:"6",D:"8"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: dy/dx = 2x.",
+"Step 2: 2(2) = 4.",
+"Final answer: 4"
+]
+},
+{
+question:"Find gradient of y = x³ at x = 2.",
+options:{A:"12",B:"8",C:"6",D:"4"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: dy/dx = 3x².",
+"Step 2: 3(2²) = 12.",
+"Final answer: 12"
+]
+},
+{
+question:"Find gradient of y = x³ at x = 1.",
+options:{A:"3",B:"1",C:"2",D:"4"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: dy/dx = 3x².",
+"Step 2: 3(1²) = 3.",
+"Final answer: 3"
+]
+}
+]
+}
+
+{
+groupId:"DIFF-BASIC-006",
+topic:"Differentiation",
+level:"Basic",
+variants:[
+{
+question:"Find the x-values of stationary points for y = x² - 4x.",
+options:{A:"0, 4",B:"2",C:"-2, 2",D:"1, 3"},
+correctAnswer:"B",
+workedSolution:[
+"Step 1: Differentiate: dy/dx = 2x - 4.",
+"Step 2: Set dy/dx = 0.",
+"2x - 4 = 0 → x = 2.",
+"Final answer: x = 2"
+]
+},
+{
+question:"Find stationary point of y = x² - 6x.",
+options:{A:"3",B:"6",C:"-3",D:"0"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: dy/dx = 2x - 6.",
+"Step 2: Set to zero.",
+"2x = 6 → x = 3.",
+"Final answer: x = 3"
+]
+},
+{
+question:"Find stationary point of y = x² + 4x.",
+options:{A:"-2",B:"2",C:"4",D:"-4"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: dy/dx = 2x + 4.",
+"Step 2: 2x + 4 = 0 → x = -2.",
+"Final answer: x = -2"
+]
+},
+{
+question:"Find stationary point of y = x² - 2x.",
+options:{A:"1",B:"2",C:"-1",D:"0"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: dy/dx = 2x - 2.",
+"Step 2: Set equal to zero.",
+"x = 1.",
+"Final answer: x = 1"
+]
+}
+]
+}
+
+{
+groupId:"DIFF-BASIC-007",
+topic:"Differentiation",
+level:"Basic",
+variants:[
+{
+question:"Differentiate (x + 2)(x + 3).",
+options:{A:"2x + 5",B:"x + 5",C:"2x + 6",D:"x² + 5"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Expand: x² + 5x + 6.",
+"Step 2: Differentiate: 2x + 5.",
+"Final answer: 2x + 5"
+]
+},
+{
+question:"Differentiate (x + 1)(x + 4).",
+options:{A:"2x + 5",B:"x + 5",C:"2x + 4",D:"x² + 5"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Expand: x² + 5x + 4.",
+"Step 2: Differentiate.",
+"Final answer: 2x + 5"
+]
+},
+{
+question:"Differentiate (x + 3)(x + 2).",
+options:{A:"2x + 5",B:"x + 5",C:"2x + 6",D:"x² + 5"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Expand.",
+"Step 2: x² + 5x + 6 → 2x + 5.",
+"Final answer: 2x + 5"
+]
+},
+{
+question:"Differentiate (x + 5)(x + 1).",
+options:{A:"2x + 6",B:"x + 6",C:"2x + 5",D:"x² + 6"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Expand: x² + 6x + 5.",
+"Step 2: Differentiate.",
+"Final answer: 2x + 6"
+]
+}
+]
+}
+
+
+{
+groupId:"DIFF-BASIC-008",
+topic:"Differentiation",
+level:"Basic",
+variants:[
+{
+question:"Differentiate x(x + 2).",
+options:{A:"2x + 2",B:"x + 2",C:"2x + 4",D:"x² + 2"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Expand: x² + 2x.",
+"Step 2: Differentiate.",
+"Final answer: 2x + 2"
+]
+},
+{
+question:"Differentiate x(x + 3).",
+options:{A:"2x + 3",B:"x + 3",C:"2x + 6",D:"x² + 3"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Expand: x² + 3x.",
+"Step 2: Differentiate.",
+"Final answer: 2x + 3"
+]
+},
+{
+question:"Differentiate x(x + 5).",
+options:{A:"2x + 5",B:"x + 5",C:"2x + 10",D:"x² + 5"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Expand.",
+"Step 2: Differentiate.",
+"Final answer: 2x + 5"
+]
+},
+{
+question:"Differentiate x(x + 1).",
+options:{A:"2x + 1",B:"x + 1",C:"2x + 2",D:"x² + 1"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Expand: x² + x.",
+"Step 2: Differentiate.",
+"Final answer: 2x + 1"
+]
+}
+]
+}
+
+{
+groupId:"DIFF-BASIC-009",
+topic:"Differentiation",
+level:"Basic",
+variants:[
+{
+question:"Differentiate 2x³ + 3x² + x.",
+options:{A:"6x² + 6x + 1",B:"2x² + 3x + 1",C:"6x² + 3x + 1",D:"2x² + 6x + 1"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Differentiate each term.",
+"2x³ → 6x², 3x² → 6x, x → 1.",
+"Final answer: 6x² + 6x + 1"
+]
+},
+{
+question:"Differentiate 3x³ + 2x² + x.",
+options:{A:"9x² + 4x + 1",B:"3x² + 2x + 1",C:"9x² + 2x + 1",D:"3x² + 4x + 1"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Differentiate each term.",
+"Final answer: 9x² + 4x + 1"
+]
+},
+{
+question:"Differentiate 4x³ + x² + 2x.",
+options:{A:"12x² + 2x + 2",B:"4x² + x + 2",C:"12x² + x + 2",D:"4x² + 2x + 2"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Differentiate each term.",
+"Final answer: 12x² + 2x + 2"
+]
+},
+{
+question:"Differentiate x³ + 3x² + 4x.",
+options:{A:"3x² + 6x + 4",B:"x² + 3x + 4",C:"3x² + 3x + 4",D:"x² + 6x + 4"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Differentiate each term.",
+"Final answer: 3x² + 6x + 4"
+]
+}
+]
+}
+
+{
+groupId:"DIFF-BASIC-010",
+topic:"Differentiation",
+level:"Basic",
+variants:[
+{
+question:"Find gradient of y = x² + 4x at x = 2.",
+options:{A:"8",B:"6",C:"4",D:"10"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: dy/dx = 2x + 4.",
+"Step 2: Substitute x = 2.",
+"2(2) + 4 = 8.",
+"Final answer: 8"
+]
+},
+{
+question:"Find gradient of y = x² + 3x at x = 1.",
+options:{A:"5",B:"4",C:"3",D:"6"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: dy/dx = 2x + 3.",
+"Step 2: Substitute x = 1.",
+"2 + 3 = 5.",
+"Final answer: 5"
+]
+},
+{
+question:"Find gradient of y = x³ + x at x = 1.",
+options:{A:"4",B:"3",C:"2",D:"5"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: dy/dx = 3x² + 1.",
+"Step 2: Substitute x = 1.",
+"3 + 1 = 4.",
+"Final answer: 4"
+]
+},
+{
+question:"Find gradient of y = x³ + 2x at x = 2.",
+options:{A:"14",B:"10",C:"12",D:"16"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: dy/dx = 3x² + 2.",
+"Step 2: Substitute x = 2.",
+"3(4) + 2 = 14.",
+"Final answer: 14"
+]
+}
+]
+}
