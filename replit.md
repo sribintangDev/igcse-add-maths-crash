@@ -26,6 +26,13 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 
 See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details.
 
+## GitHub Repository
+
+- **URL**: https://github.com/sribintangDev/igcse-add-maths-crash
+- **Remote**: `origin` → `https://github.com/sribintangDev/igcse-add-maths-crash.git`
+- The main branch is pushed and up to date on GitHub.
+- To push future changes: `git push origin main`
+
 ## Artifacts
 
 - `artifacts/api-server` — Express API server (default scaffold).
