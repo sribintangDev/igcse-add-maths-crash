@@ -328,13 +328,19 @@ export default function IntermediatePractice({ topicId, level }: IntermediatePra
         </div>
       </header>
 
-      {/* Mobile-only sticky graph */}
+      {/* Mobile-only sticky context/graph bar */}
       <div className="sticky top-0 z-10 border-b border-border bg-card/95 px-4 py-3 shadow-sm lg:hidden">
         <p className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-          Graph
+          {currentSet.graphExpression ? "Graph" : "Scenario"}
         </p>
         <div className="rounded-lg border border-card-border bg-muted/30 px-4 py-3 text-center text-base font-medium">
-          <MathText block>{currentSet.graphExpression}</MathText>
+          {currentSet.graphExpression ? (
+            <MathText block>{currentSet.graphExpression}</MathText>
+          ) : (
+            <span className="text-sm font-normal text-foreground">
+              <MathText>{currentSet.context}</MathText>
+            </span>
+          )}
         </div>
       </div>
 
@@ -343,17 +349,25 @@ export default function IntermediatePractice({ topicId, level }: IntermediatePra
           {/* ── LEFT PANEL (desktop sticky, mobile hidden within grid) ── */}
           <aside className="hidden lg:block">
             <div className="sticky top-6 space-y-4">
-              {/* Graph card */}
+              {/* Graph / Scenario card */}
               <Card className="border border-card-border bg-card p-5">
                 <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-                  Graph
+                  {currentSet.graphExpression ? "Graph" : "Scenario"}
                 </p>
-                <div className="rounded-lg border border-card-border bg-muted/30 px-4 py-6 text-center text-lg">
-                  <MathText block>{currentSet.graphExpression}</MathText>
-                </div>
-                <p className="mt-3 text-xs text-muted-foreground">
-                  <MathText>{currentSet.context}</MathText>
-                </p>
+                {currentSet.graphExpression ? (
+                  <>
+                    <div className="rounded-lg border border-card-border bg-muted/30 px-4 py-6 text-center text-lg">
+                      <MathText block>{currentSet.graphExpression}</MathText>
+                    </div>
+                    <p className="mt-3 text-xs text-muted-foreground">
+                      <MathText>{currentSet.context}</MathText>
+                    </p>
+                  </>
+                ) : (
+                  <div className="rounded-lg border border-card-border bg-muted/30 px-4 py-4 text-sm leading-relaxed text-foreground">
+                    <MathText>{currentSet.context}</MathText>
+                  </div>
+                )}
               </Card>
 
               {/* Working summary */}
@@ -447,10 +461,12 @@ export default function IntermediatePractice({ topicId, level }: IntermediatePra
 
             {/* Question card */}
             <Card className="border border-card-border bg-card p-6 shadow-sm sm:p-8">
-              {/* Context (mobile only — desktop has it in left panel) */}
-              <p className="mb-4 text-sm text-muted-foreground lg:hidden">
-                <MathText>{currentSet.context}</MathText>
-              </p>
+              {/* Context line: mobile-only, shown only for graph sets (scenario sets show context in the sticky bar) */}
+              {currentSet.graphExpression && (
+                <p className="mb-4 text-sm text-muted-foreground lg:hidden">
+                  <MathText>{currentSet.context}</MathText>
+                </p>
+              )}
 
               <div className="mb-4 flex flex-wrap items-center gap-2">
                 <Badge variant="secondary">{meta.title}</Badge>
