@@ -18,10 +18,10 @@ export interface ProgressState {
   times: Record<string, number[]>;
   /**
    * Best try-number recorded for MCQ variant questions.
-   * 1 = got it right on the first attempt, 2 = second attempt, 3+ = three or more.
+   * 1 = got it right on the first attempt, 2 = second attempt, 3 = three or more.
    * Only the best (lowest) try number is stored per question id.
    */
-  mcqTryNumber: Record<string, number>;
+  mcqTryNumber: Record<string, 1 | 2 | 3>;
   /**
    * Set of variant group ids the student has marked "Confident" on.
    * Once a group is complete it is skipped in future sessions until reset.
@@ -135,7 +135,7 @@ export function useProgress() {
    * Record the best try-number for an MCQ variant question.
    * Lower is better — existing records are only overwritten by a lower value.
    */
-  const recordMcqTryNumber = useCallback((questionId: string, tryNumber: number) => {
+  const recordMcqTryNumber = useCallback((questionId: string, tryNumber: 1 | 2 | 3) => {
     setState((s) => {
       const existing = s.mcqTryNumber[questionId];
       if (existing !== undefined && existing <= tryNumber) return s;

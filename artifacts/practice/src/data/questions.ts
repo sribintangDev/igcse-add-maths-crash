@@ -9,7 +9,10 @@ export type Topic =
   | "Differentiation"
   | "Integration"
   | "Trigonometry"
-  | "Mixed";
+  | "Mixed"
+  | "Functions"
+  | "Polynomials"
+  | "Graphs";
 
 export type TopicId =
   | "algebra"
@@ -17,7 +20,11 @@ export type TopicId =
   | "quadratics"
   | "differentiation"
   | "integration"
-  | "trigonometry";
+  | "trigonometry"
+  | "mixed"
+  | "functions"
+  | "polynomials"
+  | "graphs";
 
 export type SectionId =
   | "algebra"
@@ -94,6 +101,9 @@ export const TOPIC_TO_SECTION: Record<Topic, SectionId> = {
   "Integration": "differentiation",
   "Trigonometry": "trigonometry",
   Mixed: "mixed",
+  Functions: "mixed",
+  Polynomials: "mixed",
+  Graphs: "mixed",
 };
 
 export const SECTION_META: Record<
@@ -149,6 +159,8 @@ export interface TopicMeta {
   blurb: string;
   accent: string;
   iconKey: string;
+  /** If set, the TopicCard links directly to this URL instead of /topic/:id */
+  linkTo?: string;
 }
 
 export const TOPIC_META: Record<TopicId, TopicMeta> = {
@@ -194,6 +206,35 @@ export const TOPIC_META: Record<TopicId, TopicMeta> = {
     accent: "from-cyan-500/20 to-cyan-500/5 text-cyan-600 dark:text-cyan-400",
     iconKey: "triangle",
   },
+  mixed: {
+    id: "mixed",
+    title: "Mixed Practice",
+    blurb: "Questions drawn from every topic — great for exam-style revision.",
+    accent: "from-slate-500/20 to-slate-500/5 text-slate-600 dark:text-slate-400",
+    iconKey: "layers",
+    linkTo: "/practice/mixed",
+  },
+  functions: {
+    id: "functions",
+    title: "Functions",
+    blurb: "Domain, range, composite and inverse functions.",
+    accent: "from-indigo-500/20 to-indigo-500/5 text-indigo-600 dark:text-indigo-400",
+    iconKey: "function",
+  },
+  polynomials: {
+    id: "polynomials",
+    title: "Polynomials",
+    blurb: "Factor theorem, remainder theorem and polynomial division.",
+    accent: "from-yellow-500/20 to-yellow-500/5 text-yellow-600 dark:text-yellow-400",
+    iconKey: "calculator",
+  },
+  graphs: {
+    id: "graphs",
+    title: "Graphs",
+    blurb: "Transformations, sketching and interpreting graphs.",
+    accent: "from-rose-500/20 to-rose-500/5 text-rose-600 dark:text-rose-400",
+    iconKey: "trending-up",
+  },
 };
 
 export const TOPICS: TopicId[] = [
@@ -203,6 +244,7 @@ export const TOPICS: TopicId[] = [
   "differentiation",
   "integration",
   "trigonometry",
+  "mixed",
 ];
 
 /* ================================================================
@@ -1488,6 +1530,9 @@ export function topicIdForQuestion(q: Question): TopicId | null {
     Integration: "integration",
     Trigonometry: "trigonometry",
     Mixed: null,
+    Functions: "functions",
+    Polynomials: "polynomials",
+    Graphs: "graphs",
   };
   return mapping[q.topic] ?? null;
 }

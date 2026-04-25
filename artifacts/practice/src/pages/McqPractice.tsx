@@ -147,18 +147,18 @@ export default function McqPractice({ topicId, level }: McqPracticeProps) {
     if (!selectedKey || !currentQuestion) return;
     const isCorrect = selectedKey === correctKey;
 
-    recordMcqTryNumber(currentQuestion.id, tryNumber);
     setSolutionOpen(true);
 
     if (isCorrect) {
-      if (variantIndex === 0) {
-        setPhase("correct");
-      } else {
+      const cappedTry = Math.min(tryNumber, 3) as 1 | 2 | 3;
+      recordMcqTryNumber(currentQuestion.id, cappedTry);
+      if (variantIndex === 1) {
         setPhase("decision");
+      } else {
+        setPhase("correct");
       }
     } else {
-      const newTry = tryNumber + 1;
-      setTryNumber(newTry);
+      setTryNumber((t) => Math.min(t + 1, 3));
       const { options, correctKey: ck } = buildShuffledOptions(currentQuestion);
       setShuffledOptions(options);
       setCorrectKey(ck);

@@ -164,9 +164,9 @@ export default function TopicHome({ topicId }: TopicHomeProps) {
 
                 {canStart && (
                   <Link
-                    href={`/topic/${topicId}/${level}/mcq`}
+                    href={`/topic/${topicId}/${level}`}
                     className="absolute inset-0"
-                    aria-label={`Start ${level} MCQ practice`}
+                    aria-label={`Choose ${level} practice mode`}
                     data-testid={`link-level-${level.toLowerCase()}`}
                   />
                 )}

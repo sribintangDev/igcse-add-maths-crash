@@ -5,6 +5,7 @@ import {
   Calculator,
   Clock,
   FunctionSquare,
+  Layers,
   Sigma,
   Triangle,
   TrendingUp,
@@ -30,6 +31,7 @@ const ICONS: Record<string, LucideIcon> = {
   "trending-up": TrendingUp,
   "area-chart": BarChart2,
   triangle: Triangle,
+  layers: Layers,
 };
 
 interface TopicCardProps {
@@ -50,7 +52,8 @@ export function TopicCard({ topicId, state }: TopicCardProps) {
     totalGroups += ids.length;
   }
 
-  const isComingSoon = totalGroups === 0;
+  const hasLinkOverride = !!meta.linkTo;
+  const isComingSoon = totalGroups === 0 && !hasLinkOverride;
 
   const inner = (
     <Card
@@ -107,8 +110,9 @@ export function TopicCard({ topicId, state }: TopicCardProps) {
 
   if (isComingSoon) return inner;
 
+  const href = meta.linkTo ?? `/topic/${topicId}`;
   return (
-    <Link href={`/topic/${topicId}`} data-testid={`link-topic-${topicId}`}>
+    <Link href={href} data-testid={`link-topic-${topicId}`}>
       {inner}
     </Link>
   );

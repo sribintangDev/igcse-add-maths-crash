@@ -3,6 +3,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import Practice from "@/pages/Practice";
 import TopicHome from "@/pages/TopicHome";
+import LevelChooser from "@/pages/LevelChooser";
 import McqPractice from "@/pages/McqPractice";
 import { isSectionId } from "@/lib/storage";
 import type { Level, TopicId } from "@/data/questions";
@@ -14,6 +15,10 @@ const TOPIC_IDS: TopicId[] = [
   "differentiation",
   "integration",
   "trigonometry",
+  "mixed",
+  "functions",
+  "polynomials",
+  "graphs",
 ];
 const LEVELS: Level[] = ["Basic", "Intermediate", "Advanced"];
 
@@ -34,6 +39,12 @@ function TopicHomeRoute({ params }: { params: { topicId: string } }) {
   return <TopicHome topicId={params.topicId} />;
 }
 
+function LevelChooserRoute({ params }: { params: { topicId: string; level: string } }) {
+  if (!isTopicId(params.topicId)) return <NotFound />;
+  if (!isLevel(params.level)) return <NotFound />;
+  return <LevelChooser topicId={params.topicId} level={params.level} />;
+}
+
 function McqPracticeRoute({ params }: { params: { topicId: string; level: string } }) {
   if (!isTopicId(params.topicId)) return <NotFound />;
   if (!isLevel(params.level)) return <NotFound />;
@@ -46,6 +57,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/practice/:section" component={PracticeRoute} />
       <Route path="/topic/:topicId" component={TopicHomeRoute} />
+      <Route path="/topic/:topicId/:level" component={LevelChooserRoute} />
       <Route path="/topic/:topicId/:level/mcq" component={McqPracticeRoute} />
       <Route component={NotFound} />
     </Switch>
