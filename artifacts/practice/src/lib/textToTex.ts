@@ -21,12 +21,15 @@ import katex from "katex";
 export function textToTex(input: string): string {
   let s = input;
 
-  // Greek letters first (so they don't collide with sqrt/sin/cos/tan word
-  // matches below). The negative lookbehind prevents double-escaping when
-  // textToTex recurses (e.g. on the inner of `\sqrt{a+pi}`) and we'd otherwise
-  // turn `\pi` into `\\pi`.
-  s = s.replace(/(?<!\\)\bpi\b/g, "\\pi ");
-  s = s.replace(/(?<!\\)\btheta\b/g, "\\theta ");
+  // Greek letters. Match `pi`/`theta` even when preceded by a digit or letter
+  // (`8pi`, `Api`, `2theta` all mean "<thing> times <greek>") but never when
+  // preceded by `\` (so a recursive call doesn't turn `\pi` into `\\pi`) and
+  // never when followed by another letter (so `pip`, `thetax`, `epsilon`
+  // don't get partially mangled). We don't require a left word boundary,
+  // which is the whole point of this widening — see issue with `Api` and
+  // `8pi` being skipped before.
+  s = s.replace(/(?<!\\)pi(?![a-zA-Z])/g, "\\pi ");
+  s = s.replace(/(?<!\\)theta(?![a-zA-Z])/g, "\\theta ");
   s = s.replace(/π/g, "\\pi ");
   s = s.replace(/θ/g, "\\theta ");
   // Normalise the unicode √ symbol. `√(x+1)` becomes `sqrt(x+1)` for the
@@ -341,7 +344,11 @@ function wrapBalancedCall(
     // Match name( with a word-boundary before name.
     const slice = src.slice(i, i + word.length);
     const prevChar = i === 0 ? "" : src[i - 1];
-    const isWordBoundary = !/[a-zA-Z0-9_\\]/.test(prevChar);
+    // Allow a digit prefix so `2sqrt(3)`, `8sin(theta)` etc. are recognised
+    // as `2 * sqrt(3)` and the call gets wrapped. We still block letters,
+    // backslashes and underscores so we don't match inside identifiers like
+    // `xsqrt` or already-emitted commands like `\sin`.
+    const isWordBoundary = !/[a-zA-Z_\\]/.test(prevChar);
     const nextChar = src[i + word.length];
     if (slice === word && isWordBoundary && nextChar === "(") {
       const start = i + word.length + 1;
