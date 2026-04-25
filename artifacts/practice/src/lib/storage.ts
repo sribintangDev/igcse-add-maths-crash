@@ -16,9 +16,27 @@ export interface ProgressState {
    * a slow question that improves over time is reflected in the average.
    */
   times: Record<string, number[]>;
+  /**
+   * Best try-number recorded for MCQ variant questions.
+   * 1 = got it right on the first attempt, 2 = second attempt, 3+ = three or more.
+   * Only the best (lowest) try number is stored per question id.
+   */
+  mcqTryNumber: Record<string, number>;
+  /**
+   * Set of variant group ids the student has marked "Confident" on.
+   * Once a group is complete it is skipped in future sessions until reset.
+   */
+  variantGroupComplete: Record<string, true>;
 }
 
-const EMPTY: ProgressState = { attempted: {}, correct: {}, mistakes: {}, times: {} };
+const EMPTY: ProgressState = {
+  attempted: {},
+  correct: {},
+  mistakes: {},
+  times: {},
+  mcqTryNumber: {},
+  variantGroupComplete: {},
+};
 
 function read(): ProgressState {
   if (typeof window === "undefined") return EMPTY;
@@ -31,6 +49,8 @@ function read(): ProgressState {
       correct: parsed.correct ?? {},
       mistakes: parsed.mistakes ?? {},
       times: parsed.times ?? {},
+      mcqTryNumber: parsed.mcqTryNumber ?? {},
+      variantGroupComplete: parsed.variantGroupComplete ?? {},
     };
   } catch {
     return EMPTY;
@@ -105,21 +125,41 @@ export function useProgress() {
           const prior = s.times[questionId] ?? [];
           times = { ...s.times, [questionId]: [...prior, elapsedSeconds] };
         }
-        return { attempted, correct, mistakes, times };
+        return { ...s, attempted, correct, mistakes, times };
       });
     },
     [],
   );
 
+  /**
+   * Record the best try-number for an MCQ variant question.
+   * Lower is better — existing records are only overwritten by a lower value.
+   */
+  const recordMcqTryNumber = useCallback((questionId: string, tryNumber: number) => {
+    setState((s) => {
+      const existing = s.mcqTryNumber[questionId];
+      if (existing !== undefined && existing <= tryNumber) return s;
+      return { ...s, mcqTryNumber: { ...s.mcqTryNumber, [questionId]: tryNumber } };
+    });
+  }, []);
+
+  /** Mark a variant group as fully completed (student pressed "Confident"). */
+  const completeVariantGroup = useCallback((groupId: string) => {
+    setState((s) => ({
+      ...s,
+      variantGroupComplete: { ...s.variantGroupComplete, [groupId]: true },
+    }));
+  }, []);
+
   const reset = useCallback(() => {
-    setState(() => ({ ...EMPTY, times: {} }));
+    setState(() => ({ ...EMPTY }));
   }, []);
 
   const clearMistakes = useCallback(() => {
     setState((s) => ({ ...s, mistakes: {} }));
   }, []);
 
-  return { state, recordAttempt, reset, clearMistakes };
+  return { state, recordAttempt, recordMcqTryNumber, completeVariantGroup, reset, clearMistakes };
 }
 
 /** Compute headline counters across all questions. */
@@ -200,4 +240,24 @@ export function isSectionId(value: string): value is SectionId {
     "mixed",
     "mistakes",
   ].includes(value);
+}
+
+/** Returns true if the student has completed (pressed "Confident") for this group. */
+export function isGroupComplete(state: ProgressState, groupId: string): boolean {
+  return !!state.variantGroupComplete?.[groupId];
+}
+
+/**
+ * Returns {done, total} for a list of group ids.
+ * `done` = how many the student has marked confident.
+ */
+export function groupProgress(
+  state: ProgressState,
+  groupIds: string[],
+): { done: number; total: number } {
+  let done = 0;
+  for (const id of groupIds) {
+    if (isGroupComplete(state, id)) done++;
+  }
+  return { done, total: groupIds.length };
 }

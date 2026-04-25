@@ -1,11 +1,23 @@
 export type Difficulty = "Easy" | "Moderate" | "Exam Style";
 
+export type Level = "Basic" | "Intermediate" | "Advanced";
+
 export type Topic =
-  | "Algebra Foundations"
+  | "Algebra"
+  | "Surds"
   | "Quadratics"
   | "Differentiation"
-  | "Trigonometry Survival"
+  | "Integration"
+  | "Trigonometry"
   | "Mixed";
+
+export type TopicId =
+  | "algebra"
+  | "surds"
+  | "quadratics"
+  | "differentiation"
+  | "integration"
+  | "trigonometry";
 
 export type SectionId =
   | "algebra"
@@ -56,23 +68,32 @@ export interface Question {
   unorderedSet?: boolean;
   /**
    * Optional formula-sheet hint (KaTeX source, no $...$ delimiters) shown
-   * in a small card pinned to the top-left of the question card. Use this
-   * for questions where having the relevant IGCSE Add Maths formula
-   * visible would actually help the student (quadratic formula, sine /
-   * cosine rule, power rule, Pythagorean identity, etc.). Leave blank
-   * for items where a formula wouldn't help.
+   * in a small card pinned to the top-left of the question card.
    */
   formula?: string;
   /** Short label printed above the formula, e.g. "Quadratic formula". */
   formulaLabel?: string;
+  /**
+   * Difficulty level for the new topic-based MCQ flow.
+   * Basic = entry-level, Intermediate = practise, Advanced = exam-ready.
+   */
+  level?: Level;
+  /**
+   * Variant group id for MCQ smart-retry. All questions sharing the same
+   * variantGroup id form a set of 2-4 variants used by the retry engine:
+   * Q1 → Q2 → "Confident / Try another" → Q3 → Q4.
+   */
+  variantGroup?: string;
 }
 
 export const TOPIC_TO_SECTION: Record<Topic, SectionId> = {
-  "Algebra Foundations": "algebra",
+  "Algebra": "algebra",
+  "Surds": "algebra",
   Quadratics: "quadratics",
   Differentiation: "differentiation",
-  "Trigonometry Survival": "trigonometry",
-  Mixed: "mcq",
+  "Integration": "differentiation",
+  "Trigonometry": "trigonometry",
+  Mixed: "mixed",
 };
 
 export const SECTION_META: Record<
@@ -81,9 +102,9 @@ export const SECTION_META: Record<
 > = {
   algebra: {
     id: "algebra",
-    title: "Algebra Foundations",
+    title: "Algebra",
     blurb: "Expanding, factorising, simplifying, indices and basic equations.",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
   },
   quadratics: {
     id: "quadratics",
@@ -99,9 +120,9 @@ export const SECTION_META: Record<
   },
   trigonometry: {
     id: "trigonometry",
-    title: "Trigonometry Survival",
+    title: "Trigonometry",
     blurb: "Exact ratios, identities and basic trig equations.",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
   },
   mcq: {
     id: "mcq",
@@ -120,14 +141,68 @@ export const SECTION_META: Record<
   },
 };
 
-export const SECTION_ORDER: SectionId[] = [
+export const SECTION_ORDER: SectionId[] = ["mixed", "mistakes"];
+
+export interface TopicMeta {
+  id: TopicId;
+  title: string;
+  blurb: string;
+  accent: string;
+  iconKey: string;
+}
+
+export const TOPIC_META: Record<TopicId, TopicMeta> = {
+  algebra: {
+    id: "algebra",
+    title: "Algebra",
+    blurb: "Expand, factorise, simplify and work with indices.",
+    accent: "from-blue-500/20 to-blue-500/5 text-blue-600 dark:text-blue-400",
+    iconKey: "calculator",
+  },
+  surds: {
+    id: "surds",
+    title: "Surds",
+    blurb: "Simplify surds, rationalise denominators and operate with roots.",
+    accent: "from-emerald-500/20 to-emerald-500/5 text-emerald-600 dark:text-emerald-400",
+    iconKey: "radical",
+  },
+  quadratics: {
+    id: "quadratics",
+    title: "Quadratics",
+    blurb: "Factorise, use the formula, complete the square and find roots.",
+    accent: "from-violet-500/20 to-violet-500/5 text-violet-600 dark:text-violet-400",
+    iconKey: "function",
+  },
+  differentiation: {
+    id: "differentiation",
+    title: "Differentiation",
+    blurb: "Power rule, gradients, stationary points and tangent lines.",
+    accent: "from-orange-500/20 to-orange-500/5 text-orange-600 dark:text-orange-400",
+    iconKey: "trending-up",
+  },
+  integration: {
+    id: "integration",
+    title: "Integration",
+    blurb: "Reverse differentiation and find areas under curves.",
+    accent: "from-pink-500/20 to-pink-500/5 text-pink-600 dark:text-pink-400",
+    iconKey: "area-chart",
+  },
+  trigonometry: {
+    id: "trigonometry",
+    title: "Trigonometry",
+    blurb: "Exact values, trig equations and the Pythagorean identity.",
+    accent: "from-cyan-500/20 to-cyan-500/5 text-cyan-600 dark:text-cyan-400",
+    iconKey: "triangle",
+  },
+};
+
+export const TOPICS: TopicId[] = [
   "algebra",
+  "surds",
   "quadratics",
   "differentiation",
+  "integration",
   "trigonometry",
-  "mcq",
-  "mixed",
-  "mistakes",
 ];
 
 /* ================================================================
@@ -143,7 +218,7 @@ export const QUESTIONS: Question[] = [
   /* ---------- ALGEBRA FOUNDATIONS (16) ---------- */
   {
     id: "ALG-001",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
     section: "algebra",
     questionType: "short-text",
     difficulty: "Easy",
@@ -157,7 +232,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "ALG-002",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
     section: "algebra",
     questionType: "short-text",
     difficulty: "Easy",
@@ -171,7 +246,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "ALG-003",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
     section: "algebra",
     questionType: "short-text",
     difficulty: "Easy",
@@ -185,7 +260,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "ALG-004",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
     section: "algebra",
     questionType: "short-text",
     difficulty: "Easy",
@@ -199,7 +274,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "ALG-005",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
     section: "algebra",
     questionType: "short-text",
     difficulty: "Easy",
@@ -213,7 +288,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "ALG-006",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
     section: "algebra",
     questionType: "short-text",
     difficulty: "Moderate",
@@ -227,7 +302,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "ALG-007",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
     section: "algebra",
     questionType: "short-text",
     difficulty: "Moderate",
@@ -241,7 +316,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "ALG-008",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
     section: "algebra",
     questionType: "short-text",
     difficulty: "Moderate",
@@ -255,7 +330,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "ALG-009",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
     section: "algebra",
     questionType: "short-text",
     difficulty: "Moderate",
@@ -269,7 +344,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "ALG-010",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
     section: "algebra",
     questionType: "short-text",
     difficulty: "Moderate",
@@ -283,7 +358,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "ALG-011",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
     section: "algebra",
     questionType: "short-text",
     difficulty: "Moderate",
@@ -297,7 +372,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "ALG-012",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
     section: "algebra",
     questionType: "short-text",
     difficulty: "Moderate",
@@ -311,7 +386,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "ALG-013",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
     section: "algebra",
     questionType: "short-text",
     difficulty: "Exam Style",
@@ -327,7 +402,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "ALG-014",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
     section: "algebra",
     questionType: "short-text",
     difficulty: "Exam Style",
@@ -342,7 +417,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "ALG-015",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
     section: "algebra",
     questionType: "short-text",
     difficulty: "Exam Style",
@@ -356,7 +431,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "ALG-016",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
     section: "algebra",
     questionType: "short-text",
     difficulty: "Exam Style",
@@ -884,7 +959,7 @@ export const QUESTIONS: Question[] = [
   /* ---------- TRIGONOMETRY SURVIVAL (16) ---------- */
   {
     id: "TRI-001",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "trigonometry",
     questionType: "short-text",
     difficulty: "Easy",
@@ -897,7 +972,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "TRI-002",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "trigonometry",
     questionType: "short-text",
     difficulty: "Easy",
@@ -910,7 +985,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "TRI-003",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "trigonometry",
     questionType: "short-text",
     difficulty: "Easy",
@@ -923,7 +998,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "TRI-004",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "trigonometry",
     questionType: "short-text",
     difficulty: "Easy",
@@ -937,7 +1012,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "TRI-005",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "trigonometry",
     questionType: "short-text",
     difficulty: "Easy",
@@ -952,7 +1027,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "TRI-006",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "trigonometry",
     questionType: "short-text",
     difficulty: "Moderate",
@@ -969,7 +1044,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "TRI-007",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "trigonometry",
     questionType: "short-text",
     difficulty: "Moderate",
@@ -986,7 +1061,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "TRI-008",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "trigonometry",
     questionType: "short-text",
     difficulty: "Moderate",
@@ -1002,7 +1077,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "TRI-009",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "trigonometry",
     questionType: "short-text",
     difficulty: "Moderate",
@@ -1018,7 +1093,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "TRI-010",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "trigonometry",
     questionType: "short-text",
     difficulty: "Moderate",
@@ -1034,7 +1109,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "TRI-011",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "trigonometry",
     questionType: "short-text",
     difficulty: "Moderate",
@@ -1047,7 +1122,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "TRI-012",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "trigonometry",
     questionType: "short-text",
     difficulty: "Exam Style",
@@ -1063,7 +1138,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "TRI-013",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "trigonometry",
     questionType: "short-text",
     difficulty: "Exam Style",
@@ -1079,7 +1154,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "TRI-014",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "trigonometry",
     questionType: "short-text",
     difficulty: "Exam Style",
@@ -1096,7 +1171,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "TRI-015",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "trigonometry",
     questionType: "short-text",
     difficulty: "Exam Style",
@@ -1113,7 +1188,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "TRI-016",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "trigonometry",
     questionType: "short-text",
     difficulty: "Exam Style",
@@ -1132,10 +1207,12 @@ export const QUESTIONS: Question[] = [
   /* ---------- MCQ PRACTICE (11) ---------- */
   {
     id: "MCQ-ALG-001",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
     section: "mcq",
     questionType: "multiple-choice",
     difficulty: "Moderate",
+    level: "Basic",
+    variantGroup: "ALG-BASIC-G1",
     question: "Expand $(2x + 3)(x - 4)$.",
     options: {
       A: "$2x^2 - 8x + 3x - 12$",
@@ -1149,10 +1226,12 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "MCQ-ALG-002",
-    topic: "Algebra Foundations",
+    topic: "Algebra",
     section: "mcq",
     questionType: "multiple-choice",
     difficulty: "Moderate",
+    level: "Basic",
+    variantGroup: "ALG-BASIC-G1",
     question: "Simplify $(3x^2y)(2xy^2)$.",
     options: {
       A: "$6x^3y^3$",
@@ -1174,6 +1253,8 @@ export const QUESTIONS: Question[] = [
     section: "mcq",
     questionType: "multiple-choice",
     difficulty: "Moderate",
+    level: "Basic",
+    variantGroup: "QUAD-BASIC-G1",
     question: "Solve $x^2 - 2x - 3 = 0$.",
     options: {
       A: "$x = 3$ or $x = -1$",
@@ -1191,6 +1272,8 @@ export const QUESTIONS: Question[] = [
     section: "mcq",
     questionType: "multiple-choice",
     difficulty: "Moderate",
+    level: "Basic",
+    variantGroup: "QUAD-BASIC-G1",
     question: "Solve $3x^2 - 5x - 2 = 0$.",
     options: {
       A: "$x = 2$ or $x = -\\tfrac{1}{3}$",
@@ -1208,6 +1291,8 @@ export const QUESTIONS: Question[] = [
     section: "mcq",
     questionType: "multiple-choice",
     difficulty: "Moderate",
+    level: "Basic",
+    variantGroup: "DIFF-BASIC-G1",
     question: "Differentiate $6x^3 - 4x^2 + x$.",
     options: {
       A: "$18x^2 - 8x + 1$",
@@ -1229,6 +1314,8 @@ export const QUESTIONS: Question[] = [
     section: "mcq",
     questionType: "multiple-choice",
     difficulty: "Moderate",
+    level: "Basic",
+    variantGroup: "DIFF-BASIC-G1",
     question: "Find the gradient of $y = x^2 + 3x$ at $x = 2$.",
     options: {
       A: "$5$",
@@ -1245,10 +1332,12 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "MCQ-TRIG-001",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "mcq",
     questionType: "multiple-choice",
     difficulty: "Moderate",
+    level: "Basic",
+    variantGroup: "TRIG-BASIC-G1",
     question: "Solve $\\sin x = 0.5$ for $0° \\leq x \\leq 360°$.",
     options: {
       A: "$30°, 150°$",
@@ -1266,10 +1355,12 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "MCQ-TRIG-002",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "mcq",
     questionType: "multiple-choice",
     difficulty: "Moderate",
+    level: "Basic",
+    variantGroup: "TRIG-BASIC-G1",
     question: "Solve $\\cos x = 0.5$ for $0° \\leq x \\leq 360°$.",
     options: {
       A: "$60°, 120°$",
@@ -1287,10 +1378,12 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "MCQ-TRIG-003",
-    topic: "Trigonometry Survival",
+    topic: "Trigonometry",
     section: "mcq",
     questionType: "multiple-choice",
     difficulty: "Moderate",
+    level: "Basic",
+    variantGroup: "TRIG-BASIC-G1",
     question: "Solve $\\tan x = 1$ for $0° \\leq x \\leq 360°$.",
     options: {
       A: "$45°, 225°$",
@@ -1353,7 +1446,7 @@ export function questionsForSection(sectionId: SectionId): Question[] {
     return QUESTIONS.filter((q) => q.section === "mcq");
   }
   if (sectionId === "mixed") {
-    return shuffle(QUESTIONS.filter((q) => q.section !== "mcq"));
+    return shuffle(QUESTIONS.filter((q) => !q.variantGroup));
   }
   if (sectionId === "mistakes") {
     return [];
@@ -1378,4 +1471,50 @@ export function shuffle<T>(arr: T[]): T[] {
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy;
+}
+
+/** Return all questions belonging to a specific variant group, in id order. */
+export function questionsForVariantGroup(groupId: string): Question[] {
+  return QUESTIONS.filter((q) => q.variantGroup === groupId);
+}
+
+/** Return the TopicId that a Question's topic maps to, or null for Mixed. */
+export function topicIdForQuestion(q: Question): TopicId | null {
+  const mapping: Record<Topic, TopicId | null> = {
+    Algebra: "algebra",
+    Surds: "surds",
+    Quadratics: "quadratics",
+    Differentiation: "differentiation",
+    Integration: "integration",
+    Trigonometry: "trigonometry",
+    Mixed: null,
+  };
+  return mapping[q.topic] ?? null;
+}
+
+/**
+ * Return an ordered list of unique variantGroup ids for the given
+ * TopicId + Level combination. Order follows first appearance in QUESTIONS.
+ */
+export function variantGroupsForTopicLevel(topicId: TopicId, level: Level): string[] {
+  const seen = new Set<string>();
+  const result: string[] = [];
+  for (const q of QUESTIONS) {
+    if (q.variantGroup && q.level === level && topicIdForQuestion(q) === topicId) {
+      if (!seen.has(q.variantGroup)) {
+        seen.add(q.variantGroup);
+        result.push(q.variantGroup);
+      }
+    }
+  }
+  return result;
+}
+
+/** Counts how many variant groups exist for each level of a topic. */
+export function groupCountsForTopic(topicId: TopicId): Record<Level, number> {
+  return {
+    Basic: variantGroupsForTopicLevel(topicId, "Basic").length,
+    Intermediate: variantGroupsForTopicLevel(topicId, "Intermediate").length,
+    Advanced: variantGroupsForTopicLevel(topicId, "Advanced").length,
+  };
 }

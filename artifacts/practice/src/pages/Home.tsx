@@ -4,6 +4,7 @@ import {
   QUESTIONS,
   SECTION_META,
   SECTION_ORDER,
+  TOPICS,
   questionsForSection,
 } from "@/data/questions";
 import {
@@ -15,6 +16,7 @@ import {
 } from "@/lib/storage";
 import { Footer } from "@/components/Footer";
 import { SectionCard } from "@/components/SectionCard";
+import { TopicCard } from "@/components/TopicCard";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import {
@@ -113,8 +115,7 @@ export default function Home() {
             className="font-serif text-2xl leading-snug text-foreground sm:text-3xl"
             data-testid="text-instruction"
           >
-            Complete each section, submit your answers, and review the worked solutions immediately
-            after checking.
+            Pick a topic, choose your level, and drill MCQ questions until you feel confident.
           </p>
         </section>
 
@@ -124,10 +125,16 @@ export default function Home() {
               <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 Overall progress
               </p>
-              <p className="mt-1 font-serif text-3xl font-semibold text-foreground" data-testid="text-overall-percentage">
+              <p
+                className="mt-1 font-serif text-3xl font-semibold text-foreground"
+                data-testid="text-overall-percentage"
+              >
                 {summary.percentage}%
               </p>
-              <p className="mt-1 text-sm text-muted-foreground" data-testid="text-overall-counters">
+              <p
+                className="mt-1 text-sm text-muted-foreground"
+                data-testid="text-overall-counters"
+              >
                 {summary.totalCorrect} correct out of {summary.totalAttempts} attempts ·{" "}
                 {summary.attemptedCount} of {QUESTIONS.length} questions tried
               </p>
@@ -138,14 +145,25 @@ export default function Home() {
           </div>
         </section>
 
-        <section>
-          <h2 className="mb-4 font-serif text-xl font-semibold text-foreground">Choose a section</h2>
+        <section className="mb-10">
+          <h2 className="mb-4 font-serif text-xl font-semibold text-foreground">Topics</h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {TOPICS.map((topicId) => (
+              <TopicCard key={topicId} topicId={topicId} state={state} />
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <h2 className="mb-4 font-serif text-xl font-semibold text-foreground">
+            Practice utilities
+          </h2>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {SECTION_ORDER.map((id) => {
               const meta = SECTION_META[id];
               const ids =
                 id === "mixed"
-                  ? QUESTIONS.map((q) => q.id)
+                  ? questionsForSection("mixed").map((q) => q.id)
                   : id === "mistakes"
                   ? mistakes
                   : questionsForSection(id).map((q) => q.id);
