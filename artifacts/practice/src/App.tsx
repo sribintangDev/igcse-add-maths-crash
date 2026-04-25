@@ -5,6 +5,7 @@ import Practice from "@/pages/Practice";
 import TopicHome from "@/pages/TopicHome";
 import LevelChooser from "@/pages/LevelChooser";
 import McqPractice from "@/pages/McqPractice";
+import IntermediatePractice from "@/pages/IntermediatePractice";
 import { isSectionId } from "@/lib/storage";
 import type { Level, TopicId } from "@/data/questions";
 
@@ -48,6 +49,9 @@ function LevelChooserRoute({ params }: { params: { topicId: string; level: strin
 function McqPracticeRoute({ params }: { params: { topicId: string; level: string } }) {
   if (!isTopicId(params.topicId)) return <NotFound />;
   if (!isLevel(params.level)) return <NotFound />;
+  if (params.level === "Intermediate") {
+    return <IntermediatePractice topicId={params.topicId as TopicId} level="Intermediate" />;
+  }
   return <McqPractice topicId={params.topicId} level={params.level} />;
 }
 
