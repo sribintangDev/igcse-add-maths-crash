@@ -351,13 +351,11 @@ export default function Practice({ sectionId }: PracticeProps) {
                     : "Not quite — review the worked solution below and try again."}
                 </div>
                 <div
-                  className="mt-1 text-xs opacity-90"
+                  className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs opacity-90"
                   data-testid="text-correct-answer-line"
                 >
-                  Correct answer:{" "}
-                  <code className="rounded bg-background/40 px-1.5 py-0.5 font-mono">
-                    {current.acceptedAnswers[0]}
-                  </code>
+                  <span>Correct answer:</span>
+                  <MathChip value={current.acceptedAnswers[0]} />
                 </div>
               </div>
             </div>
@@ -470,16 +468,14 @@ export default function Practice({ sectionId }: PracticeProps) {
                   </li>
                 ))}
               </ol>
-              <div className="flex flex-wrap gap-2 border-t border-border pt-3 text-xs text-muted-foreground">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-2 border-t border-border pt-3 text-xs text-muted-foreground">
                 <span>Accepted answers:</span>
                 {current.acceptedAnswers.map((a) => (
-                  <code
+                  <MathChip
                     key={a}
-                    className="rounded bg-card px-2 py-0.5 font-mono text-foreground"
+                    value={a}
                     data-testid={`text-accepted-answer-${a}`}
-                  >
-                    {a}
-                  </code>
+                  />
                 ))}
               </div>
             </CollapsibleContent>
@@ -670,6 +666,39 @@ function AnswerPreview({ value }: { value: string }) {
         </span>
       )}
     </div>
+  );
+}
+
+/**
+ * Compact pill that renders an accepted-answer string as real math via KaTeX
+ * (so `dy/dx=4x^3`, `(5x+2)/(x(x+1))`, `sqrt(3)/2`, etc. show as proper
+ * stacked fractions, radicals and exponents). Falls back to a monospaced
+ * representation if the string can't be parsed.
+ */
+function MathChip({
+  value,
+  "data-testid": testId,
+}: {
+  value: string;
+  "data-testid"?: string;
+}) {
+  const result = previewKatex(value);
+  if (result.kind === "tex") {
+    return (
+      <span
+        className="inline-flex items-center rounded bg-card px-2 py-0.5 text-sm text-foreground"
+        data-testid={testId}
+        dangerouslySetInnerHTML={{ __html: result.html }}
+      />
+    );
+  }
+  return (
+    <code
+      className="rounded bg-card px-2 py-0.5 font-mono text-foreground"
+      data-testid={testId}
+    >
+      {result.value}
+    </code>
   );
 }
 
