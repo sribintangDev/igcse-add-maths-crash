@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import type { SectionId } from "@/data/questions";
+import type { Level, SectionId, TopicId } from "@/data/questions";
+import { variantGroupsForTopicLevel } from "@/data/questions";
 
 const STORAGE_KEY = "igcse-add-maths-practice/v1";
 
@@ -245,6 +246,21 @@ export function isSectionId(value: string): value is SectionId {
 /** Returns true if the student has completed (pressed "Confident") for this group. */
 export function isGroupComplete(state: ProgressState, groupId: string): boolean {
   return !!state.variantGroupComplete?.[groupId];
+}
+
+/**
+ * Returns true when every variant group for the given topic + level has been
+ * marked "Confident" by the student. Returns false when there are no groups
+ * (level not yet available).
+ */
+export function isLevelComplete(
+  state: ProgressState,
+  topicId: TopicId,
+  level: Level,
+): boolean {
+  const groupIds = variantGroupsForTopicLevel(topicId, level);
+  if (groupIds.length === 0) return false;
+  return groupIds.every((id) => isGroupComplete(state, id));
 }
 
 /**
