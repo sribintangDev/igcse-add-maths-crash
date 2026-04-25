@@ -29,27 +29,38 @@ interface MathKey {
 }
 
 const ROWS: MathKey[][] = [
+  // Row 1 — basic operators and grouping.
+  [
+    { label: "+", insert: "+", title: "Plus" },
+    { label: "−", insert: "-", title: "Minus" },
+    { label: "=", insert: "=" },
+    { label: "(\u2009)", insert: "()", caret: 1, title: "Parentheses" },
+    { label: "/", insert: "/", title: "Divide" },
+    {
+      label: "▢⁄▢",
+      insert: "()/()",
+      caret: 1,
+      title: "Fraction template — type the numerator, then the denominator inside the second pair of brackets",
+    },
+    { label: ",", insert: ",", title: "Separate multiple answers" },
+    { label: "±", insert: "±", title: "Plus or minus" },
+  ],
+  // Row 2 — variables, powers, root.
   [
     { label: "x", insert: "x" },
     { label: "y", insert: "y" },
-    { label: "=", insert: "=" },
-    { label: "(\u2009)", insert: "()", caret: 1, title: "Parentheses" },
-    { label: "/", insert: "/", title: "Divide / fraction" },
     { label: "x²", insert: "x^2", title: "x squared" },
     { label: "x³", insert: "x^3", title: "x cubed" },
     { label: "x^", insert: "x^", title: "x to a power" },
-  ],
-  [
     { label: "√(\u2009)", insert: "sqrt()", caret: 5, title: "Square root" },
     { label: "π", insert: "pi", title: "Pi" },
     { label: "θ", insert: "theta", title: "Theta" },
+  ],
+  // Row 3 — trig functions and edit actions.
+  [
     { label: "sin", insert: "sin()", caret: 4, title: "Sine" },
     { label: "cos", insert: "cos()", caret: 4, title: "Cosine" },
     { label: "tan", insert: "tan()", caret: 4, title: "Tangent" },
-    { label: "±", insert: "±", title: "Plus or minus" },
-    { label: ",", insert: ",", title: "Separate multiple answers" },
-  ],
-  [
     {
       label: "⌫",
       insert: "",

@@ -328,6 +328,41 @@ export default function Practice({ sectionId }: PracticeProps) {
             </div>
           </div>
 
+          {feedback !== "idle" && (
+            <div
+              className={`mb-4 flex items-start gap-3 rounded-lg border p-4 ${
+                feedback === "correct"
+                  ? "border-success/40 bg-success/10 text-success"
+                  : "border-destructive/40 bg-destructive/10 text-destructive"
+              }`}
+              data-testid={`feedback-${feedback}`}
+              role="status"
+              aria-live="polite"
+            >
+              {feedback === "correct" ? (
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none" />
+              ) : (
+                <XCircle className="mt-0.5 h-5 w-5 flex-none" />
+              )}
+              <div className="flex-1 text-sm">
+                <div className="font-medium">
+                  {feedback === "correct"
+                    ? "Correct! Well done."
+                    : "Not quite — review the worked solution below and try again."}
+                </div>
+                <div
+                  className="mt-1 text-xs opacity-90"
+                  data-testid="text-correct-answer-line"
+                >
+                  Correct answer:{" "}
+                  <code className="rounded bg-background/40 px-1.5 py-0.5 font-mono">
+                    {current.acceptedAnswers[0]}
+                  </code>
+                </div>
+              </div>
+            </div>
+          )}
+
           <form onSubmit={handleFormSubmit} className="space-y-3">
             <label
               className="block text-xs font-medium uppercase tracking-wider text-muted-foreground"
@@ -406,39 +441,6 @@ export default function Practice({ sectionId }: PracticeProps) {
               </p>
             )}
           </form>
-
-          {feedback !== "idle" && (
-            <div
-              className={`mt-5 flex items-start gap-3 rounded-lg border p-4 ${
-                feedback === "correct"
-                  ? "border-success/40 bg-success/10 text-success"
-                  : "border-destructive/40 bg-destructive/10 text-destructive"
-              }`}
-              data-testid={`feedback-${feedback}`}
-            >
-              {feedback === "correct" ? (
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none" />
-              ) : (
-                <XCircle className="mt-0.5 h-5 w-5 flex-none" />
-              )}
-              <div className="flex-1 text-sm">
-                <div className="font-medium">
-                  {feedback === "correct"
-                    ? "Correct! Well done."
-                    : "Not quite — review the worked solution below and try again."}
-                </div>
-                <div
-                  className="mt-1 text-xs opacity-90"
-                  data-testid="text-correct-answer-line"
-                >
-                  Correct answer:{" "}
-                  <code className="rounded bg-background/40 px-1.5 py-0.5 font-mono">
-                    {current.acceptedAnswers[0]}
-                  </code>
-                </div>
-              </div>
-            </div>
-          )}
 
           <Collapsible open={solutionOpen} onOpenChange={setSolutionOpen} className="mt-5">
             <CollapsibleTrigger asChild>
