@@ -12,7 +12,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { TOPIC_META, type Level, type TopicId, variantGroupsForTopicLevel } from "@/data/questions";
+import { TOPIC_META, type Level, type TopicId, variantGroupsForTopicLevel, multiPartSetsForTopicLevel } from "@/data/questions";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -37,7 +37,9 @@ export default function LevelChooser({ topicId, level }: LevelChooserProps) {
   const meta = TOPIC_META[topicId];
   const Icon = ICONS[meta.iconKey] ?? Calculator;
   const groupIds = variantGroupsForTopicLevel(topicId, level);
-  const hasMcq = groupIds.length > 0;
+  const multiPartSets = multiPartSetsForTopicLevel(topicId, level);
+  const hasMcq = groupIds.length > 0 || multiPartSets.length > 0;
+  const mcqGroupCount = groupIds.length > 0 ? groupIds.length : multiPartSets.length;
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -97,7 +99,7 @@ export default function LevelChooser({ topicId, level }: LevelChooserProps) {
                 </p>
                 {hasMcq && (
                   <p className="mt-2 text-xs text-muted-foreground">
-                    {groupIds.length} variant group{groupIds.length !== 1 ? "s" : ""}
+                    {mcqGroupCount} {multiPartSets.length > 0 ? "question set" : "variant group"}{mcqGroupCount !== 1 ? "s" : ""}
                   </p>
                 )}
               </div>
