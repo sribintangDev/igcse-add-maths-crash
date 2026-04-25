@@ -39,7 +39,9 @@ export default function LevelChooser({ topicId, level }: LevelChooserProps) {
   const groupIds = variantGroupsForTopicLevel(topicId, level);
   const multiPartSets = multiPartSetsForTopicLevel(topicId, level);
   const hasMcq = groupIds.length > 0 || multiPartSets.length > 0;
-  const mcqGroupCount = groupIds.length > 0 ? groupIds.length : multiPartSets.length;
+  const mcqGroupCount = groupIds.length > 0
+    ? groupIds.length
+    : new Set(multiPartSets.map((s) => s.variantGroup)).size;
 
   return (
     <div className="flex min-h-screen flex-col bg-background">

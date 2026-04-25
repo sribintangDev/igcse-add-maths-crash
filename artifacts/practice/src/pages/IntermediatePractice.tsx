@@ -107,8 +107,17 @@ export default function IntermediatePractice({ topicId, level }: IntermediatePra
     [topicId, level],
   );
 
+  // Pick the first set for each variantGroup that is not yet complete.
+  // This ensures variants within the same group don't all appear in one session.
   const sessionSets = useRef<MultiPartSet[]>(
-    allSets.filter((s) => !isGroupComplete(state, s.variantGroup)),
+    (() => {
+      const seenGroups = new Set<string>();
+      return allSets.filter((s) => {
+        if (seenGroups.has(s.variantGroup)) return false;
+        seenGroups.add(s.variantGroup);
+        return !isGroupComplete(state, s.variantGroup);
+      });
+    })(),
   ).current;
 
   // Hydrate from localStorage: find how far through the first session set we are.
