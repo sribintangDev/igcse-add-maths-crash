@@ -457,6 +457,12 @@ export interface GradeResult {
 }
 
 export function grade(question: Question, raw: string): GradeResult {
+  if (question.questionType === "multiple-choice" && question.correctAnswer) {
+    const correct =
+      raw.trim().toUpperCase() === question.correctAnswer.toUpperCase();
+    return { correct };
+  }
+
   const learner = normalise(raw);
   if (!learner) return { correct: false };
 

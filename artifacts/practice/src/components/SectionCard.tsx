@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { ArrowRight, BookOpen, Calculator, Clock, FunctionSquare, RefreshCcw, Shuffle, Triangle } from "lucide-react";
+import { ArrowRight, BookOpen, Calculator, Clock, FunctionSquare, ListChecks, RefreshCcw, Shuffle, Triangle } from "lucide-react";
 import type { SectionId } from "@/data/questions";
 import { formatDuration } from "@/lib/storage";
 import { Card } from "@/components/ui/card";
@@ -26,6 +26,7 @@ const ICONS: Record<SectionId, typeof BookOpen> = {
   quadratics: FunctionSquare,
   differentiation: BookOpen,
   trigonometry: Triangle,
+  mcq: ListChecks,
   mixed: Shuffle,
   mistakes: RefreshCcw,
 };
@@ -35,6 +36,7 @@ const ACCENT: Record<SectionId, string> = {
   quadratics: "from-chart-2/20 to-chart-2/5 text-chart-2",
   differentiation: "from-chart-4/20 to-chart-4/5 text-chart-4",
   trigonometry: "from-chart-3/20 to-chart-3/5 text-chart-3",
+  mcq: "from-violet-500/20 to-violet-500/5 text-violet-500",
   mixed: "from-primary/20 to-primary/5 text-primary",
   mistakes: "from-chart-5/20 to-chart-5/5 text-chart-5",
 };

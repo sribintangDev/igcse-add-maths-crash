@@ -191,7 +191,13 @@ export function mistakeIds(state: ProgressState): string[] {
 
 /** Used for the section dot on the home page. */
 export function isSectionId(value: string): value is SectionId {
-  return ["algebra", "quadratics", "differentiation", "trigonometry", "mixed", "mistakes"].includes(
-    value,
-  );
+  return [
+    "algebra",
+    "quadratics",
+    "differentiation",
+    "trigonometry",
+    "mcq",
+    "mixed",
+    "mistakes",
+  ].includes(value);
 }

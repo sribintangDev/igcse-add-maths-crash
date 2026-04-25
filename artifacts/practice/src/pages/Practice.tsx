@@ -376,88 +376,190 @@ export default function Practice({ sectionId }: PracticeProps) {
                   data-testid="text-correct-answer-line"
                 >
                   <span>Correct answer:</span>
-                  <MathChip value={current.acceptedAnswers[0]} />
+                  {current.questionType === "multiple-choice" &&
+                  current.options &&
+                  current.correctAnswer ? (
+                    <span className="font-semibold">
+                      {current.correctAnswer}:{" "}
+                      <MathText>{current.options[current.correctAnswer]}</MathText>
+                    </span>
+                  ) : (
+                    <MathChip value={current.acceptedAnswers[0]} />
+                  )}
                 </div>
               </div>
             </div>
           )}
 
           <form onSubmit={handleFormSubmit} className="space-y-3">
-            <label
-              className="block text-xs font-medium uppercase tracking-wider text-muted-foreground"
-              htmlFor="answer-input"
-            >
+            <label className="block text-xs font-medium uppercase tracking-wider text-muted-foreground">
               Your answer
             </label>
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
-              <Input
-                ref={inputRef}
-                id="answer-input"
-                value={answer}
-                onChange={(e) => setAnswer(e.target.value)}
-                placeholder="Type your answer here..."
-                readOnly={feedback === "correct"}
-                className="h-16 flex-1 font-mono text-xl sm:text-2xl"
-                autoComplete="off"
-                spellCheck={false}
-                data-testid="input-answer"
-              />
-              {feedback === "idle" && (
-                <Button
-                  type="submit"
-                  disabled={!answer.trim()}
-                  size="lg"
-                  className="h-16 px-6 text-base"
-                  data-testid="button-check-answer"
-                >
-                  Check answer
-                </Button>
-              )}
-              {feedback === "wrong" && (
-                <>
-                  <Button
-                    type="submit"
-                    variant="secondary"
-                    size="lg"
-                    className="h-16 px-6 text-base"
-                    data-testid="button-try-again"
+
+            {current.questionType === "multiple-choice" && current.options ? (
+              <>
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                  {(["A", "B", "C", "D"] as const).map((letter) => {
+                    const optionText = current.options![letter];
+                    const isSelected = answer === letter;
+                    const isCorrect = letter === current.correctAnswer;
+                    const isChosen = feedback !== "idle" && letter === answer;
+
+                    let borderClass =
+                      "border-border hover:border-primary hover:bg-accent";
+                    if (feedback !== "idle") {
+                      if (isCorrect) {
+                        borderClass = "border-green-500 bg-green-500/10";
+                      } else if (isChosen) {
+                        borderClass =
+                          "border-destructive bg-destructive/10";
+                      } else {
+                        borderClass = "border-border opacity-40";
+                      }
+                    } else if (isSelected) {
+                      borderClass = "border-primary bg-primary/10";
+                    }
+
+                    return (
+                      <button
+                        key={letter}
+                        type="button"
+                        disabled={feedback !== "idle"}
+                        onClick={() => setAnswer(letter)}
+                        className={`flex items-start gap-3 rounded-lg border p-4 text-left transition-colors ${borderClass}`}
+                        data-testid={`mcq-option-${letter}`}
+                      >
+                        <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-muted text-xs font-bold">
+                          {letter}
+                        </span>
+                        <span className="text-sm leading-snug">
+                          <MathText>{optionText}</MathText>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <div className="flex gap-3">
+                  {feedback === "idle" && (
+                    <Button
+                      type="submit"
+                      disabled={!answer.trim()}
+                      size="lg"
+                      className="h-12 flex-1 text-base"
+                      data-testid="button-check-answer"
+                    >
+                      Check answer
+                    </Button>
+                  )}
+                  {feedback === "wrong" && (
+                    <>
+                      <Button
+                        type="submit"
+                        variant="secondary"
+                        size="lg"
+                        className="h-12 flex-1 text-base"
+                        data-testid="button-try-again"
+                      >
+                        Try again
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="lg"
+                        className="h-12 flex-1 text-base"
+                        onClick={goNext}
+                        data-testid="button-skip-question"
+                      >
+                        {index + 1 >= total ? "Finish" : "Skip"}
+                      </Button>
+                    </>
+                  )}
+                  {feedback === "correct" && (
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="h-12 flex-1 text-base"
+                      data-testid="button-next-question"
+                    >
+                      {index + 1 >= total ? "Finish" : "Next question"}
+                    </Button>
+                  )}
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
+                  <Input
+                    ref={inputRef}
+                    id="answer-input"
+                    value={answer}
+                    onChange={(e) => setAnswer(e.target.value)}
+                    placeholder="Type your answer here..."
+                    readOnly={feedback === "correct"}
+                    className="h-16 flex-1 font-mono text-xl sm:text-2xl"
+                    autoComplete="off"
+                    spellCheck={false}
+                    data-testid="input-answer"
+                  />
+                  {feedback === "idle" && (
+                    <Button
+                      type="submit"
+                      disabled={!answer.trim()}
+                      size="lg"
+                      className="h-16 px-6 text-base"
+                      data-testid="button-check-answer"
+                    >
+                      Check answer
+                    </Button>
+                  )}
+                  {feedback === "wrong" && (
+                    <>
+                      <Button
+                        type="submit"
+                        variant="secondary"
+                        size="lg"
+                        className="h-16 px-6 text-base"
+                        data-testid="button-try-again"
+                      >
+                        Try again
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="lg"
+                        className="h-16 px-6 text-base"
+                        onClick={goNext}
+                        data-testid="button-skip-question"
+                      >
+                        {index + 1 >= total ? "Finish" : "Skip"}
+                      </Button>
+                    </>
+                  )}
+                  {feedback === "correct" && (
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="h-16 px-6 text-base"
+                      data-testid="button-next-question"
+                    >
+                      {index + 1 >= total ? "Finish" : "Next question"}
+                    </Button>
+                  )}
+                </div>
+                <AnswerPreview value={answer} />
+                {feedback !== "correct" && !systemKbVisible && (
+                  <MathKeyboard inputRef={inputRef} value={answer} onChange={setAnswer} />
+                )}
+                {feedback === "correct" && (
+                  <p
+                    className="text-xs text-muted-foreground"
+                    data-testid="text-press-enter-hint"
                   >
-                    Try again
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="lg"
-                    className="h-16 px-6 text-base"
-                    onClick={goNext}
-                    data-testid="button-skip-question"
-                  >
-                    {index + 1 >= total ? "Finish" : "Skip"}
-                  </Button>
-                </>
-              )}
-              {feedback === "correct" && (
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="h-16 px-6 text-base"
-                  data-testid="button-next-question"
-                >
-                  {index + 1 >= total ? "Finish" : "Next question"}
-                </Button>
-              )}
-            </div>
-            <AnswerPreview value={answer} />
-            {feedback !== "correct" && !systemKbVisible && (
-              <MathKeyboard inputRef={inputRef} value={answer} onChange={setAnswer} />
-            )}
-            {feedback === "correct" && (
-              <p
-                className="text-xs text-muted-foreground"
-                data-testid="text-press-enter-hint"
-              >
-                Press Enter to continue.
-              </p>
+                    Press Enter to continue.
+                  </p>
+                )}
+              </>
             )}
           </form>
 

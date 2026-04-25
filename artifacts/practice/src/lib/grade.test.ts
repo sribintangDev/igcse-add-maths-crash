@@ -240,3 +240,38 @@ describe("grade — symbolic equivalence", () => {
     expect(grade(q, "1.4142").correct).toBe(false);
   });
 });
+
+describe("grade – multiple-choice", () => {
+  function makeMcq(correctAnswer: string): Question {
+    return {
+      id: "mcq-test",
+      topic: "Algebra Foundations",
+      section: "mcq",
+      questionType: "multiple-choice",
+      difficulty: "Moderate",
+      question: "stub",
+      acceptedAnswers: [correctAnswer],
+      correctAnswer,
+      options: { A: "opt A", B: "opt B", C: "opt C", D: "opt D" },
+      solution: ["stub"],
+    };
+  }
+
+  it("returns correct when the student picks the right letter", () => {
+    expect(grade(makeMcq("B"), "B").correct).toBe(true);
+  });
+
+  it("accepts the correct letter regardless of case", () => {
+    expect(grade(makeMcq("B"), "b").correct).toBe(true);
+  });
+
+  it("returns incorrect when the student picks the wrong letter", () => {
+    expect(grade(makeMcq("B"), "A").correct).toBe(false);
+    expect(grade(makeMcq("B"), "C").correct).toBe(false);
+    expect(grade(makeMcq("B"), "D").correct).toBe(false);
+  });
+
+  it("returns incorrect for an empty answer", () => {
+    expect(grade(makeMcq("A"), "").correct).toBe(false);
+  });
+});

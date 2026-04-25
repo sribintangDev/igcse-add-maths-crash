@@ -4,13 +4,15 @@ export type Topic =
   | "Algebra Foundations"
   | "Quadratics"
   | "Differentiation"
-  | "Trigonometry Survival";
+  | "Trigonometry Survival"
+  | "Mixed";
 
 export type SectionId =
   | "algebra"
   | "quadratics"
   | "differentiation"
   | "trigonometry"
+  | "mcq"
   | "mixed"
   | "mistakes";
 
@@ -36,10 +38,16 @@ export interface Question {
   question: string;
   acceptedAnswers: string[];
   /**
-   * Optional choices for "multiple-choice" questions. Unused for the current
-   * short-text bank but declared so the schema is forward-compatible.
+   * Option map for multiple-choice questions. Keys are the option letters
+   * ("A"–"D") and values are the option text (may contain inline math).
    */
-  choices?: string[];
+  options?: Record<string, string>;
+  /**
+   * The correct option key (e.g. "B") for multiple-choice questions.
+   * The grader checks this directly; the value is also stored in
+   * `acceptedAnswers[0]` for backwards-compatibility with the fallback path.
+   */
+  correctAnswer?: string;
   solution: string[];
   /**
    * If true, the answer represents a comma-separated set whose order does not matter
@@ -64,6 +72,7 @@ export const TOPIC_TO_SECTION: Record<Topic, SectionId> = {
   Quadratics: "quadratics",
   Differentiation: "differentiation",
   "Trigonometry Survival": "trigonometry",
+  Mixed: "mcq",
 };
 
 export const SECTION_META: Record<
@@ -94,6 +103,11 @@ export const SECTION_META: Record<
     blurb: "Exact ratios, identities and basic trig equations.",
     topic: "Trigonometry Survival",
   },
+  mcq: {
+    id: "mcq",
+    title: "MCQ Practice",
+    blurb: "Multiple-choice questions across all topics. Pick A, B, C or D.",
+  },
   mixed: {
     id: "mixed",
     title: "Mixed Exam Practice",
@@ -111,6 +125,7 @@ export const SECTION_ORDER: SectionId[] = [
   "quadratics",
   "differentiation",
   "trigonometry",
+  "mcq",
   "mixed",
   "mistakes",
 ];
@@ -1113,20 +1128,237 @@ export const QUESTIONS: Question[] = [
       "Final answer: $\\sin\\theta$.",
     ],
   },
+
+  /* ---------- MCQ PRACTICE (11) ---------- */
+  {
+    id: "MCQ-ALG-001",
+    topic: "Algebra Foundations",
+    section: "mcq",
+    questionType: "multiple-choice",
+    difficulty: "Moderate",
+    question: "Expand $(2x + 3)(x - 4)$.",
+    options: {
+      A: "$2x^2 - 8x + 3x - 12$",
+      B: "$2x^2 - 5x - 12$",
+      C: "$2x^2 - 11x - 12$",
+      D: "$2x^2 + x - 12$",
+    },
+    correctAnswer: "B",
+    acceptedAnswers: ["B"],
+    solution: ["Expand: $2x^2 - 8x + 3x - 12 = 2x^2 - 5x - 12$."],
+  },
+  {
+    id: "MCQ-ALG-002",
+    topic: "Algebra Foundations",
+    section: "mcq",
+    questionType: "multiple-choice",
+    difficulty: "Moderate",
+    question: "Simplify $(3x^2y)(2xy^2)$.",
+    options: {
+      A: "$6x^3y^3$",
+      B: "$5x^3y^3$",
+      C: "$6x^2y^3$",
+      D: "$6x^3y^2$",
+    },
+    correctAnswer: "A",
+    acceptedAnswers: ["A"],
+    solution: [
+      "Multiply coefficients: $3 \\times 2 = 6$.",
+      "Add powers: $x^2 \\times x = x^3$, $y \\times y^2 = y^3$.",
+      "Final answer: $6x^3y^3$.",
+    ],
+  },
+  {
+    id: "MCQ-QUAD-001",
+    topic: "Quadratics",
+    section: "mcq",
+    questionType: "multiple-choice",
+    difficulty: "Moderate",
+    question: "Solve $x^2 - 2x - 3 = 0$.",
+    options: {
+      A: "$x = 3$ or $x = -1$",
+      B: "$x = -3$ or $x = 1$",
+      C: "$x = 3$ or $x = 1$",
+      D: "$x = -3$ or $x = -1$",
+    },
+    correctAnswer: "A",
+    acceptedAnswers: ["A"],
+    solution: ["Factorise: $(x - 3)(x + 1) = 0$.", "So $x = 3$ or $x = -1$."],
+  },
+  {
+    id: "MCQ-QUAD-002",
+    topic: "Quadratics",
+    section: "mcq",
+    questionType: "multiple-choice",
+    difficulty: "Moderate",
+    question: "Solve $3x^2 - 5x - 2 = 0$.",
+    options: {
+      A: "$x = 2$ or $x = -\\tfrac{1}{3}$",
+      B: "$x = -2$ or $x = \\tfrac{1}{3}$",
+      C: "$x = 2$ or $x = \\tfrac{1}{3}$",
+      D: "$x = -2$ or $x = -\\tfrac{1}{3}$",
+    },
+    correctAnswer: "A",
+    acceptedAnswers: ["A"],
+    solution: ["Factorise: $(3x + 1)(x - 2) = 0$.", "So $x = 2$ or $x = -\\tfrac{1}{3}$."],
+  },
+  {
+    id: "MCQ-DIFF-001",
+    topic: "Differentiation",
+    section: "mcq",
+    questionType: "multiple-choice",
+    difficulty: "Moderate",
+    question: "Differentiate $6x^3 - 4x^2 + x$.",
+    options: {
+      A: "$18x^2 - 8x + 1$",
+      B: "$6x^2 - 8x + 1$",
+      C: "$18x^2 - 4x + 1$",
+      D: "$18x^2 - 8x$",
+    },
+    correctAnswer: "A",
+    acceptedAnswers: ["A"],
+    solution: [
+      "Differentiate term by term.",
+      "$\\dfrac{d}{dx}(6x^3) = 18x^2$, $\\dfrac{d}{dx}(-4x^2) = -8x$, $\\dfrac{d}{dx}(x) = 1$.",
+      "Final answer: $18x^2 - 8x + 1$.",
+    ],
+  },
+  {
+    id: "MCQ-DIFF-002",
+    topic: "Differentiation",
+    section: "mcq",
+    questionType: "multiple-choice",
+    difficulty: "Moderate",
+    question: "Find the gradient of $y = x^2 + 3x$ at $x = 2$.",
+    options: {
+      A: "$5$",
+      B: "$6$",
+      C: "$7$",
+      D: "$8$",
+    },
+    correctAnswer: "C",
+    acceptedAnswers: ["C"],
+    solution: [
+      "$\\dfrac{dy}{dx} = 2x + 3$.",
+      "At $x = 2$: $2(2) + 3 = 7$.",
+    ],
+  },
+  {
+    id: "MCQ-TRIG-001",
+    topic: "Trigonometry Survival",
+    section: "mcq",
+    questionType: "multiple-choice",
+    difficulty: "Moderate",
+    question: "Solve $\\sin x = 0.5$ for $0° \\leq x \\leq 360°$.",
+    options: {
+      A: "$30°, 150°$",
+      B: "$30°, 210°$",
+      C: "$150°, 330°$",
+      D: "$60°, 120°$",
+    },
+    correctAnswer: "A",
+    acceptedAnswers: ["A"],
+    solution: [
+      "$\\sin^{-1}(0.5) = 30°$.",
+      "Second solution in range: $180° - 30° = 150°$.",
+      "Answers: $30°, 150°$.",
+    ],
+  },
+  {
+    id: "MCQ-TRIG-002",
+    topic: "Trigonometry Survival",
+    section: "mcq",
+    questionType: "multiple-choice",
+    difficulty: "Moderate",
+    question: "Solve $\\cos x = 0.5$ for $0° \\leq x \\leq 360°$.",
+    options: {
+      A: "$60°, 120°$",
+      B: "$60°, 300°$",
+      C: "$120°, 300°$",
+      D: "$30°, 330°$",
+    },
+    correctAnswer: "B",
+    acceptedAnswers: ["B"],
+    solution: [
+      "$\\cos^{-1}(0.5) = 60°$.",
+      "Second solution in range: $360° - 60° = 300°$.",
+      "Answers: $60°, 300°$.",
+    ],
+  },
+  {
+    id: "MCQ-TRIG-003",
+    topic: "Trigonometry Survival",
+    section: "mcq",
+    questionType: "multiple-choice",
+    difficulty: "Moderate",
+    question: "Solve $\\tan x = 1$ for $0° \\leq x \\leq 360°$.",
+    options: {
+      A: "$45°, 225°$",
+      B: "$45°, 180°$",
+      C: "$90°, 270°$",
+      D: "$30°, 210°$",
+    },
+    correctAnswer: "A",
+    acceptedAnswers: ["A"],
+    solution: [
+      "$\\tan^{-1}(1) = 45°$.",
+      "Tan repeats every $180°$: second solution $45° + 180° = 225°$.",
+      "Answers: $45°, 225°$.",
+    ],
+  },
+  {
+    id: "MCQ-MIX-001",
+    topic: "Mixed",
+    section: "mcq",
+    questionType: "multiple-choice",
+    difficulty: "Moderate",
+    question: "Solve $x^2 + x - 12 = 0$.",
+    options: {
+      A: "$x = 3$ or $x = -4$",
+      B: "$x = -3$ or $x = 4$",
+      C: "$x = 6$ or $x = -2$",
+      D: "$x = -6$ or $x = 2$",
+    },
+    correctAnswer: "A",
+    acceptedAnswers: ["A"],
+    solution: ["Factorise: $(x + 4)(x - 3) = 0$.", "So $x = 3$ or $x = -4$."],
+  },
+  {
+    id: "MCQ-MIX-002",
+    topic: "Mixed",
+    section: "mcq",
+    questionType: "multiple-choice",
+    difficulty: "Moderate",
+    question: "Differentiate $5x^2 - 3x + 7$.",
+    options: {
+      A: "$10x - 3$",
+      B: "$5x - 3$",
+      C: "$10x + 3$",
+      D: "$5x + 3$",
+    },
+    correctAnswer: "A",
+    acceptedAnswers: ["A"],
+    solution: [
+      "Differentiate term by term.",
+      "$\\dfrac{d}{dx}(5x^2) = 10x$, $\\dfrac{d}{dx}(-3x) = -3$, $\\dfrac{d}{dx}(7) = 0$.",
+      "Final answer: $10x - 3$.",
+    ],
+  },
 ];
 
 /* Helpers */
 
 export function questionsForSection(sectionId: SectionId): Question[] {
+  if (sectionId === "mcq") {
+    return QUESTIONS.filter((q) => q.section === "mcq");
+  }
   if (sectionId === "mixed") {
-    return shuffle(QUESTIONS);
+    return shuffle(QUESTIONS.filter((q) => q.section !== "mcq"));
   }
   if (sectionId === "mistakes") {
     return [];
   }
-  const meta = SECTION_META[sectionId];
-  if (!meta.topic) return [];
-  return QUESTIONS.filter((q) => q.topic === meta.topic);
+  return QUESTIONS.filter((q) => q.section === sectionId);
 }
 
 export function questionsByIds(ids: string[]): Question[] {
