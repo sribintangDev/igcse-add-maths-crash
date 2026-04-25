@@ -454,7 +454,7 @@ export default function McqPractice({ topicId, level }: McqPracticeProps) {
                   onClick={handleConfident}
                   data-testid="button-confident"
                 >
-                  ✓ Confident — next topic
+                  ✓ Confident — next question
                 </Button>
                 <Button
                   size="lg"
