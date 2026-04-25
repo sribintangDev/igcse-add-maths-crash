@@ -34,12 +34,12 @@ See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and pa
   so sync errors appear immediately in commit output. Logs appended to `/tmp/github-sync.log`.
 - **Sync mechanism**: `scripts/src/github-sync.ts` uses the Replit GitHub integration
   (`@replit/connectors-sdk`) to push via the GitHub Git Data API (no personal token needed).
-  It submits a complete tree (handles additions, changes, and deletions), reuses unchanged
-  blobs by SHA, and uses a safe fast-forward ref update (`force: false`). State tracked in
-  `.git/github-sync-sha` to skip no-op syncs.
-- **Snapshot semantics**: the script syncs the current `HEAD` tree as a single GitHub commit.
-  If multiple local commits accumulate before a sync, they appear as one combined GitHub commit.
-  The commit message comes from the latest local commit.
+  Preserves per-commit history: walks local commits since the last sync and creates one GitHub
+  commit per local commit (same message, author, date). Reuses unchanged blobs by SHA for
+  efficiency; uses a safe fast-forward ref update (`force: false`). State tracked in
+  `.git/github-sync-sha` (last synced local HEAD SHA). On first run with no state file, scans
+  backwards up to 50 commits to find the fork point (e.g. from a prior real `git push`).
+  Retries transient 502/503 errors up to 3 times.
 - **Manual sync**: `pnpm --filter @workspace/scripts run github-sync`
 - **Hook setup**: `core.hooksPath = .githooks` (set in `.git/config`; re-applied by `scripts/post-merge.sh` after task merges)
 
