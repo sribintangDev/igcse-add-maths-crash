@@ -52,6 +52,46 @@ interface AnsweredPart {
   keyValue?: { label: string; value: string };
 }
 
+interface PersistedPart {
+  selectedKey: string;
+  correct: boolean;
+  answerText: string;
+  keyValue?: { label: string; value: string };
+}
+
+function partStorageKey(setId: string, partId: string): string {
+  return `intermediate-part-${setId}-${partId}`;
+}
+
+function savePartAnswer(setId: string, partId: string, data: PersistedPart): void {
+  try {
+    localStorage.setItem(partStorageKey(setId, partId), JSON.stringify(data));
+  } catch {}
+}
+
+function loadPartAnswers(set: MultiPartSet): AnsweredPart[] {
+  const results: AnsweredPart[] = [];
+  for (const part of set.parts) {
+    try {
+      const raw = localStorage.getItem(partStorageKey(set.id, part.id));
+      if (!raw) break;
+      const data = JSON.parse(raw) as PersistedPart;
+      results.push({ partId: part.id, label: part.label, ...data });
+    } catch {
+      break;
+    }
+  }
+  return results;
+}
+
+function clearPartAnswers(set: MultiPartSet): void {
+  for (const part of set.parts) {
+    try {
+      localStorage.removeItem(partStorageKey(set.id, part.id));
+    } catch {}
+  }
+}
+
 interface IntermediatePracticeProps {
   topicId: TopicId;
   level: Level;
@@ -71,11 +111,23 @@ export default function IntermediatePractice({ topicId, level }: IntermediatePra
     allSets.filter((s) => !isGroupComplete(state, s.variantGroup)),
   ).current;
 
+  // Hydrate from localStorage: find how far through the first session set we are.
+  const firstSet = sessionSets[0] ?? null;
+  const initialAnswered = useRef<AnsweredPart[]>(
+    firstSet ? loadPartAnswers(firstSet) : [],
+  ).current;
+  const allPartsAnswered =
+    firstSet !== null && initialAnswered.length === firstSet.parts.length;
+
   const [setIndex, setSetIndex] = useState(0);
-  const [partIndex, setPartIndex] = useState(0);
+  const [partIndex, setPartIndex] = useState(
+    firstSet
+      ? Math.min(initialAnswered.length, firstSet.parts.length - 1)
+      : 0,
+  );
   const [selectedKey, setSelectedKey] = useState("");
   const [checked, setChecked] = useState(false);
-  const [answeredParts, setAnsweredParts] = useState<AnsweredPart[]>([]);
+  const [answeredParts, setAnsweredParts] = useState<AnsweredPart[]>(initialAnswered);
   const [solutionOpen, setSolutionOpen] = useState(false);
   const [mobileAnswersOpen, setMobileAnswersOpen] = useState(false);
   const [phase, setPhase] = useState<"active" | "set-done" | "all-done" | "no-sets">(
@@ -83,6 +135,10 @@ export default function IntermediatePractice({ topicId, level }: IntermediatePra
       ? "no-sets"
       : sessionSets.length === 0
       ? "all-done"
+      : allPartsAnswered
+      ? sessionSets.length === 1
+        ? "all-done"
+        : "set-done"
       : "active",
   );
 
@@ -99,21 +155,21 @@ export default function IntermediatePractice({ topicId, level }: IntermediatePra
   const isCorrect = checked && selectedKey === currentPart?.correctAnswer;
 
   function handleCheck() {
-    if (!selectedKey || !currentPart) return;
+    if (!selectedKey || !currentPart || !currentSet) return;
     setChecked(true);
     setSolutionOpen(true);
     const correct = selectedKey === currentPart.correctAnswer;
     const answerText = currentPart.options[selectedKey] ?? selectedKey;
-    setAnsweredParts((prev) => [
-      ...prev,
-      {
-        partId: currentPart.id,
-        label: currentPart.label,
-        answerText,
-        correct,
-        keyValue: correct ? currentPart.keyValue : undefined,
-      },
-    ]);
+    const kv = correct ? currentPart.keyValue : undefined;
+    const newPart: AnsweredPart = {
+      partId: currentPart.id,
+      label: currentPart.label,
+      answerText,
+      correct,
+      keyValue: kv,
+    };
+    savePartAnswer(currentSet.id, currentPart.id, { selectedKey, correct, answerText, keyValue: kv });
+    setAnsweredParts((prev) => [...prev, newPart]);
   }
 
   function handleNext() {
@@ -134,12 +190,16 @@ export default function IntermediatePractice({ topicId, level }: IntermediatePra
   }
 
   function handleNextSet() {
-    setSetIndex((i) => i + 1);
-    setPartIndex(0);
+    if (currentSet) clearPartAnswers(currentSet);
+    const nextIdx = setIndex + 1;
+    const nextSet = sessionSets[nextIdx] ?? null;
+    const nextAnswered = nextSet ? loadPartAnswers(nextSet) : [];
+    setSetIndex(nextIdx);
+    setPartIndex(nextSet ? Math.min(nextAnswered.length, nextSet.parts.length - 1) : 0);
     setSelectedKey("");
     setChecked(false);
     setSolutionOpen(false);
-    setAnsweredParts([]);
+    setAnsweredParts(nextAnswered);
     setMobileAnswersOpen(false);
     setPhase("active");
   }
