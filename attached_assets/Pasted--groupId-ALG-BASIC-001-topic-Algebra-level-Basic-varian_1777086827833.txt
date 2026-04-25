@@ -1,0 +1,320 @@
+{
+groupId:"ALG-BASIC-001",
+topic:"Algebra",
+level:"Basic",
+variants:[
+{
+question:"Simplify 2x + 3x.",
+options:{A:"5x",B:"6x",C:"x",D:"3x"},
+correctAnswer:"A",
+explanation:"2 + 3 = 5."
+},
+{
+question:"Simplify 4x + x.",
+options:{A:"5x",B:"4x",C:"x",D:"6x"},
+correctAnswer:"A",
+explanation:"4 + 1 = 5."
+},
+{
+question:"Simplify 5x - 2x.",
+options:{A:"3x",B:"7x",C:"x",D:"2x"},
+correctAnswer:"A",
+explanation:"5 - 2 = 3."
+},
+{
+question:"Simplify 6x - 4x.",
+options:{A:"2x",B:"10x",C:"x",D:"4x"},
+correctAnswer:"A",
+explanation:"6 - 4 = 2."
+}
+]
+}
+
+
+{
+groupId:"ALG-BASIC-002",
+topic:"Algebra",
+level:"Basic",
+variants:[
+{
+question:"Expand 3(x + 2).",
+options:{A:"3x + 6",B:"3x + 2",C:"x + 6",D:"6x"},
+correctAnswer:"A"
+},
+{
+question:"Expand 2(x + 5).",
+options:{A:"2x + 10",B:"2x + 5",C:"x + 10",D:"10x"},
+correctAnswer:"A"
+},
+{
+question:"Expand 4(x + 3).",
+options:{A:"4x + 12",B:"4x + 3",C:"x + 12",D:"12x"},
+correctAnswer:"A"
+},
+{
+question:"Expand 5(x + 1).",
+options:{A:"5x + 5",B:"5x + 1",C:"x + 5",D:"5x"},
+correctAnswer:"A"
+}
+]
+}
+
+{
+groupId:"ALG-BASIC-003",
+topic:"Algebra",
+level:"Basic",
+variants:[
+{
+question:"Expand 3(x - 2).",
+options:{A:"3x - 6",B:"3x + 6",C:"x - 6",D:"6x"},
+correctAnswer:"A"
+},
+{
+question:"Expand 4(x - 3).",
+options:{A:"4x - 12",B:"4x + 12",C:"x - 12",D:"12x"},
+correctAnswer:"A"
+},
+{
+question:"Expand 2(x - 5).",
+options:{A:"2x - 10",B:"2x + 10",C:"x - 10",D:"10x"},
+correctAnswer:"A"
+},
+{
+question:"Expand 5(x - 1).",
+options:{A:"5x - 5",B:"5x + 5",C:"x - 5",D:"5x"},
+correctAnswer:"A"
+}
+]
+}
+
+{
+groupId:"ALG-BASIC-005",
+topic:"Algebra",
+level:"Basic",
+variants:[
+{
+question:"Factorise x² + 5x.",
+options:{A:"x(x+5)",B:"x²+5",C:"(x+5)²",D:"x+5"},
+correctAnswer:"A"
+},
+{
+question:"Factorise x² + 3x.",
+options:{A:"x(x+3)",B:"x²+3",C:"(x+3)²",D:"x+3"},
+correctAnswer:"A"
+},
+{
+question:"Factorise x² + 7x.",
+options:{A:"x(x+7)",B:"x²+7",C:"(x+7)²",D:"x+7"},
+correctAnswer:"A"
+},
+{
+question:"Factorise x² + 2x.",
+options:{A:"x(x+2)",B:"x²+2",C:"(x+2)²",D:"x+2"},
+correctAnswer:"A"
+}
+]
+}
+
+{
+groupId:"ALG-BASIC-006",
+topic:"Algebra",
+level:"Basic",
+variants:[
+{
+question:"Factorise x² + 5x + 6.",
+options:{A:"(x+2)(x+3)",B:"(x+1)(x+6)",C:"(x+5)(x+1)",D:"(x+6)(x+1)"},
+correctAnswer:"A"
+},
+{
+question:"Factorise x² + 6x + 8.",
+options:{A:"(x+2)(x+4)",B:"(x+1)(x+8)",C:"(x+6)(x+2)",D:"(x+8)(x+1)"},
+correctAnswer:"A"
+},
+{
+question:"Factorise x² + 7x + 10.",
+options:{A:"(x+5)(x+2)",B:"(x+1)(x+10)",C:"(x+7)(x+3)",D:"(x+10)(x+1)"},
+correctAnswer:"A"
+},
+{
+question:"Factorise x² + 4x + 3.",
+options:{A:"(x+1)(x+3)",B:"(x+2)(x+2)",C:"(x+4)(x+1)",D:"(x+3)(x+2)"},
+correctAnswer:"A"
+}
+]
+}
+
+
+
+
+/* GROUP 6 – Indices division */
+{
+groupId:"ALG-BASIC-006",
+topic:"Algebra",
+level:"Basic",
+variants:[
+{
+question:"Simplify x⁶ ÷ x².",
+options:{A:"x⁴",B:"x³",C:"x²",D:"x⁸"},
+correctAnswer:"A",
+explanation:"Subtract powers."
+},
+{
+question:"Simplify x⁵ ÷ x³.",
+options:{A:"x²",B:"x⁸",C:"x³",D:"x¹"},
+correctAnswer:"A",
+explanation:"5-3=2."
+},
+{
+question:"Simplify x⁷ ÷ x⁴.",
+options:{A:"x³",B:"x¹¹",C:"x⁴",D:"x²"},
+correctAnswer:"A",
+explanation:"Subtract indices."
+},
+{
+question:"Simplify x⁸ ÷ x⁶.",
+options:{A:"x²",B:"x¹⁴",C:"x⁶",D:"x³"},
+correctAnswer:"A",
+explanation:"8-6=2."
+}
+]
+},
+
+/* GROUP 7 – Powers of powers */
+{
+groupId:"ALG-BASIC-007",
+topic:"Algebra",
+level:"Basic",
+variants:[
+{
+question:"Simplify (x²)³.",
+options:{A:"x⁶",B:"x⁵",C:"x⁸",D:"x⁹"},
+correctAnswer:"A",
+explanation:"Multiply powers."
+},
+{
+question:"Simplify (x³)².",
+options:{A:"x⁶",B:"x⁵",C:"x⁹",D:"x⁴"},
+correctAnswer:"A",
+explanation:"3×2=6."
+},
+{
+question:"Simplify (x⁴)².",
+options:{A:"x⁸",B:"x⁶",C:"x¹⁶",D:"x⁴"},
+correctAnswer:"A",
+explanation:"Multiply exponents."
+},
+{
+question:"Simplify (x⁵)².",
+options:{A:"x¹⁰",B:"x⁷",C:"x²⁵",D:"x⁵"},
+correctAnswer:"A",
+explanation:"5×2=10."
+}
+]
+},
+
+
+{
+groupId:"ALG-BASIC-008",
+topic:"Algebra",
+level:"Basic",
+variants:[
+{
+question:"Simplify x⁶ ÷ x².",
+options:{A:"x⁴",B:"x⁸",C:"x²",D:"x³"},
+correctAnswer:"A",
+explanation:"When dividing powers with the same base, subtract the powers: 6 − 2 = 4."
+},
+{
+question:"Simplify x⁷ ÷ x³.",
+options:{A:"x⁴",B:"x¹⁰",C:"x³",D:"x²"},
+correctAnswer:"A",
+explanation:"Subtract the indices: 7 − 3 = 4."
+},
+{
+question:"Simplify x⁹ ÷ x⁵.",
+options:{A:"x⁴",B:"x¹⁴",C:"x⁵",D:"x³"},
+correctAnswer:"A",
+explanation:"Use the rule: x⁹ ÷ x⁵ = x⁹⁻⁵ = x⁴."
+},
+{
+question:"Simplify x⁸ ÷ x⁶.",
+options:{A:"x²",B:"x¹⁴",C:"x⁶",D:"x³"},
+correctAnswer:"A",
+explanation:"Subtract the indices: 8 − 6 = 2."
+}
+]
+}
+
+/* GROUP 9 – Expanded multi-step expressions (upgraded) */
+{
+groupId:"ALG-BASIC-009",
+topic:"Algebra",
+level:"Basic",
+variants:[
+{
+question:"Simplify 2x(x + 3) + x².",
+options:{A:"3x² + 6x",B:"2x² + 6x",C:"3x² + 3x",D:"2x² + 3x"},
+correctAnswer:"A",
+explanation:"Expand: 2x² + 6x + x² = 3x² + 6x."
+},
+{
+question:"Simplify 3x(x + 2) - x².",
+options:{A:"2x² + 6x",B:"3x² + 6x",C:"2x² + 2x",D:"3x² + 2x"},
+correctAnswer:"A",
+explanation:"Expand: 3x² + 6x - x² = 2x² + 6x."
+},
+{
+question:"Simplify 4x(x - 1) + 2x².",
+options:{A:"6x² - 4x",B:"4x² - 4x",C:"6x² - x",D:"2x² - 4x"},
+correctAnswer:"A",
+explanation:"Expand: 4x² - 4x + 2x² = 6x² - 4x."
+},
+{
+question:"Simplify 5x(x + 1) - 3x².",
+options:{A:"2x² + 5x",B:"5x² + 5x",C:"2x² + x",D:"5x² + x"},
+correctAnswer:"A",
+explanation:"Expand: 5x² + 5x - 3x² = 2x² + 5x."
+}
+]
+}
+
+
+
+/* GROUP 10 – Mixed multi-step algebra (upgraded) */
+{
+groupId:"ALG-BASIC-010",
+topic:"Algebra",
+level:"Basic",
+variants:[
+{
+question:"Simplify 2(x + 3) + x.",
+options:{A:"3x + 6",B:"2x + 3",C:"x + 6",D:"3x + 3"},
+correctAnswer:"A",
+explanation:"Expand: 2x + 6 + x = 3x + 6."
+},
+{
+question:"Simplify 3(x + 2) - x.",
+options:{A:"2x + 6",B:"3x + 2",C:"2x + 2",D:"3x - 2"},
+correctAnswer:"A",
+explanation:"Expand: 3x + 6 - x = 2x + 6."
+},
+{
+question:"Simplify 4(x + 1) + 2x.",
+options:{A:"6x + 4",B:"4x + 2",C:"2x + 4",D:"6x + 2"},
+correctAnswer:"A",
+explanation:"Expand: 4x + 4 + 2x = 6x + 4."
+},
+{
+question:"Simplify 5(x + 2) - 3x.",
+options:{A:"2x + 10",B:"5x + 2",C:"3x + 10",D:"2x + 2"},
+correctAnswer:"A",
+explanation:"Expand: 5x + 10 - 3x = 2x + 10."
+}
+]
+}
+
+
+
+
+
+
