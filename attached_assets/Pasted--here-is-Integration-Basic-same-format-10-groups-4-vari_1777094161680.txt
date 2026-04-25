@@ -1,0 +1,521 @@
+— here is Integration Basic, same format:
+
+10 groups × 4 variants
+with workedSolution included.
+
+const integrationBasicSet = [
+
+/* GROUP 1 — Basic power rule */
+{
+groupId:"INT-BASIC-001",
+topic:"Integration",
+level:"Basic",
+variants:[
+{
+question:"Integrate x².",
+options:{A:"x³/3 + C",B:"2x + C",C:"x³ + C",D:"x²/2 + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Use the rule ∫xⁿ dx = xⁿ⁺¹/(n+1) + C.",
+"Step 2: x² becomes x³/3.",
+"Final answer: x³/3 + C"
+]
+},
+{
+question:"Integrate x³.",
+options:{A:"x⁴/4 + C",B:"3x² + C",C:"x³/3 + C",D:"x⁴ + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Add 1 to the power: 3 + 1 = 4.",
+"Step 2: Divide by the new power.",
+"Final answer: x⁴/4 + C"
+]
+},
+{
+question:"Integrate x⁴.",
+options:{A:"x⁵/5 + C",B:"4x³ + C",C:"x⁴/4 + C",D:"x⁵ + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Add 1 to the power.",
+"Step 2: Divide by 5.",
+"Final answer: x⁵/5 + C"
+]
+},
+{
+question:"Integrate x.",
+options:{A:"x²/2 + C",B:"1 + C",C:"2x + C",D:"x² + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: x = x¹.",
+"Step 2: Add 1 to the power: x².",
+"Step 3: Divide by 2.",
+"Final answer: x²/2 + C"
+]
+}
+]
+},
+
+/* GROUP 2 — Coefficients */
+{
+groupId:"INT-BASIC-002",
+topic:"Integration",
+level:"Basic",
+variants:[
+{
+question:"Integrate 3x².",
+options:{A:"x³ + C",B:"6x + C",C:"3x³ + C",D:"x² + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: ∫3x² dx = 3 × x³/3.",
+"Step 2: Simplify.",
+"Final answer: x³ + C"
+]
+},
+{
+question:"Integrate 4x³.",
+options:{A:"x⁴ + C",B:"12x² + C",C:"4x⁴ + C",D:"x³ + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: ∫4x³ dx = 4 × x⁴/4.",
+"Step 2: Simplify.",
+"Final answer: x⁴ + C"
+]
+},
+{
+question:"Integrate 2x.",
+options:{A:"x² + C",B:"2 + C",C:"2x² + C",D:"x + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: ∫2x dx = 2 × x²/2.",
+"Step 2: Simplify.",
+"Final answer: x² + C"
+]
+},
+{
+question:"Integrate 5x⁴.",
+options:{A:"x⁵ + C",B:"20x³ + C",C:"5x⁵ + C",D:"x⁴ + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: ∫5x⁴ dx = 5 × x⁵/5.",
+"Step 2: Simplify.",
+"Final answer: x⁵ + C"
+]
+}
+]
+},
+
+/* GROUP 3 — Multiple terms */
+{
+groupId:"INT-BASIC-003",
+topic:"Integration",
+level:"Basic",
+variants:[
+{
+question:"Integrate 2x + 3.",
+options:{A:"x² + 3x + C",B:"2 + C",C:"2x² + 3 + C",D:"x² + 3 + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Integrate each term separately.",
+"Step 2: ∫2x dx = x².",
+"Step 3: ∫3 dx = 3x.",
+"Final answer: x² + 3x + C"
+]
+},
+{
+question:"Integrate 3x² + 2x.",
+options:{A:"x³ + x² + C",B:"6x + 2 + C",C:"3x³ + x² + C",D:"x³ + 2x² + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: ∫3x² dx = x³.",
+"Step 2: ∫2x dx = x².",
+"Final answer: x³ + x² + C"
+]
+},
+{
+question:"Integrate 4x³ + 5.",
+options:{A:"x⁴ + 5x + C",B:"12x² + C",C:"x⁴ + 5 + C",D:"4x⁴ + 5x + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: ∫4x³ dx = x⁴.",
+"Step 2: ∫5 dx = 5x.",
+"Final answer: x⁴ + 5x + C"
+]
+},
+{
+question:"Integrate 6x² + 4x.",
+options:{A:"2x³ + 2x² + C",B:"12x + 4 + C",C:"6x³ + 4x² + C",D:"2x³ + 4x² + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: ∫6x² dx = 2x³.",
+"Step 2: ∫4x dx = 2x².",
+"Final answer: 2x³ + 2x² + C"
+]
+}
+]
+},
+
+/* GROUP 4 — Constants */
+{
+groupId:"INT-BASIC-004",
+topic:"Integration",
+level:"Basic",
+variants:[
+{
+question:"Integrate 5.",
+options:{A:"5x + C",B:"5 + C",C:"x + C",D:"0 + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: The integral of a constant k is kx.",
+"Final answer: 5x + C"
+]
+},
+{
+question:"Integrate 7.",
+options:{A:"7x + C",B:"7 + C",C:"x⁷ + C",D:"0 + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: ∫7 dx = 7x.",
+"Final answer: 7x + C"
+]
+},
+{
+question:"Integrate -3.",
+options:{A:"-3x + C",B:"-3 + C",C:"3x + C",D:"0 + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: ∫-3 dx = -3x.",
+"Final answer: -3x + C"
+]
+},
+{
+question:"Integrate 10.",
+options:{A:"10x + C",B:"10 + C",C:"x¹⁰ + C",D:"0 + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: ∫10 dx = 10x.",
+"Final answer: 10x + C"
+]
+}
+]
+},
+
+/* GROUP 5 — Check by differentiating */
+{
+groupId:"INT-BASIC-005",
+topic:"Integration",
+level:"Basic",
+variants:[
+{
+question:"Which expression differentiates to 2x?",
+options:{A:"x² + C",B:"2x² + C",C:"2 + C",D:"x + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Differentiate x².",
+"d/dx(x²) = 2x.",
+"Final answer: x² + C"
+]
+},
+{
+question:"Which expression differentiates to 3x²?",
+options:{A:"x³ + C",B:"3x³ + C",C:"6x + C",D:"x² + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Differentiate x³.",
+"d/dx(x³) = 3x².",
+"Final answer: x³ + C"
+]
+},
+{
+question:"Which expression differentiates to 4x³?",
+options:{A:"x⁴ + C",B:"4x⁴ + C",C:"12x² + C",D:"x³ + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Differentiate x⁴.",
+"d/dx(x⁴) = 4x³.",
+"Final answer: x⁴ + C"
+]
+},
+{
+question:"Which expression differentiates to 5?",
+options:{A:"5x + C",B:"x⁵ + C",C:"5 + C",D:"0 + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Differentiate 5x.",
+"d/dx(5x) = 5.",
+"Final answer: 5x + C"
+]
+}
+]
+},
+
+/* GROUP 6 — Definite integrals */
+{
+groupId:"INT-BASIC-006",
+topic:"Integration",
+level:"Basic",
+variants:[
+{
+question:"Find ∫ from 0 to 2 of x dx.",
+options:{A:"2",B:"4",C:"1",D:"0"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Integrate x to get x²/2.",
+"Step 2: Substitute limits: (2²/2) - (0²/2).",
+"Step 3: 4/2 = 2.",
+"Final answer: 2"
+]
+},
+{
+question:"Find ∫ from 0 to 3 of x dx.",
+options:{A:"9/2",B:"3",C:"9",D:"6"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: ∫x dx = x²/2.",
+"Step 2: Substitute 3 and 0.",
+"3²/2 - 0 = 9/2.",
+"Final answer: 9/2"
+]
+},
+{
+question:"Find ∫ from 0 to 2 of 2x dx.",
+options:{A:"4",B:"2",C:"8",D:"1"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: ∫2x dx = x².",
+"Step 2: Substitute limits: 2² - 0².",
+"Final answer: 4"
+]
+},
+{
+question:"Find ∫ from 1 to 3 of 2x dx.",
+options:{A:"8",B:"6",C:"4",D:"9"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: ∫2x dx = x².",
+"Step 2: Substitute limits: 3² - 1².",
+"Step 3: 9 - 1 = 8.",
+"Final answer: 8"
+]
+}
+]
+},
+
+/* GROUP 7 — Area under curve */
+{
+groupId:"INT-BASIC-007",
+topic:"Integration",
+level:"Basic",
+variants:[
+{
+question:"Find the area under y = x from x = 0 to x = 4.",
+options:{A:"8",B:"4",C:"16",D:"2"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Area = ∫ from 0 to 4 of x dx.",
+"Step 2: ∫x dx = x²/2.",
+"Step 3: 4²/2 - 0 = 8.",
+"Final answer: 8"
+]
+},
+{
+question:"Find the area under y = 2x from x = 0 to x = 3.",
+options:{A:"9",B:"6",C:"3",D:"18"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Area = ∫ from 0 to 3 of 2x dx.",
+"Step 2: ∫2x dx = x².",
+"Step 3: 3² = 9.",
+"Final answer: 9"
+]
+},
+{
+question:"Find the area under y = x² from x = 0 to x = 3.",
+options:{A:"9",B:"6",C:"3",D:"27"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Area = ∫ from 0 to 3 of x² dx.",
+"Step 2: ∫x² dx = x³/3.",
+"Step 3: 3³/3 = 27/3 = 9.",
+"Final answer: 9"
+]
+},
+{
+question:"Find the area under y = 3x² from x = 0 to x = 2.",
+options:{A:"8",B:"6",C:"12",D:"4"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Area = ∫ from 0 to 2 of 3x² dx.",
+"Step 2: ∫3x² dx = x³.",
+"Step 3: 2³ = 8.",
+"Final answer: 8"
+]
+}
+]
+},
+
+/* GROUP 8 — Find constant of integration using a point */
+{
+groupId:"INT-BASIC-008",
+topic:"Integration",
+level:"Basic",
+variants:[
+{
+question:"If dy/dx = 2x and y = 5 when x = 2, find y.",
+options:{A:"y = x² + 1",B:"y = x² + 5",C:"y = 2x² + 1",D:"y = x² - 1"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Integrate dy/dx = 2x.",
+"y = x² + C.",
+"Step 2: Use y = 5 when x = 2.",
+"5 = 2² + C = 4 + C.",
+"C = 1.",
+"Final answer: y = x² + 1"
+]
+},
+{
+question:"If dy/dx = 3x² and y = 10 when x = 2, find y.",
+options:{A:"y = x³ + 2",B:"y = x³ + 10",C:"y = 3x³ + 2",D:"y = x³ - 2"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Integrate 3x² to get y = x³ + C.",
+"Step 2: Substitute x = 2, y = 10.",
+"10 = 8 + C.",
+"C = 2.",
+"Final answer: y = x³ + 2"
+]
+},
+{
+question:"If dy/dx = 4x³ and y = 5 when x = 1, find y.",
+options:{A:"y = x⁴ + 4",B:"y = x⁴ + 5",C:"y = 4x⁴ + 4",D:"y = x⁴ - 4"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Integrate 4x³ to get y = x⁴ + C.",
+"Step 2: Use x = 1, y = 5.",
+"5 = 1 + C.",
+"C = 4.",
+"Final answer: y = x⁴ + 4"
+]
+},
+{
+question:"If dy/dx = 2x + 3 and y = 6 when x = 1, find y.",
+options:{A:"y = x² + 3x + 2",B:"y = x² + 3x + 6",C:"y = 2x² + 3x + 2",D:"y = x² + 2"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Integrate 2x + 3.",
+"y = x² + 3x + C.",
+"Step 2: Substitute x = 1, y = 6.",
+"6 = 1 + 3 + C.",
+"C = 2.",
+"Final answer: y = x² + 3x + 2"
+]
+}
+]
+},
+
+/* GROUP 9 — Velocity and displacement */
+{
+groupId:"INT-BASIC-009",
+topic:"Integration",
+level:"Basic",
+variants:[
+{
+question:"If velocity v = 2t, find displacement s.",
+options:{A:"s = t² + C",B:"s = 2 + C",C:"s = 2t² + C",D:"s = t + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Displacement is the integral of velocity.",
+"Step 2: ∫2t dt = t².",
+"Final answer: s = t² + C"
+]
+},
+{
+question:"If velocity v = 3t², find displacement s.",
+options:{A:"s = t³ + C",B:"s = 6t + C",C:"s = 3t³ + C",D:"s = t² + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Integrate 3t².",
+"Step 2: ∫3t² dt = t³.",
+"Final answer: s = t³ + C"
+]
+},
+{
+question:"If acceleration a = 4t, find velocity v.",
+options:{A:"v = 2t² + C",B:"v = 4 + C",C:"v = 4t² + C",D:"v = t² + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Velocity is the integral of acceleration.",
+"Step 2: ∫4t dt = 2t².",
+"Final answer: v = 2t² + C"
+]
+},
+{
+question:"If acceleration a = 6t², find velocity v.",
+options:{A:"v = 2t³ + C",B:"v = 12t + C",C:"v = 6t³ + C",D:"v = t³ + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Integrate 6t².",
+"Step 2: 6 × t³/3 = 2t³.",
+"Final answer: v = 2t³ + C"
+]
+}
+]
+},
+
+/* GROUP 10 — Mixed integration exam bridge */
+{
+groupId:"INT-BASIC-010",
+topic:"Integration",
+level:"Basic",
+variants:[
+{
+question:"Integrate 6x² + 2x + 1.",
+options:{A:"2x³ + x² + x + C",B:"12x + 2 + C",C:"6x³ + x² + x + C",D:"2x³ + 2x² + x + C"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Integrate each term.",
+"∫6x² dx = 2x³.",
+"∫2x dx = x².",
+"∫1 dx = x.",
+"Final answer: 2x³ + x² + x + C"
+]
+},
+{
+question:"Find ∫ from 0 to 1 of 3x² + 2x.",
+options:{A:"2",B:"1",C:"3",D:"4"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Integrate: ∫(3x² + 2x) dx = x³ + x².",
+"Step 2: Substitute limits 0 to 1.",
+"(1³ + 1²) - 0 = 2.",
+"Final answer: 2"
+]
+},
+{
+question:"If dy/dx = 6x + 4 and y = 10 when x = 1, find C after integration.",
+options:{A:"3",B:"4",C:"5",D:"6"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Integrate 6x + 4.",
+"y = 3x² + 4x + C.",
+"Step 2: Substitute x = 1, y = 10.",
+"10 = 3 + 4 + C.",
+"C = 3.",
+"Final answer: 3"
+]
+},
+{
+question:"Find the area under y = 2x + 1 from x = 0 to x = 2.",
+options:{A:"6",B:"4",C:"5",D:"8"},
+correctAnswer:"A",
+workedSolution:[
+"Step 1: Integrate 2x + 1.",
+"∫(2x + 1) dx = x² + x.",
+"Step 2: Substitute 2 and 0.",
+"(4 + 2) - 0 = 6.",
+"Final answer: 6"
+]
+}
+]
+}
+
+];
