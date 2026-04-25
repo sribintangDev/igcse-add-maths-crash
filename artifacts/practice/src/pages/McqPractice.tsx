@@ -108,6 +108,17 @@ export default function McqPractice({ topicId, level }: McqPracticeProps) {
   const [phase, setPhase] = useState<Phase>(initialPhase);
   const [solutionOpen, setSolutionOpen] = useState(false);
 
+  const autoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearAutoTimer = useCallback(() => {
+    if (autoTimerRef.current !== null) {
+      clearTimeout(autoTimerRef.current);
+      autoTimerRef.current = null;
+    }
+  }, []);
+
+  useEffect(() => () => clearAutoTimer(), [clearAutoTimer]);
+
   const currentGroupId = sessionGroupIds[groupIndex] ?? "";
 
   const variants = useMemo(
@@ -152,10 +163,25 @@ export default function McqPractice({ topicId, level }: McqPracticeProps) {
     if (isCorrect) {
       const cappedTry = Math.min(tryNumber, 3) as 1 | 2 | 3;
       recordMcqTryNumber(currentQuestion.id, cappedTry);
+
       if (variantIndex === 1) {
         setPhase("decision");
       } else {
         setPhase("correct");
+        const nextVariant = variantIndex + 1;
+        clearAutoTimer();
+        autoTimerRef.current = setTimeout(() => {
+          autoTimerRef.current = null;
+          if (nextVariant < variants.length) {
+            setVariantIndex(nextVariant);
+            setTryNumber(1);
+            setSolutionOpen(false);
+            setPhase("idle");
+          } else {
+            completeVariantGroup(currentGroupId);
+            advanceGroup();
+          }
+        }, 1500);
       }
     } else {
       setTryNumber((t) => Math.min(t + 1, 3));
@@ -337,7 +363,7 @@ export default function McqPractice({ topicId, level }: McqPracticeProps) {
                   {phase === "wrong"
                     ? "Not quite — options reshuffled. Try again!"
                     : phase === "correct"
-                    ? "Correct! Here's a follow-up question to confirm."
+                    ? "Correct! Loading next question…"
                     : "Correct! How confident are you?"}
                 </div>
                 {phase === "wrong" && currentQuestion.options && currentQuestion.correctAnswer && (
@@ -413,14 +439,12 @@ export default function McqPractice({ topicId, level }: McqPracticeProps) {
               </Button>
             )}
             {phase === "correct" && (
-              <Button
-                size="lg"
-                className="h-12 flex-1 text-base"
-                onClick={handleNext}
-                data-testid="button-next-question"
+              <div
+                className="flex h-12 flex-1 items-center justify-center rounded-lg bg-success/10 text-sm font-medium text-success"
+                data-testid="auto-advance-indicator"
               >
-                Next question →
-              </Button>
+                Moving to next question…
+              </div>
             )}
             {phase === "decision" && (
               <>
