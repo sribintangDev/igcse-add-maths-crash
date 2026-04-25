@@ -1246,7 +1246,7 @@ export const QUESTIONS: Question[] = [
     ],
   },
 
-  /* ---------- MCQ PRACTICE (11) ---------- */
+  /* ---------- MCQ PRACTICE — miscellaneous starters (no variantGroup → reserve pool) ---------- */
   {
     id: "MCQ-ALG-001",
     topic: "Algebra",
@@ -1254,7 +1254,6 @@ export const QUESTIONS: Question[] = [
     questionType: "multiple-choice",
     difficulty: "Moderate",
     level: "Basic",
-    variantGroup: "ALG-BASIC-G1",
     question: "Expand $(2x + 3)(x - 4)$.",
     options: {
       A: "$2x^2 - 8x + 3x - 12$",
@@ -1273,7 +1272,6 @@ export const QUESTIONS: Question[] = [
     questionType: "multiple-choice",
     difficulty: "Moderate",
     level: "Basic",
-    variantGroup: "ALG-BASIC-G1",
     question: "Simplify $(3x^2y)(2xy^2)$.",
     options: {
       A: "$6x^3y^3$",
@@ -1917,7 +1915,6 @@ export const QUESTIONS: Question[] = [
     questionType: "multiple-choice",
     difficulty: "Moderate",
     level: "Basic",
-    variantGroup: "QUAD-BASIC-G1",
     question: "Solve $x^2 - 2x - 3 = 0$.",
     options: {
       A: "$x = 3$ or $x = -1$",
@@ -1936,7 +1933,6 @@ export const QUESTIONS: Question[] = [
     questionType: "multiple-choice",
     difficulty: "Moderate",
     level: "Basic",
-    variantGroup: "QUAD-BASIC-G1",
     question: "Solve $3x^2 - 5x - 2 = 0$.",
     options: {
       A: "$x = 2$ or $x = -\\tfrac{1}{3}$",
@@ -1955,7 +1951,6 @@ export const QUESTIONS: Question[] = [
     questionType: "multiple-choice",
     difficulty: "Moderate",
     level: "Basic",
-    variantGroup: "DIFF-BASIC-G1",
     question: "Differentiate $6x^3 - 4x^2 + x$.",
     options: {
       A: "$18x^2 - 8x + 1$",
@@ -1978,7 +1973,6 @@ export const QUESTIONS: Question[] = [
     questionType: "multiple-choice",
     difficulty: "Moderate",
     level: "Basic",
-    variantGroup: "DIFF-BASIC-G1",
     question: "Find the gradient of $y = x^2 + 3x$ at $x = 2$.",
     options: {
       A: "$5$",
@@ -2000,7 +1994,6 @@ export const QUESTIONS: Question[] = [
     questionType: "multiple-choice",
     difficulty: "Moderate",
     level: "Basic",
-    variantGroup: "TRIG-BASIC-G1",
     question: "Solve $\\sin x = 0.5$ for $0° \\leq x \\leq 360°$.",
     options: {
       A: "$30°, 150°$",
@@ -2023,7 +2016,6 @@ export const QUESTIONS: Question[] = [
     questionType: "multiple-choice",
     difficulty: "Moderate",
     level: "Basic",
-    variantGroup: "TRIG-BASIC-G1",
     question: "Solve $\\cos x = 0.5$ for $0° \\leq x \\leq 360°$.",
     options: {
       A: "$60°, 120°$",
@@ -2046,7 +2038,6 @@ export const QUESTIONS: Question[] = [
     questionType: "multiple-choice",
     difficulty: "Moderate",
     level: "Basic",
-    variantGroup: "TRIG-BASIC-G1",
     question: "Solve $\\tan x = 1$ for $0° \\leq x \\leq 360°$.",
     options: {
       A: "$45°, 225°$",
