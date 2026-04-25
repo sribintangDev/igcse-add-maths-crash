@@ -2,10 +2,12 @@
 # Auto-sync to GitHub after every Replit commit.
 # Uses the Replit GitHub integration via the Git Data API — no personal token needed.
 # Runs synchronously so any failure is immediately visible in the commit output.
+# Note: post-commit hook exit code does not block the commit (git ignores it),
+# but a non-zero exit surfaces the failure in process status and CI tools.
+
+set -o pipefail
 
 WORKSPACE_ROOT="$(git rev-parse --show-toplevel)"
 
 cd "$WORKSPACE_ROOT"
 pnpm --filter @workspace/scripts run github-sync 2>&1 | tee -a /tmp/github-sync.log
-
-exit 0
