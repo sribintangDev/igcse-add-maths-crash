@@ -107,16 +107,23 @@ export default function IntermediatePractice({ topicId, level }: IntermediatePra
     [topicId, level],
   );
 
-  // Pick the first set for each variantGroup that is not yet complete.
-  // This ensures variants within the same group don't all appear in one session.
+  // Pick one random set per variantGroup that is not yet complete.
+  // Grouping first ensures a random variant (not always the first) is selected each session.
   const sessionSets = useRef<MultiPartSet[]>(
     (() => {
-      const seenGroups = new Set<string>();
-      return allSets.filter((s) => {
-        if (seenGroups.has(s.variantGroup)) return false;
-        seenGroups.add(s.variantGroup);
-        return !isGroupComplete(state, s.variantGroup);
-      });
+      const groupMap = new Map<string, MultiPartSet[]>();
+      for (const s of allSets) {
+        const arr = groupMap.get(s.variantGroup) ?? [];
+        arr.push(s);
+        groupMap.set(s.variantGroup, arr);
+      }
+      const result: MultiPartSet[] = [];
+      for (const [group, sets] of groupMap) {
+        if (isGroupComplete(state, group)) continue;
+        const idx = Math.floor(Math.random() * sets.length);
+        result.push(sets[idx]);
+      }
+      return result;
     })(),
   ).current;
 
