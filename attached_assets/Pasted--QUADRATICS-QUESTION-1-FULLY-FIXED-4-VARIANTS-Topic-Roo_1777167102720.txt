@@ -1,0 +1,848 @@
+📘 QUADRATICS — QUESTION 1 (FULLY FIXED, 4 VARIANTS)
+
+Topic: Roots → Equation → Value → Axis
+
+{
+groupId:"MULTI-QUAD-INT-001",
+topic:"Quadratics",
+level:"Intermediate",
+diagram:"Parabola crossing x-axis at given roots",
+variants:[
+
+/* ================= VARIANT 1 ================= */
+{
+context:"A quadratic has roots x = -2 and x = 3.",
+parts:[
+
+{
+part:"A",
+question:"Which is the correct factorised form?",
+options:{
+A:"(x+2)(x-3)",
+B:"(x-2)(x+3)",
+C:"(x+2)(x+3)",
+D:"(x-2)(x-3)"
+},
+correctAnswer:"A",
+workedSolution:[
+"Roots -2 and 3 → factors (x+2)(x-3)."
+]
+},
+
+{
+part:"B",
+question:"Expand the expression.",
+options:{
+A:"x² - x - 6",
+B:"x² + x - 6",
+C:"x² - 5x + 6",
+D:"x² + 5x + 6"
+},
+correctAnswer:"A",
+workedSolution:[
+"Expand → x² - 3x + 2x - 6 = x² - x - 6."
+]
+},
+
+{
+part:"C",
+question:"Find y when x = 1.",
+options:{A:"-6",B:"-4",C:"0",D:"2"},
+correctAnswer:"A",
+workedSolution:[
+"1² - 1 - 6 = -6."
+]
+},
+
+{
+part:"D",
+question:"Find the axis of symmetry.",
+options:{
+A:"x = 1/2",
+B:"x = 1",
+C:"x = -1/2",
+D:"x = 2"
+},
+correctAnswer:"A",
+workedSolution:[
+"Axis = midpoint of roots = (-2 + 3)/2 = 1/2."
+]
+}
+
+]
+},
+
+/* ================= VARIANT 2 ================= */
+{
+context:"A quadratic has roots x = -1 and x = 4.",
+parts:[
+
+{
+part:"A",
+question:"Factorised form?",
+options:{
+A:"(x+1)(x-4)",
+B:"(x-1)(x+4)",
+C:"(x+1)(x+4)",
+D:"(x-1)(x-4)"
+},
+correctAnswer:"A"
+},
+
+{
+part:"B",
+question:"Expanded form?",
+options:{
+A:"x² + 3x - 4",
+B:"x² - 3x - 4",
+C:"x² + 5x + 4",
+D:"x² - 5x + 4"
+},
+correctAnswer:"A"
+},
+
+{
+part:"C",
+question:"Find y when x = 2.",
+options:{A:"6",B:"4",C:"0",D:"2"},
+correctAnswer:"A",
+workedSolution:[
+"2² + 3(2) - 4 = 4 + 6 - 4 = 6."
+]
+},
+
+{
+part:"D",
+question:"Axis of symmetry?",
+options:{
+A:"x = 3/2",
+B:"x = 2",
+C:"x = 1",
+D:"x = -1"
+},
+correctAnswer:"A",
+workedSolution:[
+"(-1 + 4)/2 = 3/2."
+]
+}
+
+]
+},
+
+/* ================= VARIANT 3 ================= */
+{
+context:"A quadratic has roots x = 2 and x = -5.",
+parts:[
+
+{
+part:"A",
+question:"Factorised form?",
+options:{
+A:"(x-2)(x+5)",
+B:"(x+2)(x-5)",
+C:"(x-2)(x-5)",
+D:"(x+2)(x+5)"
+},
+correctAnswer:"A"
+},
+
+{
+part:"B",
+question:"Expanded form?",
+options:{
+A:"x² + 3x - 10",
+B:"x² - 3x - 10",
+C:"x² + 7x + 10",
+D:"x² - 7x + 10"
+},
+correctAnswer:"A"
+},
+
+{
+part:"C",
+question:"Find y when x = 1.",
+options:{A:"-6",B:"-4",C:"0",D:"2"},
+correctAnswer:"A",
+workedSolution:[
+"1 + 3 - 10 = -6."
+]
+},
+
+{
+part:"D",
+question:"Axis of symmetry?",
+options:{
+A:"x = -3/2",
+B:"x = 3/2",
+C:"x = -1",
+D:"x = 2"
+},
+correctAnswer:"A",
+workedSolution:[
+"(2 + (-5))/2 = -3/2."
+]
+}
+
+]
+},
+
+/* ================= VARIANT 4 ================= */
+{
+context:"A quadratic has roots x = 1 and x = -3.",
+parts:[
+
+{
+part:"A",
+question:"Factorised form?",
+options:{
+A:"(x-1)(x+3)",
+B:"(x+1)(x-3)",
+C:"(x-1)(x-3)",
+D:"(x+1)(x+3)"
+},
+correctAnswer:"A"
+},
+
+{
+part:"B",
+question:"Expanded form?",
+options:{
+A:"x² + 2x - 3",
+B:"x² - 2x - 3",
+C:"x² + 4x + 3",
+D:"x² - 4x + 3"
+},
+correctAnswer:"A"
+},
+
+{
+part:"C",
+question:"Find y when x = 2.",
+options:{A:"5",B:"3",C:"1",D:"-1"},
+correctAnswer:"A",
+workedSolution:[
+"4 + 4 - 3 = 5."
+]
+},
+
+{
+part:"D",
+question:"Axis of symmetry?",
+options:{
+A:"x = -1",
+B:"x = 1",
+C:"x = 0",
+D:"x = 2"
+},
+correctAnswer:"A",
+workedSolution:[
+"(1 + (-3))/2 = -1."
+]
+}
+
+]
+}
+
+]
+}
+
+{
+groupId:"MULTI-QUAD-INT-001",
+topic:"Quadratics",
+level:"Intermediate",
+diagram:"Parabola crossing x-axis at given roots",
+variants:[
+
+/* ================= VARIANT 1 ================= */
+{
+context:"A quadratic has roots x = -2 and x = 3.",
+parts:[
+
+{
+part:"A",
+question:"Which is the correct factorised form?",
+options:{
+A:"(x+2)(x-3)",
+B:"(x-2)(x+3)",
+C:"(x+2)(x+3)",
+D:"(x-2)(x-3)"
+},
+correctAnswer:"A",
+workedSolution:[
+"Roots -2 and 3 → factors (x+2)(x-3)."
+]
+},
+
+{
+part:"B",
+question:"Expand the expression.",
+options:{
+A:"x² - x - 6",
+B:"x² + x - 6",
+C:"x² - 5x + 6",
+D:"x² + 5x + 6"
+},
+correctAnswer:"A",
+workedSolution:[
+"Expand → x² - 3x + 2x - 6 = x² - x - 6."
+]
+},
+
+{
+part:"C",
+question:"Find y when x = 1.",
+options:{A:"-6",B:"-4",C:"0",D:"2"},
+correctAnswer:"A",
+workedSolution:[
+"1² - 1 - 6 = -6."
+]
+},
+
+{
+part:"D",
+question:"Find the axis of symmetry.",
+options:{
+A:"x = 1/2",
+B:"x = 1",
+C:"x = -1/2",
+D:"x = 2"
+},
+correctAnswer:"A",
+workedSolution:[
+"Axis = midpoint of roots = (-2 + 3)/2 = 1/2."
+]
+}
+
+]
+},
+
+/* ================= VARIANT 2 ================= */
+{
+context:"A quadratic has roots x = -1 and x = 4.",
+parts:[
+
+{
+part:"A",
+question:"Factorised form?",
+options:{
+A:"(x+1)(x-4)",
+B:"(x-1)(x+4)",
+C:"(x+1)(x+4)",
+D:"(x-1)(x-4)"
+},
+correctAnswer:"A"
+},
+
+{
+part:"B",
+question:"Expanded form?",
+options:{
+A:"x² + 3x - 4",
+B:"x² - 3x - 4",
+C:"x² + 5x + 4",
+D:"x² - 5x + 4"
+},
+correctAnswer:"A"
+},
+
+{
+part:"C",
+question:"Find y when x = 2.",
+options:{A:"6",B:"4",C:"0",D:"2"},
+correctAnswer:"A",
+workedSolution:[
+"2² + 3(2) - 4 = 4 + 6 - 4 = 6."
+]
+},
+
+{
+part:"D",
+question:"Axis of symmetry?",
+options:{
+A:"x = 3/2",
+B:"x = 2",
+C:"x = 1",
+D:"x = -1"
+},
+correctAnswer:"A",
+workedSolution:[
+"(-1 + 4)/2 = 3/2."
+]
+}
+
+]
+},
+
+/* ================= VARIANT 3 ================= */
+{
+context:"A quadratic has roots x = 2 and x = -5.",
+parts:[
+
+{
+part:"A",
+question:"Factorised form?",
+options:{
+A:"(x-2)(x+5)",
+B:"(x+2)(x-5)",
+C:"(x-2)(x-5)",
+D:"(x+2)(x+5)"
+},
+correctAnswer:"A"
+},
+
+{
+part:"B",
+question:"Expanded form?",
+options:{
+A:"x² + 3x - 10",
+B:"x² - 3x - 10",
+C:"x² + 7x + 10",
+D:"x² - 7x + 10"
+},
+correctAnswer:"A"
+},
+
+{
+part:"C",
+question:"Find y when x = 1.",
+options:{A:"-6",B:"-4",C:"0",D:"2"},
+correctAnswer:"A",
+workedSolution:[
+"1 + 3 - 10 = -6."
+]
+},
+
+{
+part:"D",
+question:"Axis of symmetry?",
+options:{
+A:"x = -3/2",
+B:"x = 3/2",
+C:"x = -1",
+D:"x = 2"
+},
+correctAnswer:"A",
+workedSolution:[
+"(2 + (-5))/2 = -3/2."
+]
+}
+
+]
+},
+
+/* ================= VARIANT 4 ================= */
+{
+context:"A quadratic has roots x = 1 and x = -3.",
+parts:[
+
+{
+part:"A",
+question:"Factorised form?",
+options:{
+A:"(x-1)(x+3)",
+B:"(x+1)(x-3)",
+C:"(x-1)(x-3)",
+D:"(x+1)(x+3)"
+},
+correctAnswer:"A"
+},
+
+{
+part:"B",
+question:"Expanded form?",
+options:{
+A:"x² + 2x - 3",
+B:"x² - 2x - 3",
+C:"x² + 4x + 3",
+D:"x² - 4x + 3"
+},
+correctAnswer:"A"
+},
+
+{
+part:"C",
+question:"Find y when x = 2.",
+options:{A:"5",B:"3",C:"1",D:"-1"},
+correctAnswer:"A",
+workedSolution:[
+"4 + 4 - 3 = 5."
+]
+},
+
+{
+part:"D",
+question:"Axis of symmetry?",
+options:{
+A:"x = -1",
+B:"x = 1",
+C:"x = 0",
+D:"x = 2"
+},
+correctAnswer:"A",
+workedSolution:[
+"(1 + (-3))/2 = -1."
+]
+}
+
+]
+}
+
+]
+}
+
+
+
+
+
+{
+groupId:"MULTI-QUAD-INT-002",
+topic:"Quadratics",
+level:"Intermediate",
+variants:[
+
+/* Variant 1 */
+{
+context:"y = (x - 2)² - 3",
+parts:[
+{
+part:"A",
+question:"Vertex?",
+options:{A:"(2,-3)",B:"(-2,-3)",C:"(2,3)",D:"(-2,3)"},
+correctAnswer:"A",
+workedSolution:["Vertex form → (h,k)"]
+},
+{
+part:"B",
+question:"Expand.",
+options:{A:"x² - 4x + 1",B:"x² + 4x + 1",C:"x² - 2x - 3",D:"x² + 2x - 3"},
+correctAnswer:"A",
+workedSolution:["(x-2)² = x²-4x+4 → -3 = +1"]
+},
+{
+part:"C",
+question:"Solve y=0.",
+options:{A:"2±√3",B:"2±1",C:"±√3",D:"1,3"},
+correctAnswer:"A",
+workedSolution:["Quadratic formula"]
+}
+]
+},
+
+/* Variant 2 */
+{
+context:"y = (x + 1)² - 4",
+parts:[
+{
+part:"A",
+question:"Vertex?",
+options:{A:"(-1,-4)",B:"(1,-4)",C:"(-1,4)",D:"(1,4)"},
+correctAnswer:"A",
+workedSolution:["(x+1) = (x - (-1))"]
+},
+{
+part:"B",
+question:"Expand.",
+options:{A:"x² + 2x - 3",B:"x² - 2x - 3",C:"x² + x - 4",D:"x² + 2x + 4"},
+correctAnswer:"A",
+workedSolution:["Expand properly"]
+},
+{
+part:"C",
+question:"Solve y=0.",
+options:{A:"-1±2",B:"1±2",C:"±2",D:"-2,2"},
+correctAnswer:"A",
+workedSolution:["Factorised form"]
+}
+]
+},
+
+/* Variant 3 */
+{
+context:"y = (x - 3)² + 2",
+parts:[
+{
+part:"A",
+question:"Vertex?",
+options:{A:"(3,2)",B:"(-3,2)",C:"(3,-2)",D:"(-3,-2)"},
+correctAnswer:"A"
+},
+{
+part:"B",
+question:"Expand.",
+options:{A:"x² - 6x + 11",B:"x² + 6x + 11",C:"x² - 3x + 2",D:"x² - 6x + 2"},
+correctAnswer:"A"
+},
+{
+part:"C",
+question:"Number of real roots?",
+options:{A:"0",B:"1",C:"2",D:"Infinite"},
+correctAnswer:"A",
+workedSolution:["Always positive → no roots"]
+}
+]
+},
+
+/* Variant 4 */
+{
+context:"y = (x + 2)² + 1",
+parts:[
+{
+part:"A",
+question:"Vertex?",
+options:{A:"(-2,1)",B:"(2,1)",C:"(-2,-1)",D:"(2,-1)"},
+correctAnswer:"A"
+},
+{
+part:"B",
+question:"Expand.",
+options:{A:"x² + 4x + 5",B:"x² - 4x + 5",C:"x² + 2x + 1",D:"x² + 4x + 1"},
+correctAnswer:"A"
+},
+{
+part:"C",
+question:"Does graph cross x-axis?",
+options:{A:"No",B:"Yes",C:"Touches",D:"Depends"},
+correctAnswer:"A",
+workedSolution:["Minimum > 0"]
+}
+]
+}
+
+]
+}
+
+
+
+{
+groupId:"MULTI-QUAD-INT-003",
+topic:"Quadratics",
+level:"Intermediate",
+diagram:"Parabola relative to x-axis",
+variants:[
+
+/* ================= VARIANT 1 ================= */
+{
+context:"Consider the quadratic x² + 4x + 5 = 0.",
+parts:[
+
+{
+part:"A",
+question:"Find the discriminant.",
+options:{A:"-4",B:"4",C:"0",D:"16"},
+correctAnswer:"A",
+workedSolution:[
+"b² - 4ac = 16 - 20 = -4."
+]
+},
+
+{
+part:"B",
+question:"Nature of roots?",
+options:{
+A:"No real roots",
+B:"Equal roots",
+C:"Two distinct real roots",
+D:"One root"
+},
+correctAnswer:"A"
+},
+
+{
+part:"C",
+question:"How does the graph relate to the x-axis?",
+options:{
+A:"Does not cross",
+B:"Touches once",
+C:"Crosses twice",
+D:"Parallel to axis"
+},
+correctAnswer:"A",
+workedSolution:[
+"No real roots → no intersection."
+]
+},
+
+{
+part:"D",
+question:"Minimum value of y?",
+options:{A:"1",B:"0",C:"-1",D:"-4"},
+correctAnswer:"A",
+workedSolution:[
+"Vertex x = -b/2a = -2.",
+"y = (-2)² + 4(-2) + 5 = 4 - 8 + 5 = 1."
+]
+}
+
+]
+},
+
+/* ================= VARIANT 2 ================= */
+{
+context:"Consider x² + 6x + 9 = 0.",
+parts:[
+
+{
+part:"A",
+question:"Discriminant?",
+options:{A:"0",B:"36",C:"9",D:"-9"},
+correctAnswer:"A",
+workedSolution:[
+"36 - 36 = 0."
+]
+},
+
+{
+part:"B",
+question:"Nature of roots?",
+options:{
+A:"Equal roots",
+B:"No real roots",
+C:"Two distinct roots",
+D:"One negative root"
+},
+correctAnswer:"A"
+},
+
+{
+part:"C",
+question:"Graph behaviour?",
+options:{
+A:"Touches x-axis once",
+B:"Does not cross",
+C:"Crosses twice",
+D:"Parallel"
+},
+correctAnswer:"A"
+},
+
+{
+part:"D",
+question:"Value of the repeated root?",
+options:{A:"-3",B:"3",C:"0",D:"6"},
+correctAnswer:"A",
+workedSolution:[
+"(x+3)² = 0 → x = -3."
+]
+}
+
+]
+},
+
+/* ================= VARIANT 3 ================= */
+{
+context:"Consider x² + 5x + 6 = 0.",
+parts:[
+
+{
+part:"A",
+question:"Discriminant?",
+options:{A:"1",B:"25",C:"0",D:"36"},
+correctAnswer:"A",
+workedSolution:[
+"25 - 24 = 1."
+]
+},
+
+{
+part:"B",
+question:"Nature of roots?",
+options:{
+A:"Two distinct real roots",
+B:"Equal roots",
+C:"No real roots",
+D:"Infinite solutions"
+},
+correctAnswer:"A"
+},
+
+{
+part:"C",
+question:"Find the roots.",
+options:{
+A:"-2, -3",
+B:"2, 3",
+C:"-1, -6",
+D:"1, 6"
+},
+correctAnswer:"A",
+workedSolution:[
+"(x+2)(x+3)=0."
+]
+},
+
+{
+part:"D",
+question:"Axis of symmetry?",
+options:{
+A:"x = -5/2",
+B:"x = 5/2",
+C:"x = -2",
+D:"x = -3"
+},
+correctAnswer:"A",
+workedSolution:[
+"Axis = (-2 + -3)/2 = -5/2."
+]
+}
+
+]
+},
+
+/* ================= VARIANT 4 ================= */
+{
+context:"Consider 2x² - 3x + 1 = 0.",
+parts:[
+
+{
+part:"A",
+question:"Discriminant?",
+options:{A:"1",B:"9",C:"25",D:"-1"},
+correctAnswer:"A",
+workedSolution:[
+"(-3)² - 4(2)(1) = 9 - 8 = 1."
+]
+},
+
+{
+part:"B",
+question:"Nature of roots?",
+options:{
+A:"Two distinct real roots",
+B:"Equal roots",
+C:"No real roots",
+D:"Infinite solutions"
+},
+correctAnswer:"A"
+},
+
+{
+part:"C",
+question:"Find the roots.",
+options:{
+A:"1, 1/2",
+B:"-1, -1/2",
+C:"1, -1/2",
+D:"2, 1"
+},
+correctAnswer:"A",
+workedSolution:[
+"(2x-1)(x-1)=0 → x=1/2,1."
+]
+},
+
+{
+part:"D",
+question:"Sum of roots?",
+options:{A:"3/2",B:"-3/2",C:"1",D:"-1"},
+correctAnswer:"A",
+workedSolution:[
+"Sum = (1 + 1/2) = 3/2."
+]
+}
+
+]
+}
+
+]
+}
+
