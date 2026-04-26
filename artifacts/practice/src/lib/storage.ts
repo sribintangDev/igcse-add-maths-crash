@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import type { Level, SectionId, TopicId } from "@/data/questions";
-import { variantGroupsForTopicLevel } from "@/data/questions";
+import { variantGroupsForTopicLevel, multiPartSetsForTopicLevel } from "@/data/questions";
 
 const STORAGE_KEY = "igcse-add-maths-practice/v1";
 
@@ -258,7 +258,12 @@ export function isLevelComplete(
   topicId: TopicId,
   level: Level,
 ): boolean {
-  const groupIds = variantGroupsForTopicLevel(topicId, level);
+  const groupIds = [
+    ...new Set([
+      ...variantGroupsForTopicLevel(topicId, level),
+      ...multiPartSetsForTopicLevel(topicId, level).map((s) => s.variantGroup),
+    ]),
+  ];
   if (groupIds.length === 0) return false;
   return groupIds.every((id) => isGroupComplete(state, id));
 }

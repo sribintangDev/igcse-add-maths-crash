@@ -17,6 +17,7 @@ import {
   type Level,
   type TopicId,
   variantGroupsForTopicLevel,
+  multiPartSetsForTopicLevel,
 } from "@/data/questions";
 import { groupProgress, type ProgressState } from "@/lib/storage";
 import { Card } from "@/components/ui/card";
@@ -46,7 +47,12 @@ export function TopicCard({ topicId, state }: TopicCardProps) {
   let totalDone = 0;
   let totalGroups = 0;
   for (const level of LEVELS) {
-    const ids = variantGroupsForTopicLevel(topicId, level);
+    const ids = [
+      ...new Set([
+        ...variantGroupsForTopicLevel(topicId, level),
+        ...multiPartSetsForTopicLevel(topicId, level).map((s) => s.variantGroup),
+      ]),
+    ];
     const { done } = groupProgress(state, ids);
     totalDone += done;
     totalGroups += ids.length;

@@ -17,6 +17,7 @@ import {
   type Level,
   type TopicId,
   variantGroupsForTopicLevel,
+  multiPartSetsForTopicLevel,
 } from "@/data/questions";
 import { groupProgress, useProgress } from "@/lib/storage";
 import { Footer } from "@/components/Footer";
@@ -52,14 +53,24 @@ export default function TopicHome({ topicId }: TopicHomeProps) {
   const Icon = ICONS[meta.iconKey] ?? Calculator;
 
   const levelData = LEVELS.map((level, i) => {
-    const groupIds = variantGroupsForTopicLevel(topicId, level);
+    const groupIds = [
+      ...new Set([
+        ...variantGroupsForTopicLevel(topicId, level),
+        ...multiPartSetsForTopicLevel(topicId, level).map((s) => s.variantGroup),
+      ]),
+    ];
     const { done, total } = groupProgress(state, groupIds);
     const isComingSoon = total === 0;
 
     let isLocked = false;
     if (i > 0) {
       const prevLevel = LEVELS[i - 1];
-      const prevGroupIds = variantGroupsForTopicLevel(topicId, prevLevel);
+      const prevGroupIds = [
+        ...new Set([
+          ...variantGroupsForTopicLevel(topicId, prevLevel),
+          ...multiPartSetsForTopicLevel(topicId, prevLevel).map((s) => s.variantGroup),
+        ]),
+      ];
       const prevProgress = groupProgress(state, prevGroupIds);
       isLocked = prevGroupIds.length > 0 && prevProgress.done < prevGroupIds.length;
     }
